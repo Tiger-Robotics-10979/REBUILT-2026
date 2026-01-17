@@ -11,6 +11,7 @@ public class SwerveCommand extends Command {
     public SwerveCommand(SwerveSubsystem swerve, XboxController controller) {
         this.swerve = swerve; 
         this.controller = controller; 
+        addRequirements(swerve);
     }
 
     @Override
