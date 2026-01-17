@@ -15,13 +15,16 @@ public class SwerveSubsystem extends SubsystemBase {
     private static final double MAX_VELOCITY = 3.0;
     private static final double MAX_ANGULAR_VELOCITY = Math.PI; // radians per second
 
-    public void SwerveSubsystem() {
+    public SwerveSubsystem() {
         File swerveJsonDirectory = new File(Filesystem.getDeployDirectory(), "swerve");
         try {
           swerveDrive = new SwerveParser(swerveJsonDirectory).createSwerveDrive(MAX_VELOCITY);
         } catch (IOException e) {
           System.err.println("Failed to initialize swerve drive from configuration files");
           e.printStackTrace();
+        }
+        if (swerveDrive == null) {
+            throw new RuntimeException("SwerveDrive failed to initialize");
         }
 
         swerveDrive.zeroGyro();
@@ -49,6 +52,13 @@ public class SwerveSubsystem extends SubsystemBase {
         Translation2d leftmovement = new Translation2d(LeftXV, LeftYV);
 
         swerveDrive.drive(leftmovement, RightXV, fieldoriented, false);
+    }
+
+    @Override
+    public void periodic() {
+    if (swerveDrive != null) {
+        swerveDrive.updateOdometry();
+    }
     }
 
     public void stop() {
