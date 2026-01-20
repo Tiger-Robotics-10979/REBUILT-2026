@@ -15,24 +15,18 @@ public class SwerveCommand extends Command {
     }
 
     @Override
-    public void initialize() {
-        // Optional: Add any setup logic here
-    }
-
-    @Override
     public void execute() {
-        swerve.drive(controller, true); // Drive the swerve subsystem
+        swerve.drive(controller, true); 
     }
 
     @Override
     public void end(boolean interrupted) {
-        // Optional: Add cleanup logic here
-        swerve.stop(); // Stop the swerve drive when the command ends
+        swerve.stop(); 
     }
 
     @Override
     public boolean isFinished() {
-        return false; // Command runs indefinitely unless interrupted
+        return false; 
     }
     
 }

@@ -10,7 +10,6 @@ public class RobotContainer {
   public XboxController driverController = new XboxController(0);
   public SwerveSubsystem swerveSubsystem = new SwerveSubsystem(); 
 
-
   public RobotContainer() {
     configureBindings();
   }
@@ -21,6 +20,5 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     return null;
-    // An example command will be run in autonomous
   }
 }
