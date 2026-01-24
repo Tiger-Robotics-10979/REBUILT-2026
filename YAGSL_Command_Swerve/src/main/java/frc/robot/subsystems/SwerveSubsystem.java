@@ -3,6 +3,8 @@ package frc.robot.subsystems;
 import java.io.File;
 import java.io.IOException;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.XboxController;
@@ -16,8 +18,6 @@ public class SwerveSubsystem extends SubsystemBase {
     private static final double MAX_VELOCITY = 3.0;
     private static final double MAX_ANGULAR_VELOCITY = Math.PI;
 
-    private int invert;
-
     public SwerveSubsystem() {
         File swerveJsonDirectory = new File(Filesystem.getDeployDirectory(), "swerve");
         try {
@@ -30,7 +30,11 @@ public class SwerveSubsystem extends SubsystemBase {
             throw new RuntimeException("SwerveDrive failed to initialize");
         }
 
-        swerveDrive.zeroGyro();
+        if (Robot.isSimulation()) {
+          swerveDrive.resetOdometry(new Pose2d(1, 1, new Rotation2d()));
+        }
+
+      swerveDrive.zeroGyro();
     }
 
     public double applyDeadBand(XboxController controller, Integer axis) {
@@ -44,31 +48,25 @@ public class SwerveSubsystem extends SubsystemBase {
     
 
     public void drive(XboxController controller, boolean fieldoriented) {
-        if (Robot.isRed) {
-            invert = 1;
-        }
-        else {
-            invert = -1;
-        }
 
         double leftX = applyDeadBand(controller, 0); 
         double leftY = applyDeadBand(controller, 1); 
         double rightX = applyDeadBand(controller, 4);
 
-        double LeftXV = invert * leftX * MAX_VELOCITY; 
-        double LeftYV = invert * leftY * MAX_VELOCITY;
+        double LeftXV = leftX * MAX_VELOCITY; 
+        double LeftYV = leftY * MAX_VELOCITY;
         double RightXV = -rightX * MAX_ANGULAR_VELOCITY;
 
-        Translation2d leftMovement = new Translation2d(LeftYV, LeftXV);
+        Translation2d strafeVelocities = new Translation2d(-LeftYV, -LeftXV); //WPILib coordinate system is left = y+, up = x+, so x and y are swapped
 
-        swerveDrive.drive(leftMovement, RightXV, fieldoriented, false);
+        swerveDrive.drive(strafeVelocities, RightXV, true, false);
     }
 
     @Override
     public void periodic() {
-    if (swerveDrive != null) {
-        swerveDrive.updateOdometry();
-    }
+      if (swerveDrive != null) { //if the swervedrive exists, it will update odometry
+          swerveDrive.updateOdometry();
+      }
     }
 
     public void stop() {

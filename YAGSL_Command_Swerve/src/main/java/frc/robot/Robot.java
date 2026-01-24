@@ -15,13 +15,6 @@ public class Robot extends TimedRobot {
 
   public Robot() {
     m_robotContainer = new RobotContainer();
-
-    if (DriverStation.getAlliance().get() == Alliance.Red) {
-      isRed = true;
-    } else {
-      isRed = false;
-    } 
-
   }
   
   @Override
