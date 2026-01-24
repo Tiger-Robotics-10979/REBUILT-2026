@@ -12,11 +12,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
 import swervelib.SwerveDrive;
 import swervelib.parser.SwerveParser;
+import static frc.robot.Constants.swerveDriveConstants.MAX_VELOCITY;
+import static frc.robot.Constants.swerveDriveConstants.MAX_ANGULAR_VELOCITY;
 
 public class SwerveSubsystem extends SubsystemBase {
     SwerveDrive swerveDrive;
-    private static final double MAX_VELOCITY = 3.0;
-    private static final double MAX_ANGULAR_VELOCITY = Math.PI;
 
     public SwerveSubsystem() {
         File swerveJsonDirectory = new File(Filesystem.getDeployDirectory(), "swerve");
@@ -46,7 +46,6 @@ public class SwerveSubsystem extends SubsystemBase {
         }
       }
     
-
     public void drive(XboxController controller, boolean fieldoriented) {
 
         double leftX = applyDeadBand(controller, 0); 
