@@ -8,7 +8,7 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ShooterSubsystem extends SubsystemBase{
-    public final SparkMax shooterMotor = new SparkMax(0, SparkMax.MotorType.kBrushless); //ID TBD
+    public final SparkMax shooterMotor = new SparkMax(22, SparkMax.MotorType.kBrushless); //ID TBD
     ;
  
     public ShooterSubsystem() {
