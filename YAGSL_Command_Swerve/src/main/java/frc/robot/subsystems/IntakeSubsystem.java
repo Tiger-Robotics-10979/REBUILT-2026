@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class IntakeSubsystem extends SubsystemBase{
     public final SparkMax intakeMotor = new SparkMax(23, SparkMax.MotorType.kBrushless); //ID TBD
- 
 
     public IntakeSubsystem() {
         final SparkMaxConfig intakeConfig = new SparkMaxConfig();
@@ -18,7 +17,6 @@ public class IntakeSubsystem extends SubsystemBase{
         intakeConfig.smartCurrentLimit(40);
 
         intakeMotor.configure(intakeConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters); 
-
     }
 
     public void runIntake(double speed) { 

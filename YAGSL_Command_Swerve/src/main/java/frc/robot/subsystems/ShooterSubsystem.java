@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ShooterSubsystem extends SubsystemBase{
     public final SparkMax shooterMotor = new SparkMax(22, SparkMax.MotorType.kBrushless); //ID TBD
-    ;
  
     public ShooterSubsystem() {
         final SparkMaxConfig shooterconfig = new SparkMaxConfig();
@@ -23,9 +22,9 @@ public class ShooterSubsystem extends SubsystemBase{
     public void runShooter(double speed) { 
         shooterMotor.set(speed); 
     }
+
     public void stopShooter() {
         shooterMotor.set(0); 
-    
     }
 
 }
