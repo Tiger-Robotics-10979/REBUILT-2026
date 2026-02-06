@@ -47,7 +47,6 @@ public class SwerveSubsystem extends SubsystemBase {
       }
     
     public void drive(XboxController controller, boolean fieldoriented) {
-
         double leftX = applyDeadBand(controller, 0); 
         double leftY = applyDeadBand(controller, 1); 
         double rightX = applyDeadBand(controller, 4);
@@ -63,7 +62,7 @@ public class SwerveSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
-      if (swerveDrive != null) { //if the swervedrive exists, it will update odometry
+      if (swerveDrive != null) { //if the swervedrive exists, it will update odometry, otherwise, it won't
           swerveDrive.updateOdometry();
       }
     }
