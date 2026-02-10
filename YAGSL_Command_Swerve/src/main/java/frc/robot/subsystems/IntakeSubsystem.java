@@ -18,7 +18,6 @@ public class IntakeSubsystem extends SubsystemBase{
         intakeConfig.smartCurrentLimit(40);
 
         intakeMotor.configure(intakeConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters); 
-
     }
 
     public void runIntake(double speed) { 

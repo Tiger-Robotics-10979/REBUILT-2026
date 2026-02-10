@@ -12,7 +12,6 @@ public class IntakeCommand extends Command {
         this.intake = intake; 
         this.controller = controller; 
         addRequirements(intake);
-
     }
 
     @Override 
@@ -35,6 +34,4 @@ public class IntakeCommand extends Command {
     public boolean isFinished() {
         return false; 
     }
-    
-    
 }
