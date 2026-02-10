@@ -56,7 +56,7 @@ public class SwerveSubsystem extends SubsystemBase {
         double LeftYV = leftY * MAX_VELOCITY;
         double RightXV = -rightX * MAX_ANGULAR_VELOCITY;
 
-        Translation2d strafeVelocities = new Translation2d(LeftYV, LeftXV); //WPILib coordinate system is left = y+, up = x+, so x and y are swapped
+        Translation2d strafeVelocities = new Translation2d(-LeftYV, -LeftXV); //WPILib coordinate system is left = y+, up = x+, so x and y are swapped
 
         swerveDrive.drive(strafeVelocities, RightXV, true, false);
     }

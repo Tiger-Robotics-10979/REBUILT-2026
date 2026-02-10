@@ -57,7 +57,7 @@ public class FollowPath extends Command {
         Translation2d trajectoryVelocity = new Translation2d(desiredVx, desiredVy);
         double desiredRotation = goalState.fieldSpeeds.omegaRadiansPerSecond;
 
-
+        
         double xError = pidX.calculate(swerve.swerveDrive.getPose().getX(), goalState.pose.getX());
         double yError = pidY.calculate(swerve.swerveDrive.getPose().getY(), goalState.pose.getY());
         double rotationError = pidRotation.calculate(swerve.swerveDrive.getPose().getRotation().minus(goalState.pose.getRotation()).getRadians(), 0);
