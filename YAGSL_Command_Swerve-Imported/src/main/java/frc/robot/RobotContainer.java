@@ -20,7 +20,7 @@ public class RobotContainer {
   public SwerveSubsystem swerveSubsystem = new SwerveSubsystem(); 
   public IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   public CameraSubsystem cameraSubsystem = new CameraSubsystem();
-  public ShooterSubsystem shooterSubsystem = new ShooterSubsystem(cameraSubsystem);
+  public ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   private Command autoCommand;
 
   private PathPlannerPath path;
