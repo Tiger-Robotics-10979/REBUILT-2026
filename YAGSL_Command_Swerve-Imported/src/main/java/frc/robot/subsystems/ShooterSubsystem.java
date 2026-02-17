@@ -13,10 +13,6 @@ public class ShooterSubsystem extends SubsystemBase{
     public final SparkMax shooterMotor = new SparkMax(12, SparkMax.MotorType.kBrushless); //ID TBD 4
 
     //private final CameraSubsystem m_camera;
-
-    
-    
-
    
     private double target; // = distanceFromTarget() * RPM; //this method will calculate the target rpm based on the distance from the target, which is calculated using the camera and some trigonometry.
  
@@ -30,7 +26,6 @@ public class ShooterSubsystem extends SubsystemBase{
         shooterconfig.smartCurrentLimit(40);   
 
         shooterMotor.configure(shooterconfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-
     }
 
     public void runShooter(double speed) { 
@@ -39,7 +34,6 @@ public class ShooterSubsystem extends SubsystemBase{
 
     public void stopShooter() {
         shooterMotor.set(0); 
-    
     }
 
 }
