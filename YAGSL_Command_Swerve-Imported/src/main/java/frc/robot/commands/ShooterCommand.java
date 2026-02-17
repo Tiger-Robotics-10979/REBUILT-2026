@@ -8,6 +8,9 @@ public class ShooterCommand extends Command {
     ShooterSubsystem shooter;
     XboxController controller;
 
+    boolean enableToggle = false;
+    
+
     public ShooterCommand(ShooterSubsystem shooter, XboxController controller) {
         this.shooter = shooter;
         this.controller = controller;
@@ -16,11 +19,22 @@ public class ShooterCommand extends Command {
  
     @Override
     public void execute() {
-        if (controller.getAButton()) {
-            shooter.runShooter(0.75);
-        } else {
+        if (controller.getAButtonPressed()) {
+            if (enableToggle == true) {
+                enableToggle = false;
+            }
+            else { //if enableToggle == false
+                enableToggle = true;
+            }
+        }
+
+       if (enableToggle == true) {
+            shooter.runShooter(1); 
+        } 
+        else {
             shooter.stopShooter();
         }
+        
     }
     
     @Override

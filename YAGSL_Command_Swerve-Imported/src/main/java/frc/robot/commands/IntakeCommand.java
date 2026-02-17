@@ -17,9 +17,9 @@ public class IntakeCommand extends Command {
     @Override 
     public void execute() {
         if (controller.getRightBumper()) {
-            intake.runIntake(-1.0); 
+            intake.runIntake(-2.0); 
         } else if (controller.getLeftBumper()) {
-            intake.runIntake(1.0); 
+            intake.runIntake(2.0); 
         } else {
             intake.stopIntake(); 
         }
