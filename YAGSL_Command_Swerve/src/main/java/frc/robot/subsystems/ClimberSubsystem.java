@@ -8,7 +8,7 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ClimberSubsystem extends SubsystemBase {
-    public final SparkMax climberMotor = new SparkMax(14, SparkMax.MotorType.kBrushless); //ID TBD 4
+    public final SparkMax climberMotor = new SparkMax(21, SparkMax.MotorType.kBrushless); //ID TBD 4
 
     public ClimberSubsystem() {
         final SparkMaxConfig climberConfig = new SparkMaxConfig();

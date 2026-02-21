@@ -46,7 +46,7 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
     public void testingRegressionSpeed() {
-        shooterMotor.set(1);
+        shooterMotor.set(0.5);
         System.out.println(shooterMotor.getEncoder().getVelocity());
     }
 
