@@ -1,10 +1,12 @@
 package frc.robot;
 
+import frc.robot.commands.ClimberCommand;
 import frc.robot.commands.ControllerCommand;
 import frc.robot.commands.FollowPath;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.SwerveCommand;
+import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
@@ -20,7 +22,10 @@ public class RobotContainer {
   public SwerveSubsystem swerveSubsystem = new SwerveSubsystem(); 
   public IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   public ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+  public ClimberSubsystem climberSubsystem = new ClimberSubsystem();
+
   public ControllerCommand controllerCommand = new ControllerCommand(intakeSubsystem, shooterSubsystem, null, driverController);
+  public ClimberCommand climberCommand = new ClimberCommand(climberSubsystem, operatorController);
   private Command autoCommand;
 
   private PathPlannerPath path;
@@ -41,7 +46,7 @@ public class RobotContainer {
     swerveSubsystem.setDefaultCommand(new SwerveCommand(swerveSubsystem, driverController));
     intakeSubsystem.setDefaultCommand(controllerCommand);
     shooterSubsystem.setDefaultCommand(controllerCommand);
-    
+    climberSubsystem.setDefaultCommand(climberCommand);
   }
 
   public Command getAutonomousCommand() {

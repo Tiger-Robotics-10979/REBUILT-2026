@@ -18,6 +18,8 @@ import static frc.robot.Constants.swerveDriveConstants.MAX_ANGULAR_VELOCITY;
 public class SwerveSubsystem extends SubsystemBase {
     public SwerveDrive swerveDrive;
 
+    public boolean shooting = false;
+
     public SwerveSubsystem() {
         File swerveJsonDirectory = new File(Filesystem.getDeployDirectory(), "swerve");
         try {
@@ -38,7 +40,7 @@ public class SwerveSubsystem extends SubsystemBase {
     }
 
     public double applyDeadBand(XboxController controller, Integer axis) {
-        if (Math.abs(controller.getRawAxis(axis)) > 0.1) {
+        if (Math.abs(controller.getRawAxis(axis)) > 0.03) {
           return controller.getRawAxis(axis);
         } 
         else {
@@ -47,17 +49,33 @@ public class SwerveSubsystem extends SubsystemBase {
       }
     
     public void drive(XboxController controller, boolean fieldoriented) {
-        double leftX = applyDeadBand(controller, 0); 
-        double leftY = applyDeadBand(controller, 1); 
-        double rightX = applyDeadBand(controller, 4);
+      double leftX = applyDeadBand(controller, 0); 
+      double leftY = applyDeadBand(controller, 1); 
+      double rightX = applyDeadBand(controller, 4);
 
-        double LeftXV = leftX * MAX_VELOCITY; 
-        double LeftYV = leftY * MAX_VELOCITY;
-        double RightXV = -rightX * MAX_ANGULAR_VELOCITY;
+      double LeftXV = leftX * MAX_VELOCITY; 
+      double LeftYV = leftY * MAX_VELOCITY;
+      double RightXV = -rightX * MAX_ANGULAR_VELOCITY;
 
-        Translation2d strafeVelocities = new Translation2d(-LeftYV, -LeftXV); //WPILib coordinate system is left = y+, up = x+, so x and y are swapped
+      Translation2d strafeVelocities;
 
-        swerveDrive.drive(strafeVelocities, RightXV, true, false);
+      if (controller.getXButtonPressed()) {
+        if (shooting) {
+          shooting = !shooting;
+        }
+        else {
+          shooting = !shooting;
+        }
+      }
+
+      if (shooting) { //forward is to where ball will shoot
+        strafeVelocities = new Translation2d(-LeftYV, -LeftXV); //WPILib coordinate system is left = y+, up = x+, so x and y are swapped
+      }
+      else { //forward is towards intake
+        strafeVelocities = new Translation2d(LeftYV, LeftXV); //WPILib coordinate system is left = y+, up = x+, so x and y are swapped
+      }
+
+      swerveDrive.drive(strafeVelocities, RightXV, true, false);
     }
 
     @Override
