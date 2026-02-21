@@ -7,7 +7,7 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class IntakeSubsystem extends SubsystemBase{
+public class IntakeSubsystem extends SubsystemBase {
     public final SparkMax intakeMotor = new SparkMax(16, SparkMax.MotorType.kBrushless); //ID TBD
  
 

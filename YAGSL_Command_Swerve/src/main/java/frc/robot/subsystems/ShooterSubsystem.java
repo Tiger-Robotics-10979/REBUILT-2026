@@ -12,8 +12,7 @@ public class ShooterSubsystem extends SubsystemBase {
     private final PIDController shooterPID = new PIDController(0, 0, 0);
     public final SparkMax shooterMotor = new SparkMax(12, SparkMax.MotorType.kBrushless); //ID TBD 4
 
-    private double targetRPM = 0;
-    private double currentRPM = shooterMotor.getEncoder().getVelocity();
+    private double goalRPM;
 
     public ShooterSubsystem() {
         final SparkMaxConfig shooterconfig = new SparkMaxConfig();
@@ -24,22 +23,31 @@ public class ShooterSubsystem extends SubsystemBase {
         shooterMotor.configure(shooterconfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     }
 
-    public double calculateTargetRPM(double distance) {
+    public double calculateTargetRPM(double distance) { //targeted RPM based on camera distance and exponential regression
         return distance * (500.0);
-        //This function gives the targeted RPM based on the distance from the hub (CAMERA!) and the equation generated from regression of multiple
-        //testing points! The equation will replace the 500!
     }
 
-    public void shootWithPID(double distance) { //speed 
-        targetRPM = calculateTargetRPM(distance);
+    public void shootWithPID(double distance) {
+        goalRPM = calculateTargetRPM(distance);
 
-        double finalPowerOutput = shooterPID.calculate(currentRPM, targetRPM); //uses current RPM and target RPM to calculate power output
+        double currentRPM = shooterMotor.getEncoder().getVelocity();
 
+        double finalPowerOutput = shooterPID.calculate(currentRPM, goalRPM); //uses current RPM and target RPM to calculate power output
         shooterMotor.set(finalPowerOutput);
     }
 
-    public void groundIntake() { //slower speed, same direction for ball intake
-        shooterMotor.set(0.5);
+    public void groundIntake(boolean out) { //slower speed, same direction for ball intake
+        if (out) {
+            shooterMotor.set(-0.5);
+        }
+        else {
+            shooterMotor.set(0.5);
+        }
+    }
+
+    public void testingRegressionSpeed() {
+        shooterMotor.set(1);
+        System.out.println(shooterMotor.getEncoder().getVelocity());
     }
 
     public void stopShooter() {

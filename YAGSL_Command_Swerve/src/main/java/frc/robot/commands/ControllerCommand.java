@@ -23,11 +23,11 @@ public class ControllerCommand extends Command {
     @Override
     public void execute() {
         if (controller.getRightBumperButton()) { //full intake process (storage and roll in)
-            shooter.groundIntake(); //run ground intake inward at half speed
+            shooter.groundIntake(false); //run ground intake inward at half speed
             intake.runIntake(1); //run flywheel inward for storage
         }
         else if (controller.getLeftBumperButton()) {
-            shooter.shootWithPID(0); //replace distance with camera distance
+            shooter.shootWithPID(5); //replace distance with camera distance
             intake.runIntake(-1); //run flywheel outward to shoot
         }
         else if (controller.getYButton()) {
@@ -35,6 +35,12 @@ public class ControllerCommand extends Command {
         }
         else if (controller.getAButton()) {
             intake.runIntake(1); //run flywheel inwards for storage
+        }
+        else if (controller.getPOV() == 0) {
+            shooter.groundIntake(true);
+        }
+        else if (controller.getPOV() == 180) {
+            shooter.groundIntake(false);
         }
         else {
             shooter.stopShooter();
