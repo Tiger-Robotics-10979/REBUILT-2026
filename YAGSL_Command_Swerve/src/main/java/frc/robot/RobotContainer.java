@@ -4,7 +4,6 @@ import frc.robot.commands.FollowPath;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.SwerveCommand;
-import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
@@ -19,8 +18,7 @@ public class RobotContainer {
   public XboxController operatorController = new XboxController(1);
   public SwerveSubsystem swerveSubsystem = new SwerveSubsystem(); 
   public IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-  public CameraSubsystem cameraSubsystem = new CameraSubsystem();
-  public ShooterSubsystem shooterSubsystem = new ShooterSubsystem(cameraSubsystem);
+  public ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   private Command autoCommand;
 
   private PathPlannerPath path;
