@@ -8,6 +8,8 @@ public class ShooterCommand extends Command {
     ShooterSubsystem shooter;
     XboxController controller;
 
+    private boolean enableToggle = false;
+
     public ShooterCommand(ShooterSubsystem shooter, XboxController controller) {
         this.shooter = shooter;
         this.controller = controller;
@@ -16,9 +18,19 @@ public class ShooterCommand extends Command {
  
     @Override
     public void execute() {
-        if (controller.getAButton()) {
-            shooter.shootWithPID(0); //***replace 0 with distance from camera***
-        } else {
+        if (controller.getAButtonPressed()) {
+            if (enableToggle == true) {
+                enableToggle = false;
+            }
+            else { //if enableToggle == false
+                enableToggle = true;
+            }
+        }
+
+       if (enableToggle == true) {
+            shooter.shootWithPID(1); //***replace 0 with distance from camera***
+        } 
+        else {
             shooter.stopShooter();
         }
     }

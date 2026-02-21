@@ -2,8 +2,6 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.math.controller.PIDController;
 
-import static edu.wpi.first.units.Units.RPM;
-
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
@@ -18,8 +16,6 @@ public class ShooterSubsystem extends SubsystemBase {
     private double currentRPM = shooterMotor.getEncoder().getVelocity();
 
     public ShooterSubsystem() {
-        //double setpoint = camera.getDistanceFromTarget() * 500.0; // RPM TO BE TESTED. USE EITHER THIS OR TARGET
-
         final SparkMaxConfig shooterconfig = new SparkMaxConfig();
         
         shooterconfig.voltageCompensation(12);
@@ -34,12 +30,16 @@ public class ShooterSubsystem extends SubsystemBase {
         //testing points! The equation will replace the 500!
     }
 
-    public void shootWithPID(double distance) {
+    public void shootWithPID(double distance) { //speed 
         targetRPM = calculateTargetRPM(distance);
 
         double finalPowerOutput = shooterPID.calculate(currentRPM, targetRPM); //uses current RPM and target RPM to calculate power output
 
         shooterMotor.set(finalPowerOutput);
+    }
+
+    public void groundIntake() { //slower speed, same direction for ball intake
+        shooterMotor.set(0.5);
     }
 
     public void stopShooter() {
