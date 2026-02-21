@@ -28,7 +28,7 @@ public class ShooterCommand extends Command {
         }
 
        if (enableToggle == true) {
-            shooter.shootWithPID(1); //***replace 0 with distance from camera***
+            shooter.testingRegressionSpeed(); //***replace 0 with distance from camera***
         } 
         else {
             shooter.stopShooter();
