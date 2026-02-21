@@ -17,7 +17,7 @@ public class ShooterCommand extends Command {
     @Override
     public void execute() {
         if (controller.getAButton()) {
-            shooter.runShooter(1.0);
+            shooter.shootWithPID(0); //***replace 0 with distance from camera***
         } else {
             shooter.stopShooter();
         }
