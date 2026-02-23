@@ -8,8 +8,7 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class IntakeSubsystem extends SubsystemBase {
-    public final SparkMax intakeMotor = new SparkMax(16, SparkMax.MotorType.kBrushless); //ID TBD
- 
+    public final SparkMax intakeMotor = new SparkMax(16, SparkMax.MotorType.kBrushless);
 
     public IntakeSubsystem() {
         final SparkMaxConfig intakeConfig = new SparkMaxConfig();
@@ -17,16 +16,14 @@ public class IntakeSubsystem extends SubsystemBase {
         intakeConfig.voltageCompensation(12);
         intakeConfig.smartCurrentLimit(40);
 
-        intakeMotor.configure(intakeConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters); 
+        intakeMotor.configure(intakeConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     }
 
-    public void runIntake(double speed) { 
-        intakeMotor.set(speed); 
+    public void runIntake(double speed) {
+        intakeMotor.set(speed);
     }
 
     public void stopIntake() {
-        intakeMotor.set(0); 
+        intakeMotor.set(0);
     }
-
-
 }

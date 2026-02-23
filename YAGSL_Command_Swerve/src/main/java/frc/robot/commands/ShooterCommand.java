@@ -5,9 +5,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class ShooterCommand extends Command {
-    ShooterSubsystem shooter;
-    XboxController controller;
-
+    private final ShooterSubsystem shooter;
+    private final XboxController controller;
     private boolean enableToggle = false;
 
     public ShooterCommand(ShooterSubsystem shooter, XboxController controller) {
@@ -15,34 +14,28 @@ public class ShooterCommand extends Command {
         this.controller = controller;
         addRequirements(shooter);
     }
- 
+
     @Override
     public void execute() {
+        // Toggle shooter on/off with A button
         if (controller.getAButtonPressed()) {
-            if (enableToggle == true) {
-                enableToggle = false;
-            }
-            else { //if enableToggle == false
-                enableToggle = true;
-            }
+            enableToggle = !enableToggle;
         }
 
-       if (enableToggle == true) {
-            shooter.testingRegressionSpeed(); //***replace 0 with distance from camera***
-        } 
-        else {
+        if (enableToggle) {
+            shooter.testingRegressionSpeed(); // TODO: Replace with distance from camera
+        } else {
             shooter.stopShooter();
         }
     }
-    
+
     @Override
     public void end(boolean interrupted) {
-        shooter.stopShooter(); 
+        shooter.stopShooter();
     }
 
     @Override
     public boolean isFinished() {
-        return false; 
+        return false;
     }
-    
 }

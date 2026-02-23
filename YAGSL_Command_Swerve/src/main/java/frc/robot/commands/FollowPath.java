@@ -24,7 +24,6 @@ public class FollowPath extends Command {
     private final PIDController pidX = new PIDController(10, 0.25, 0);
     private final PIDController pidY = new PIDController(10, 0.25, 0);
     private final PIDController pidRotation = new PIDController(2, 0, 0);
-    
     private double startTime;
 
     public FollowPath(SwerveSubsystem swerve, PathPlannerPath path) {
@@ -40,9 +39,8 @@ public class FollowPath extends Command {
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
-        
-        startTime = Timer.getFPGATimestamp();
 
+        startTime = Timer.getFPGATimestamp();
         swerve.swerveDrive.resetOdometry(trajectory.getInitialPose());
     }
 
@@ -57,13 +55,11 @@ public class FollowPath extends Command {
         Translation2d trajectoryVelocity = new Translation2d(desiredVx, desiredVy);
         double desiredRotation = goalState.fieldSpeeds.omegaRadiansPerSecond;
 
-        
         double xError = pidX.calculate(swerve.swerveDrive.getPose().getX(), goalState.pose.getX());
         double yError = pidY.calculate(swerve.swerveDrive.getPose().getY(), goalState.pose.getY());
         double rotationError = pidRotation.calculate(swerve.swerveDrive.getPose().getRotation().minus(goalState.pose.getRotation()).getRadians(), 0);
 
         Translation2d correction = new Translation2d(xError, yError);
-
         Translation2d finalVelocity = trajectoryVelocity.plus(correction);
 
         swerve.swerveDrive.drive(finalVelocity, desiredRotation + rotationError, true, false);
@@ -71,11 +67,11 @@ public class FollowPath extends Command {
 
     @Override
     public boolean isFinished() {
-      return Timer.getFPGATimestamp() - startTime >= trajectory.getTotalTimeSeconds();
+        return Timer.getFPGATimestamp() - startTime >= trajectory.getTotalTimeSeconds();
     }
-  
+
     @Override
     public void end(boolean interrupted) {
-      swerve.swerveDrive.drive(new Translation2d(), 0, false, false);
+        swerve.swerveDrive.drive(new Translation2d(), 0, false, false);
     }
 }

@@ -10,37 +10,34 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ShooterSubsystem extends SubsystemBase {
     private final PIDController shooterPID = new PIDController(0, 0, 0);
-    public final SparkMax shooterMotor = new SparkMax(12, SparkMax.MotorType.kBrushless); //ID TBD 4
-
+    public final SparkMax shooterMotor = new SparkMax(12, SparkMax.MotorType.kBrushless);
     private double goalRPM;
 
     public ShooterSubsystem() {
         final SparkMaxConfig shooterconfig = new SparkMaxConfig();
-        
+
         shooterconfig.voltageCompensation(12);
-        shooterconfig.smartCurrentLimit(40);   
+        shooterconfig.smartCurrentLimit(40);
 
         shooterMotor.configure(shooterconfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     }
 
-    public double calculateTargetRPM(double distance) { //targeted RPM based on camera distance and exponential regression
-        return distance * (500.0);
+    public double calculateTargetRPM(double distance) {
+        // Targeted RPM based on camera distance and exponential regression
+        return distance * 500.0;
     }
 
     public void shootWithPID(double distance) {
         goalRPM = calculateTargetRPM(distance);
-
         double currentRPM = shooterMotor.getEncoder().getVelocity();
-
-        double finalPowerOutput = shooterPID.calculate(currentRPM, goalRPM); //uses current RPM and target RPM to calculate power output
+        double finalPowerOutput = shooterPID.calculate(currentRPM, goalRPM);
         shooterMotor.set(finalPowerOutput);
     }
 
-    public void groundIntake(boolean out) { //slower speed, same direction for ball intake
+    public void groundIntake(boolean out) {
         if (out) {
             shooterMotor.set(-0.5);
-        }
-        else {
+        } else {
             shooterMotor.set(0.5);
         }
     }
@@ -51,6 +48,6 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
     public void stopShooter() {
-        shooterMotor.set(0); 
+        shooterMotor.set(0);
     }
 }

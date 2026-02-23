@@ -5,33 +5,33 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.IntakeSubsystem;
 
 public class IntakeCommand extends Command {
-    IntakeSubsystem intake; 
-    XboxController controller;
+    private final IntakeSubsystem intake;
+    private final XboxController controller;
 
     public IntakeCommand(IntakeSubsystem intake, XboxController controller) {
-        this.intake = intake; 
-        this.controller = controller; 
+        this.intake = intake;
+        this.controller = controller;
         addRequirements(intake);
     }
 
-    @Override 
+    @Override
     public void execute() {
         if (controller.getRightBumper()) {
-            intake.runIntake(-1.0); 
+            intake.runIntake(-1.0);
         } else if (controller.getLeftBumper()) {
-            intake.runIntake(1.0); 
+            intake.runIntake(1.0);
         } else {
-            intake.stopIntake(); 
+            intake.stopIntake();
         }
     }
 
     @Override
     public void end(boolean interrupted) {
-        intake.stopIntake(); 
+        intake.stopIntake();
     }
 
     @Override
     public boolean isFinished() {
-        return false; 
+        return false;
     }
 }
