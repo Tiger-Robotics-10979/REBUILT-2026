@@ -16,19 +16,19 @@ public class SwerveCommand extends Command {
 
     @Override
     public void execute() {
-        // Toggle shooting mode with X button
+        //Toggle shooting mode with X button
         if (controller.getXButtonPressed()) {
             swerve.toggleShootingMode();
         }
 
-        //Negative controls due to coordinate system
+        //Negative due to coordinate plane
         double xSpeed = -controller.getLeftY();  //Forward/backward (inverted)
         double ySpeed = -controller.getLeftX();  //Left/right (inverted)
         double rotation = -controller.getRightX(); //Rotation (inverted)
 
+        //Drive with field-relative control
         swerve.drive(xSpeed, ySpeed, rotation, true);
     }
-
     @Override
     public void end(boolean interrupted) {
         swerve.stop();
