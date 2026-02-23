@@ -17,17 +17,19 @@ public class IntakeCommand extends Command {
     @Override
     public void execute() {
         if (controller.getRightBumper()) {
-            intake.runIntake(-1.0);
-        } else if (controller.getLeftBumper()) {
-            intake.runIntake(1.0);
-        } else {
-            intake.stopIntake();
+            intake.outtake();
+        } 
+        else if (controller.getLeftBumper()) {
+            intake.intake();
+        } 
+        else {
+            intake.stop();
         }
     }
 
     @Override
     public void end(boolean interrupted) {
-        intake.stopIntake();
+        intake.stop();
     }
 
     @Override

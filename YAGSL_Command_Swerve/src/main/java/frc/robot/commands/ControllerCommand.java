@@ -7,10 +7,10 @@ import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class ControllerCommand extends Command {
-    IntakeSubsystem intake;
-    ShooterSubsystem shooter;
-    CameraSubsystem camera;
-    XboxController controller;
+    private final IntakeSubsystem intake;
+    private final ShooterSubsystem shooter;
+    private final CameraSubsystem camera;
+    private final XboxController controller;
 
     public ControllerCommand(IntakeSubsystem intake, ShooterSubsystem shooter, CameraSubsystem camera, XboxController controller) {
         this.intake = intake;
@@ -19,32 +19,42 @@ public class ControllerCommand extends Command {
         this.controller = controller;
         addRequirements(intake, shooter);
     }
-
     @Override
     public void execute() {
-        if (controller.getRightBumperButton()) { //full intake process (storage and roll in)
-            shooter.groundIntake(false); //run ground intake inward at half speed
-            intake.runIntake(1); //run flywheel inward for storage
-        }
-        else if (controller.getLeftBumperButton()) {
-            shooter.shootWithPID(5); //replace distance with camera distance
-            intake.runIntake(-1); //run flywheel outward to shoot
-        }
+        if (controller.getRightBumper()) { //Full intake process (storage and roll in)
+            shooter.runGroundIntake(false);
+            intake.intake();
+        } 
+        else if (controller.getLeftBumper()) {
+            shooter.shootAtDistance(5); // TODO: Replace distance with camera distance
+            intake.outtake();
+        } 
         else if (controller.getYButton()) {
-            intake.runIntake(-1); //run flywheel outwards to shoot
-        }
+            intake.outtake(); //Flywheel out
+        } 
         else if (controller.getAButton()) {
-            intake.runIntake(1); //run flywheel inwards for storage
-        }
+            intake.intake(); //Flywheel intake
+        } 
         else if (controller.getPOV() == 0) {
-            shooter.groundIntake(true);
-        }
+            shooter.runGroundIntake(true); //Ground intake out
+        } 
         else if (controller.getPOV() == 180) {
-            shooter.groundIntake(false);
-        }
+            shooter.runGroundIntake(false); //Ground intake in
+        } 
         else {
-            shooter.stopShooter();
-            intake.stopIntake();
+            shooter.stop();
+            intake.stop();
         }
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        shooter.stop();
+        intake.stop();
+    }
+
+    @Override
+    public boolean isFinished() {
+        return false;
     }
 }

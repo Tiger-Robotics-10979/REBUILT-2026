@@ -17,21 +17,22 @@ public class ShooterCommand extends Command {
 
     @Override
     public void execute() {
-        // Toggle shooter on/off with A button
+        //Toggle shooter on/off with A button
         if (controller.getAButtonPressed()) {
             enableToggle = !enableToggle;
         }
 
         if (enableToggle) {
-            shooter.testingRegressionSpeed(); // TODO: Replace with distance from camera
-        } else {
-            shooter.stopShooter();
+            shooter.shootAtDistance(0); //TODO: Replace with distance from camera
+        } 
+        else {
+            shooter.stop();
         }
     }
 
     @Override
     public void end(boolean interrupted) {
-        shooter.stopShooter();
+        shooter.stop();
     }
 
     @Override

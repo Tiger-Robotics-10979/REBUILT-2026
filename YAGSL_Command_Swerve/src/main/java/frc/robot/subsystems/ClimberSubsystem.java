@@ -8,26 +8,52 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ClimberSubsystem extends SubsystemBase {
-    public final SparkMax climberMotor = new SparkMax(21, SparkMax.MotorType.kBrushless);
+    private static final int CLIMBER_MOTOR_ID = 21;
+    private static final int CURRENT_LIMIT = 40;
+    private static final double VOLTAGE_COMPENSATION = 12.0;
+
+    //Speed constants
+    private static final double CLIMB_SPEED = 0.5;
+    private static final double LOWER_SPEED = -0.5;
+
+    private final SparkMax climberMotor;
 
     public ClimberSubsystem() {
-        final SparkMaxConfig climberConfig = new SparkMaxConfig();
+        climberMotor = new SparkMax(CLIMBER_MOTOR_ID, SparkMax.MotorType.kBrushless);
 
-        climberConfig.voltageCompensation(12);
-        climberConfig.smartCurrentLimit(40);
+        SparkMaxConfig climberConfig = new SparkMaxConfig();
+        climberConfig.voltageCompensation(VOLTAGE_COMPENSATION);
+        climberConfig.smartCurrentLimit(CURRENT_LIMIT);
 
         climberMotor.configure(climberConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     }
 
-    public void raiseClimber() {
-        climberMotor.set(0.5);
+    /**
+     * Raises the climber (positive direction)
+     */
+    public void raise() {
+        climberMotor.set(CLIMB_SPEED);
     }
 
-    public void lowerClimber() {
-        climberMotor.set(-0.5);
+    /**
+     * Lowers the climber (negative direction)
+     */
+    public void lower() {
+        climberMotor.set(LOWER_SPEED);
     }
 
-    public void stopClimber() {
+    /**
+     * Runs climber at a custom speed
+     * @param speed Speed from -1.0 to 1.0 (negative = lower, positive = raise)
+     */
+    public void setSpeed(double speed) {
+        climberMotor.set(speed);
+    }
+
+    /**
+     * Stops the climber motor
+     */
+    public void stop() {
         climberMotor.set(0);
     }
 }

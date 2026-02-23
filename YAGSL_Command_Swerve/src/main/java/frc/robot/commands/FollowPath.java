@@ -41,7 +41,7 @@ public class FollowPath extends Command {
         }
 
         startTime = Timer.getFPGATimestamp();
-        swerve.swerveDrive.resetOdometry(trajectory.getInitialPose());
+        swerve.resetOdometry(trajectory.getInitialPose());
     }
 
     @Override
@@ -55,9 +55,9 @@ public class FollowPath extends Command {
         Translation2d trajectoryVelocity = new Translation2d(desiredVx, desiredVy);
         double desiredRotation = goalState.fieldSpeeds.omegaRadiansPerSecond;
 
-        double xError = pidX.calculate(swerve.swerveDrive.getPose().getX(), goalState.pose.getX());
-        double yError = pidY.calculate(swerve.swerveDrive.getPose().getY(), goalState.pose.getY());
-        double rotationError = pidRotation.calculate(swerve.swerveDrive.getPose().getRotation().minus(goalState.pose.getRotation()).getRadians(), 0);
+        double xError = pidX.calculate(swerve.getPose().getX(), goalState.pose.getX());
+        double yError = pidY.calculate(swerve.getPose().getY(), goalState.pose.getY());
+        double rotationError = pidRotation.calculate(swerve.getPose().getRotation().minus(goalState.pose.getRotation()).getRadians(), 0);
 
         Translation2d correction = new Translation2d(xError, yError);
         Translation2d finalVelocity = trajectoryVelocity.plus(correction);
@@ -72,6 +72,6 @@ public class FollowPath extends Command {
 
     @Override
     public void end(boolean interrupted) {
-        swerve.swerveDrive.drive(new Translation2d(), 0, false, false);
+        swerve.stop();
     }
 }

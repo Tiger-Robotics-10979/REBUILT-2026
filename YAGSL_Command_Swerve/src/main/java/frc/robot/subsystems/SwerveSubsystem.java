@@ -7,7 +7,6 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.Filesystem;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
 import swervelib.SwerveDrive;
@@ -16,8 +15,11 @@ import static frc.robot.Constants.swerveDriveConstants.MAX_VELOCITY;
 import static frc.robot.Constants.swerveDriveConstants.MAX_ANGULAR_VELOCITY;
 
 public class SwerveSubsystem extends SubsystemBase {
+    // Deadband threshold for controller inputs
+    private static final double DEADBAND = 0.04;
+
     public SwerveDrive swerveDrive;
-    public boolean shooting = false;
+    private boolean shootingMode = false;
 
     public SwerveSubsystem() {
         File swerveJsonDirectory = new File(Filesystem.getDeployDirectory(), "swerve");
@@ -39,39 +41,81 @@ public class SwerveSubsystem extends SubsystemBase {
         swerveDrive.zeroGyro();
     }
 
-    public double applyDeadBand(XboxController controller, Integer axis) {
-        if (Math.abs(controller.getRawAxis(axis)) > 0.03) {
-            return controller.getRawAxis(axis);
-        } else {
-            return 0.0;
+    /**
+     * Applies deadband to controller input
+     * @param value Raw controller value
+     * @return Value with deadband applied (0 if below threshold)
+     */
+    private double applyDeadband(double value) {
+        if (Math.abs(value) > DEADBAND) {
+            return value;
         }
+        return 0.0;
     }
     
-    public void drive(XboxController controller, boolean fieldoriented) {
-        double leftX = applyDeadBand(controller, 0);
-        double leftY = applyDeadBand(controller, 1);
-        double rightX = applyDeadBand(controller, 4);
+    /**
+     * Drives the robot using controller input
+     * @param xSpeed Forward/backward speed (-1 to 1)
+     * @param ySpeed Left/right speed (-1 to 1)
+     * @param rotation Rotation speed (-1 to 1)
+     * @param fieldRelative True for field-relative control, false for robot-relative
+     */
+    public void drive(double xSpeed, double ySpeed, double rotation, boolean fieldRelative) {
+        xSpeed = applyDeadband(xSpeed);
+        ySpeed = applyDeadband(ySpeed);
+        rotation = applyDeadband(rotation);
 
-        double LeftXV = leftX * MAX_VELOCITY;
-        double LeftYV = leftY * MAX_VELOCITY;
-        double RightXV = -rightX * MAX_ANGULAR_VELOCITY;
+        double xVelocity = xSpeed * MAX_VELOCITY;
+        double yVelocity = ySpeed * MAX_VELOCITY;
+        double rotationVelocity = rotation * MAX_ANGULAR_VELOCITY;
 
-        // Toggle shooting mode with X button
-        if (controller.getXButtonPressed()) {
-            shooting = !shooting;
-        }
-
-        // Choose forward direction based on shooting mode
-        Translation2d strafeVelocities;
-        if (shooting) {
-            // Forward is to where ball will shoot
-            strafeVelocities = new Translation2d(-LeftYV, -LeftXV);
+        Translation2d translation;
+        if (shootingMode) {
+            //Shooting mode: forward faces shooter direction
+            translation = new Translation2d(-yVelocity, -xVelocity);
         } else {
-            // Forward is towards intake
-            strafeVelocities = new Translation2d(LeftYV, LeftXV);
+            //Intake mode: forward faces intake direction
+            translation = new Translation2d(yVelocity, xVelocity);
         }
 
-        swerveDrive.drive(strafeVelocities, RightXV, true, false);
+        swerveDrive.drive(translation, rotationVelocity, fieldRelative, false);
+    }
+
+    /**
+     * Toggles between shooting mode and intake mode
+     */
+    public void toggleShootingMode() {
+        shootingMode = !shootingMode;
+    }
+
+    /**
+     * Stops all swerve module movement
+     */
+    public void stop() {
+        swerveDrive.drive(new Translation2d(0, 0), 0, false, false);
+    }
+
+    /**
+     * Zeros the gyro heading
+     */
+    public void zeroHeading() {
+        swerveDrive.zeroGyro();
+    }
+
+    /**
+     * Gets the current robot pose
+     * @return Current pose on the field
+     */
+    public Pose2d getPose() {
+        return swerveDrive.getPose();
+    }
+
+    /**
+     * Resets the odometry to a specific pose
+     * @param pose New pose to reset to
+     */
+    public void resetOdometry(Pose2d pose) {
+        swerveDrive.resetOdometry(pose);
     }
 
     @Override
@@ -79,9 +123,5 @@ public class SwerveSubsystem extends SubsystemBase {
         if (swerveDrive != null) {
             swerveDrive.updateOdometry();
         }
-    }
-
-    public void stop() {
-        swerveDrive.drive(new Translation2d(0, 0), 0, false, false);
     }
 }

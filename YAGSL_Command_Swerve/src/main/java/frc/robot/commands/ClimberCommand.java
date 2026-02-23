@@ -17,17 +17,19 @@ public class ClimberCommand extends Command {
     @Override
     public void execute() {
         if (controller.getYButton()) {
-            climber.raiseClimber();
-        } else if (controller.getAButton()) {
-            climber.lowerClimber();
-        } else {
-            climber.stopClimber();
+            climber.raise();
+        } 
+        else if (controller.getAButton()) {
+            climber.lower();
+        } 
+        else {
+            climber.stop();
         }
     }
 
     @Override
     public void end(boolean interrupted) {
-        climber.stopClimber();
+        climber.stop();
     }
 
     @Override
