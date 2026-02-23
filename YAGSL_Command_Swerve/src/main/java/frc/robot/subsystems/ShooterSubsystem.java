@@ -8,7 +8,6 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ShooterSubsystem extends SubsystemBase {
-    //Motor configuration
     private static final int SHOOTER_MOTOR_ID = 12;
     private static final int CURRENT_LIMIT = 40;
     private static final double VOLTAGE_COMPENSATION = 12.0;

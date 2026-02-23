@@ -72,10 +72,10 @@ public class SwerveSubsystem extends SubsystemBase {
         Translation2d translation;
         if (shootingMode) {
             //Shooting mode: forward faces shooter direction
-            translation = new Translation2d(-yVelocity, -xVelocity);
+            translation = new Translation2d(-xVelocity, -yVelocity);
         } else {
             //Intake mode: forward faces intake direction
-            translation = new Translation2d(yVelocity, xVelocity);
+            translation = new Translation2d(xVelocity, yVelocity);
         }
 
         swerveDrive.drive(translation, rotationVelocity, fieldRelative, false);
