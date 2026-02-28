@@ -12,7 +12,7 @@ public class StorageSubsystem extends SubsystemBase {
     private static final int CURRENT_LIMIT = 40;
     private static final double VOLTAGE_COMPENSATION = 12.0;
 
-    private static final double STORAGE_SPEED = 1.0;
+    private static final double STORAGE_SPEED = 0.75;
 
     private final SparkMax storageMotor;
 

@@ -14,7 +14,7 @@ public class ShooterSubsystem extends SubsystemBase {
     private static final double VOLTAGE_COMPENSATION = 12.0;
 
     //Speed constants
-    private static final double GROUND_INTAKE_SPEED = 0.75;
+    private static final double GROUND_INTAKE_SPEED = 0.6;
 
     private final SparkMax shooterMotor;
     private final PIDController shooterPID;

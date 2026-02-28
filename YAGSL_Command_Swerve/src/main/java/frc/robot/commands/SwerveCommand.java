@@ -22,12 +22,12 @@ public class SwerveCommand extends Command {
         }
 
         //Negative due to coordinate plane
-        double xSpeed = -controller.getLeftY();  //Forward/backward (inverted)
-        double ySpeed = -controller.getLeftX();  //Left/right (inverted)
+        double xSpeed = controller.getLeftX();  //Forward/backward (inverted)
+        double ySpeed = controller.getLeftY();  //Left/right (inverted)
         double rotation = -controller.getRightX(); //Rotation (inverted)
 
         //Drive with field-relative control
-        swerve.drive(xSpeed, ySpeed, rotation, true);
+        swerve.drive(ySpeed, xSpeed, rotation, true);
     }
     @Override
     public void end(boolean interrupted) {

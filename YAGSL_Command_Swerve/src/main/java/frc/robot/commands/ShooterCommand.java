@@ -11,6 +11,7 @@ public class ShooterCommand extends Command {
     private final XboxController driverController;
     private final XboxController operatorController;
     private boolean enableToggle = false;
+    private boolean driverToggle = false; 
 
     public ShooterCommand(ShooterSubsystem shooter, StorageSubsystem storage, XboxController driverController, XboxController operatorController) {
         this.shooter = shooter;
@@ -23,26 +24,35 @@ public class ShooterCommand extends Command {
     @Override
     public void execute() {
         //driver commands
-        if (driverController.getRightBumperButton()) { //Full ball intake
+        if (driverController.getRightBumperPressed()) {
+            driverToggle = !driverToggle;
+        }
+
+        if (driverToggle) {
             shooter.runGroundIntake(false);
             storage.intake();
         }
-        else if (driverController.getLeftBumperButton()) { //Ground intake out
-            shooter.runGroundIntake(true);
-        }
-
-        //operator commands
-        if (operatorController.getLeftBumperButtonPressed()) { //Toggle shooter on/off
-            enableToggle = !enableToggle;
-        }
-
-        if (enableToggle) {
-            shooter.shootAtDistance(0); //TODO: Replace with distance from camera
-            // shooter.setSpeed(0);
-        } 
         else {
             shooter.stop();
+            storage.stop();
         }
+
+        if (driverController.getLeftBumperButton()) {
+            storage.outtake();
+        }
+
+        // //operator commands
+        // if (operatorController.getLeftBumperButtonPressed()) { //Toggle shooter on/off
+        //     enableToggle = !enableToggle;
+        // }
+
+        // if (enableToggle) {
+        //     shooter.setSpeed(0.6); //TODO: Replace with distance from camera
+        //     // shooter.setSpeed(0);
+        // } 
+        // else {
+        //     shooter.stop();
+        // }
     }
 
     @Override

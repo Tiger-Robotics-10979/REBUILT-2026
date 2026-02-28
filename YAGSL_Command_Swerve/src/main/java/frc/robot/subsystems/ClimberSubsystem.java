@@ -9,7 +9,7 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ClimberSubsystem extends SubsystemBase {
-    private static final int CLIMBER_MOTOR_ID = 21; //TODO: Change CAN ID to correct motor ID
+    private static final int CLIMBER_MOTOR_ID = 11; //TODO: Change CAN ID to correct motor ID
     private static final int CURRENT_LIMIT = 40;
     private static final double VOLTAGE_COMPENSATION = 12.0;
 
@@ -35,7 +35,7 @@ public class ClimberSubsystem extends SubsystemBase {
      */
     public void raise() {
         if (climberEncoder.getPosition() < 100) { //TODO: Change encoder value to maximum climber encoder value
-            climberMotor.set(CLIMB_SPEED);
+            climberMotor.set(-CLIMB_SPEED);
         }
         else { //greater than encoder upper limit
             climberMotor.set(0);
@@ -47,7 +47,7 @@ public class ClimberSubsystem extends SubsystemBase {
      */
     public void lower() {
         if (climberEncoder.getPosition() > 0) {
-            climberMotor.set(-CLIMB_SPEED);
+            climberMotor.set(CLIMB_SPEED);
         }
         else {
             climberMotor.set(0);

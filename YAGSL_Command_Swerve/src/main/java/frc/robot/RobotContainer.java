@@ -5,7 +5,7 @@ import frc.robot.commands.FollowPath;
 import frc.robot.commands.StorageCommand;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.SwerveCommand;
-import frc.robot.subsystems.CameraSubsystem;
+// import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.StorageSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -23,7 +23,7 @@ public class RobotContainer {
 
   //Subsystems
   private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
-  private final CameraSubsystem cameraSubsystem = new CameraSubsystem();
+  // private final CameraSubsystem cameraSubsystem = new CameraSubsystem();
   private final StorageSubsystem storageSubsystem = new StorageSubsystem();
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   private final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
@@ -46,15 +46,16 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
+    //Shooter (DRIVER: Ground intake (Right bumper, Left bumper), OPERATOR: Shooter toggle (Left bumper))
+    shooterSubsystem.setDefaultCommand(new ShooterCommand(shooterSubsystem, storageSubsystem, driverController, operatorController));
+
     //driver controls
     swerveSubsystem.setDefaultCommand(new SwerveCommand(swerveSubsystem, driverController)); //Robot movement (Joysticks)
 
     //operator controls
     climberSubsystem.setDefaultCommand(new ClimberCommand(climberSubsystem, operatorController)); //Climber (Button Y, Button A)
-    storageSubsystem.setDefaultCommand(new StorageCommand(storageSubsystem, operatorController)); //Inside storage intake (POV 0, POV 180)
+    // storageSubsystem.setDefaultCommand(new StorageCommand(storageSubsystem, operatorController)); //Inside storage intake (POV 0, POV 180)
 
-    //Shooter (DRIVER: Ground intake (Right bumper, Left bumper), OPERATOR: Shooter toggle (Left bumper))
-    shooterSubsystem.setDefaultCommand(new ShooterCommand(shooterSubsystem, storageSubsystem, driverController, operatorController));
   }
 
   public Command getAutonomousCommand() {
@@ -65,7 +66,11 @@ public class RobotContainer {
     return swerveSubsystem;
   }
 
-  public CameraSubsystem getCameraSubsystem() {
-    return cameraSubsystem;
+  // public CameraSubsystem getCameraSubsystem() {
+  //   return cameraSubsystem;
+  // }
+
+  public StorageSubsystem getStorageSubsystem() {
+    return storageSubsystem;
   }
 }
