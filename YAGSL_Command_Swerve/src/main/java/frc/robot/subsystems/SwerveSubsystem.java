@@ -15,7 +15,6 @@ import static frc.robot.Constants.swerveDriveConstants.MAX_VELOCITY;
 import static frc.robot.Constants.swerveDriveConstants.MAX_ANGULAR_VELOCITY;
 
 public class SwerveSubsystem extends SubsystemBase {
-    // Deadband threshold for controller inputs
     private static final double DEADBAND = 0.04;
 
     public SwerveDrive swerveDrive;
@@ -110,6 +109,10 @@ public class SwerveSubsystem extends SubsystemBase {
         return swerveDrive.getPose();
     }
 
+    public void addVisionMeasurement(Pose2d visionPose, double timestampSeconds) {
+        swerveDrive.addVisionMeasurement(visionPose, timestampSeconds);
+    }
+ 
     /**
      * Resets the odometry to a specific pose
      * @param pose New pose to reset to

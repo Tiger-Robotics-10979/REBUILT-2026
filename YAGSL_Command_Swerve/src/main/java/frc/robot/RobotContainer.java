@@ -5,6 +5,7 @@ import frc.robot.commands.FollowPath;
 import frc.robot.commands.StorageCommand;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.SwerveCommand;
+import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.StorageSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -22,6 +23,7 @@ public class RobotContainer {
 
   //Subsystems
   private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
+  private final CameraSubsystem cameraSubsystem = new CameraSubsystem();
   private final StorageSubsystem storageSubsystem = new StorageSubsystem();
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   private final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
@@ -57,5 +59,13 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     return autoCommand;
+  }
+
+  public SwerveSubsystem getSwerveSubsystem() {
+    return swerveSubsystem;
+  }
+
+  public CameraSubsystem getCameraSubsystem() {
+    return cameraSubsystem;
   }
 }

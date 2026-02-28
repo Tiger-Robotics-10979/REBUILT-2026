@@ -56,7 +56,7 @@ public class ShooterSubsystem extends SubsystemBase {
      */
     public void setSpeed(double speed) {
         shooterMotor.set(speed);
-        // System.out.println("Shooter RPM: " + getCurrentRPM());
+        System.out.println("Shooter RPM: " + getCurrentRPM());
     }
 
     /**

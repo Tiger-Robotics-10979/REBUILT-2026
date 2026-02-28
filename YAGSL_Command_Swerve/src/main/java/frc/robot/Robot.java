@@ -15,6 +15,16 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
+
+    var swerve = m_robotContainer.getSwerveSubsystem();
+    var camera = m_robotContainer.getCameraSubsystem();
+
+    camera.getEstimatedGlobalPose(swerve.getPose()).ifPresent(estimatedPose -> {
+        swerve.addVisionMeasurement(
+            estimatedPose.estimatedPose.toPose2d(),
+            estimatedPose.timestampSeconds
+        );  
+    });
   }
 
   @Override
