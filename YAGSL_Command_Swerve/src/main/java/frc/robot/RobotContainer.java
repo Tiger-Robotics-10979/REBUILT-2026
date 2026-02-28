@@ -1,7 +1,6 @@
 package frc.robot;
 
 import frc.robot.commands.ClimberCommand;
-import frc.robot.commands.ControllerCommand;
 import frc.robot.commands.FollowPath;
 import frc.robot.commands.StorageCommand;
 import frc.robot.commands.ShooterCommand;
@@ -28,7 +27,6 @@ public class RobotContainer {
   private final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
 
   //Commands
-  private final ControllerCommand controllerCommand = new ControllerCommand(storageSubsystem, shooterSubsystem, null, driverController);
   private final Command autoCommand;
 
   public RobotContainer() {
@@ -47,15 +45,14 @@ public class RobotContainer {
 
   private void configureBindings() {
     //driver controls
-    swerveSubsystem.setDefaultCommand(new SwerveCommand(swerveSubsystem, driverController)); //robot movement
-    climberSubsystem.setDefaultCommand(new ClimberCommand(climberSubsystem, driverController)); //climber
+    swerveSubsystem.setDefaultCommand(new SwerveCommand(swerveSubsystem, driverController)); //Robot movement (Joysticks)
 
     //operator controls
-    storageSubsystem.setDefaultCommand(new StorageCommand(storageSubsystem, operatorController)); //inside storage intake
+    climberSubsystem.setDefaultCommand(new ClimberCommand(climberSubsystem, operatorController)); //Climber (Button Y, Button A)
+    storageSubsystem.setDefaultCommand(new StorageCommand(storageSubsystem, operatorController)); //Inside storage intake (POV 0, POV 180)
 
-
-    storageSubsystem.setDefaultCommand(controllerCommand);
-    shooterSubsystem.setDefaultCommand(controllerCommand);
+    //Shooter (DRIVER: Ground intake (Right bumper, Left bumper), OPERATOR: Shooter toggle (Left bumper))
+    shooterSubsystem.setDefaultCommand(new ShooterCommand(shooterSubsystem, storageSubsystem, driverController, operatorController));
   }
 
   public Command getAutonomousCommand() {

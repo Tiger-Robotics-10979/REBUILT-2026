@@ -1,10 +1,11 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.math.controller.PIDController;
-import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
+import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkMaxConfig;
+
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ShooterSubsystem extends SubsystemBase {
@@ -13,7 +14,7 @@ public class ShooterSubsystem extends SubsystemBase {
     private static final double VOLTAGE_COMPENSATION = 12.0;
 
     //Speed constants
-    private static final double GROUND_INTAKE_SPEED = 0.5;
+    private static final double GROUND_INTAKE_SPEED = 0.75;
 
     private final SparkMax shooterMotor;
     private final PIDController shooterPID;
@@ -45,7 +46,7 @@ public class ShooterSubsystem extends SubsystemBase {
      */
     public void shootAtDistance(double distanceMeters) {
         targetRPM = calculateTargetRPM(distanceMeters);
-        double output = shooterPID.calculate(getCurrentRPM(), targetRPM); //can test for regression model values by replacing target RPM with specific RMPs
+        double output = shooterPID.calculate(getCurrentRPM(), targetRPM);  //TODO: Use this function to test different RPMs to make regression model (change targetRPM)
         shooterMotor.set(output);
     }
 
@@ -55,15 +56,15 @@ public class ShooterSubsystem extends SubsystemBase {
      */
     public void setSpeed(double speed) {
         shooterMotor.set(speed);
-        System.out.println("Shooter RPM: " + getCurrentRPM());
+        // System.out.println("Shooter RPM: " + getCurrentRPM());
     }
 
     /**
      * Runs shooter in ground intake mode (slower speed for intake assist)
      * @param reverse True to reverse direction, false for normal
      */
-    public void runGroundIntake(boolean reverse) {
-        if (reverse) {
+    public void runGroundIntake(boolean invert) {
+        if (invert) {
             shooterMotor.set(-GROUND_INTAKE_SPEED);
         } else {
             shooterMotor.set(GROUND_INTAKE_SPEED);
