@@ -7,53 +7,51 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class IntakeSubsystem extends SubsystemBase {
-    private static final int INTAKE_MOTOR_ID = 16;
+public class StorageSubsystem extends SubsystemBase {
+    private static final int STORAGE_MOTOR_ID = 16;
     private static final int CURRENT_LIMIT = 40;
     private static final double VOLTAGE_COMPENSATION = 12.0;
 
-    //Speed constants
-    private static final double INTAKE_SPEED = 1.0;
-    private static final double OUTTAKE_SPEED = -1.0;
+    private static final double STORAGE_SPEED = 1.0;
 
-    private final SparkMax intakeMotor;
+    private final SparkMax storageMotor;
 
-    public IntakeSubsystem() {
-        intakeMotor = new SparkMax(INTAKE_MOTOR_ID, SparkMax.MotorType.kBrushless);
+    public StorageSubsystem() {
+        storageMotor = new SparkMax(STORAGE_MOTOR_ID, SparkMax.MotorType.kBrushless);
 
         SparkMaxConfig intakeConfig = new SparkMaxConfig();
         intakeConfig.voltageCompensation(VOLTAGE_COMPENSATION);
         intakeConfig.smartCurrentLimit(CURRENT_LIMIT);
 
-        intakeMotor.configure(intakeConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        storageMotor.configure(intakeConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     }
 
     /**
-     * Runs intake inward to collect game pieces
+     * Runs storage intake inward to collect game pieces
      */
     public void intake() {
-        intakeMotor.set(INTAKE_SPEED);
+        storageMotor.set(STORAGE_SPEED);
     }
 
     /**
-     * Runs intake outward to eject game pieces
+     * Runs storage intake outward to eject game pieces
      */
     public void outtake() {
-        intakeMotor.set(OUTTAKE_SPEED);
+        storageMotor.set(-STORAGE_SPEED);
     }
 
     /**
-     * Runs intake at a custom speed
+     * Runs storage intake at a custom speed
      * @param speed Speed from -1.0 to 1.0 (negative = outtake, positive = intake)
      */
     public void setSpeed(double speed) {
-        intakeMotor.set(speed);
+        storageMotor.set(speed);
     }
 
     /**
-     * Stops the intake motor
+     * Stops the storage intake motor
      */
     public void stop() {
-        intakeMotor.set(0);
+        storageMotor.set(0);
     }
 }

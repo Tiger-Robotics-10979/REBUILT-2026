@@ -3,16 +3,16 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.CameraSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.StorageSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class ControllerCommand extends Command {
-    private final IntakeSubsystem intake;
+    private final StorageSubsystem intake;
     private final ShooterSubsystem shooter;
     private final CameraSubsystem camera;
     private final XboxController controller;
 
-    public ControllerCommand(IntakeSubsystem intake, ShooterSubsystem shooter, CameraSubsystem camera, XboxController controller) {
+    public ControllerCommand(StorageSubsystem intake, ShooterSubsystem shooter, CameraSubsystem camera, XboxController controller) {
         this.intake = intake;
         this.shooter = shooter;
         this.camera = camera;
