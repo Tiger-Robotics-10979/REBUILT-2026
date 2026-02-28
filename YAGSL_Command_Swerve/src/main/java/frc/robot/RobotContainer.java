@@ -46,10 +46,13 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
+    // driver controls
     swerveSubsystem.setDefaultCommand(new SwerveCommand(swerveSubsystem, driverController));
+    climberSubsystem.setDefaultCommand(new ClimberCommand(climberSubsystem, driverController));
+
+
     intakeSubsystem.setDefaultCommand(controllerCommand);
     shooterSubsystem.setDefaultCommand(controllerCommand);
-    climberSubsystem.setDefaultCommand(new ClimberCommand(climberSubsystem, operatorController));
   }
 
   public Command getAutonomousCommand() {

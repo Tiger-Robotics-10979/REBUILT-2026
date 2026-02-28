@@ -19,6 +19,7 @@ public class ControllerCommand extends Command {
         this.controller = controller;
         addRequirements(intake, shooter);
     }
+    
     @Override
     public void execute() {
         if (controller.getRightBumper()) { //Full intake process (storage and roll in)
