@@ -79,26 +79,12 @@ public class SwerveSubsystem extends SubsystemBase {
 
         swerveDrive.drive(translation, rotationVelocity, fieldRelative, false);
     }
-
-    /**
-     * Toggles between shooting mode and intake mode
-     */
-    public void toggleShootingMode() {
-        shootingMode = !shootingMode;
-    }
-
+    
     /**
      * Stops all swerve module movement
      */
     public void stop() {
         swerveDrive.drive(new Translation2d(0, 0), 0, false, false);
-    }
-
-    /**
-     * Zeros the gyro heading
-     */
-    public void zeroHeading() {
-        swerveDrive.zeroGyro();
     }
 
     /**
@@ -119,6 +105,16 @@ public class SwerveSubsystem extends SubsystemBase {
      */
     public void resetOdometry(Pose2d pose) {
         swerveDrive.resetOdometry(pose);
+    }
+
+    public void updateVision(CameraSubsystem camera) {
+        camera.getEstimatedGlobalPose(getPose())
+            .ifPresent(estimatedPose -> {
+                addVisionMeasurement(
+                    estimatedPose.estimatedPose.toPose2d(),
+                    estimatedPose.timestampSeconds
+                );
+            });
     }
 
     @Override

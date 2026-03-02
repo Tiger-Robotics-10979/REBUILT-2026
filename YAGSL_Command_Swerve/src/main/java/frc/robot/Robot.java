@@ -1,35 +1,21 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.subsystems.StorageSubsystem;
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private final RobotContainer m_robotContainer;
-  private final XboxController operatorController;
 
   public Robot() {
     m_robotContainer = new RobotContainer();
-    operatorController = new XboxController(0);
   }
 
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
-
-    // var swerve = m_robotContainer.getSwerveSubsystem();
-    // var camera = m_robotContainer.getCameraSubsystem();
-
-    // camera.getEstimatedGlobalPose(swerve.getPose())
-    //   .ifPresent(estimatedPose -> {
-    //       swerve.addVisionMeasurement(
-    //           estimatedPose.estimatedPose.toPose2d(),
-    //           estimatedPose.timestampSeconds
-    //       );
-    //   });
+    m_robotContainer.updateVision();
   }
 
   @Override
@@ -58,14 +44,7 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void teleopPeriodic() {
-    if (operatorController.getPOV() == 180) {
-      m_robotContainer.getStorageSubsystem().outtake();
-    }
-    else if (operatorController.getPOV() == 0){ 
-      m_robotContainer.getStorageSubsystem().intake();
-    }
-  }
+  public void teleopPeriodic() {}
 
   @Override
   public void testInit() {

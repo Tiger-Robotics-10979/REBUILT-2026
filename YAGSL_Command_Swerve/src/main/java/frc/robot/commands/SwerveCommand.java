@@ -16,10 +16,6 @@ public class SwerveCommand extends Command {
 
     @Override
     public void execute() {
-        //Toggle shooting mode with X button
-        if (controller.getXButtonPressed()) {
-            swerve.toggleShootingMode();
-        }
 
         //Negative due to coordinate plane
         double xSpeed = controller.getLeftX();  //Forward/backward (inverted)

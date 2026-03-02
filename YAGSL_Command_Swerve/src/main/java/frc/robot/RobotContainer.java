@@ -7,7 +7,7 @@ import frc.robot.commands.StorageCommand;
 import frc.robot.commands.StorageOuttake;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.SwerveCommand;
-// import frc.robot.subsystems.CameraSubsystem;
+import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.StorageSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -26,7 +26,7 @@ public class RobotContainer {
 
   //Subsystems
   private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
-  // private final CameraSubsystem cameraSubsystem = new CameraSubsystem();
+  public final CameraSubsystem cameraSubsystem = new CameraSubsystem();
   private final StorageSubsystem storageSubsystem = new StorageSubsystem();
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   private final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
@@ -62,6 +62,10 @@ public class RobotContainer {
     new JoystickButton(driverController, XboxController.Button.kLeftBumper.value).whileTrue(new StorageOuttake(storageSubsystem));
   }
 
+  public void updateVision() {
+    swerveSubsystem.updateVision(cameraSubsystem);
+  }
+
   public Command getAutonomousCommand() {
     return autoCommand;
   }
@@ -70,9 +74,9 @@ public class RobotContainer {
     return swerveSubsystem;
   }
 
-  // public CameraSubsystem getCameraSubsystem() {
-  //   return cameraSubsystem;
-  // }
+  public CameraSubsystem getCameraSubsystem() {
+    return cameraSubsystem;
+  }
 
   public StorageSubsystem getStorageSubsystem() {
     return storageSubsystem;
