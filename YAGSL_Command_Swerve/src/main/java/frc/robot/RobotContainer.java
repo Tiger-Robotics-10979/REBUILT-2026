@@ -2,7 +2,9 @@ package frc.robot;
 
 import frc.robot.commands.ClimberCommand;
 import frc.robot.commands.FollowPath;
+import frc.robot.commands.GroundIntakeCommand;
 import frc.robot.commands.StorageCommand;
+import frc.robot.commands.StorageOuttake;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.SwerveCommand;
 // import frc.robot.subsystems.CameraSubsystem;
@@ -15,6 +17,7 @@ import com.pathplanner.lib.path.PathPlannerPath;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 public class RobotContainer {
   //controllers
@@ -46,16 +49,17 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    //Shooter (DRIVER: Ground intake (Right bumper, Left bumper), OPERATOR: Shooter toggle (Left bumper))
-    shooterSubsystem.setDefaultCommand(new ShooterCommand(shooterSubsystem, storageSubsystem, driverController, operatorController));
-
     //driver controls
     swerveSubsystem.setDefaultCommand(new SwerveCommand(swerveSubsystem, driverController)); //Robot movement (Joysticks)
 
     //operator controls
-    climberSubsystem.setDefaultCommand(new ClimberCommand(climberSubsystem, operatorController)); //Climber (Button Y, Button A)
-    // storageSubsystem.setDefaultCommand(new StorageCommand(storageSubsystem, operatorController)); //Inside storage intake (POV 0, POV 180)
+    shooterSubsystem.setDefaultCommand(new ShooterCommand(shooterSubsystem, operatorController)); //Shooter (Shooter toggle (Left bumper))
+    climberSubsystem.setDefaultCommand(new ClimberCommand(climberSubsystem, operatorController)); //Climber (Up (Button Y), Down (Button A))
+    storageSubsystem.setDefaultCommand(new StorageCommand(storageSubsystem, operatorController)); //Inside storage intake (Out (POV 0), in (POV 180))
 
+    //driver commands
+    new JoystickButton(driverController, XboxController.Button.kRightBumper.value).whileTrue(new GroundIntakeCommand(shooterSubsystem, storageSubsystem));
+    new JoystickButton(driverController, XboxController.Button.kLeftBumper.value).whileTrue(new StorageOuttake(storageSubsystem));
   }
 
   public Command getAutonomousCommand() {

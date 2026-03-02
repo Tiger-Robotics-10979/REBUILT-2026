@@ -7,52 +7,27 @@ import frc.robot.subsystems.StorageSubsystem;
 
 public class ShooterCommand extends Command {
     private final ShooterSubsystem shooter;
-    private final StorageSubsystem storage;
-    private final XboxController driverController;
     private final XboxController operatorController;
-    private boolean enableToggle = false;
-    private boolean driverToggle = false; 
+    private boolean shooterEnabled = false;
 
-    public ShooterCommand(ShooterSubsystem shooter, StorageSubsystem storage, XboxController driverController, XboxController operatorController) {
+    public ShooterCommand(ShooterSubsystem shooter, XboxController operatorController) {
         this.shooter = shooter;
-        this.storage = storage;
-        this.driverController = driverController;
         this.operatorController = operatorController;
-        addRequirements(shooter, storage);
+        addRequirements(shooter);
     }
 
     @Override
     public void execute() {
-        //driver commands
-        if (driverController.getRightBumperPressed()) {
-            driverToggle = !driverToggle;
+        if (operatorController.getLeftBumperPressed()) {
+            shooterEnabled = !shooterEnabled;
         }
 
-        if (driverToggle) {
-            shooter.runGroundIntake(false);
-            storage.intake();
-        }
+        if (shooterEnabled) {
+            shooter.shootAtDistance(0); //replace distance with camera calculations for distance
+        } 
         else {
             shooter.stop();
-            storage.stop();
         }
-
-        if (driverController.getLeftBumperButton()) {
-            storage.outtake();
-        }
-
-        // //operator commands
-        // if (operatorController.getLeftBumperButtonPressed()) { //Toggle shooter on/off
-        //     enableToggle = !enableToggle;
-        // }
-
-        // if (enableToggle) {
-        //     shooter.setSpeed(0.6); //TODO: Replace with distance from camera
-        //     // shooter.setSpeed(0);
-        // } 
-        // else {
-        //     shooter.stop();
-        // }
     }
 
     @Override

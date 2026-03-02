@@ -6,20 +6,20 @@ import frc.robot.subsystems.StorageSubsystem;
 
 public class StorageCommand extends Command {
     private final StorageSubsystem storage;
-    private final XboxController controller;
+    private final XboxController operatorController;
 
-    public StorageCommand(StorageSubsystem storage, XboxController controller) {
+    public StorageCommand(StorageSubsystem storage, XboxController operatorController) {
         this.storage = storage;
-        this.controller = controller;
+        this.operatorController = operatorController;
         addRequirements(storage);
     }
 
     @Override
     public void execute() {
-        if (controller.getPOV() == 0) { //top of D-PAD
+        if (operatorController.getPOV() == 0) { //top of D-PAD
             storage.outtake();
         } 
-        else if (controller.getPOV() == 180) { //bottom of D-PAD
+        else if (operatorController.getPOV() == 180) { //bottom of D-PAD
             storage.intake();
         }
         else {
