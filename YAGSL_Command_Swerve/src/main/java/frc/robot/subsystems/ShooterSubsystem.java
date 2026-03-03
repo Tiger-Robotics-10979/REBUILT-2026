@@ -22,7 +22,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
     public ShooterSubsystem() {
         shooterMotor = new SparkMax(SHOOTER_MOTOR_ID, SparkMax.MotorType.kBrushless);
-        shooterPID = new PIDController(0.0002, 0.00001, 0.0);
+        shooterPID = new PIDController(0.0003, 0.00001, 0.0);
 
         SparkMaxConfig shooterConfig = new SparkMaxConfig();
         shooterConfig.voltageCompensation(VOLTAGE_COMPENSATION);
@@ -46,8 +46,10 @@ public class ShooterSubsystem extends SubsystemBase {
      */
     public void shootAtDistance(double distanceMeters) {
         targetRPM = calculateTargetRPM(distanceMeters);
-        double output = shooterPID.calculate(getCurrentRPM(), targetRPM);  //TODO: Use this function to test different RPMs to make regression model (change targetRPM)
-        shooterMotor.set(output);
+        double output = shooterPID.calculate(getCurrentRPM(), 1250);  //TODO: Use this function to test different RPMs to make regression model (change targetRPM)
+        shooterMotor.set(output + 0.5);
+        System.out.println("Shooter RPM: " + getCurrentRPM());
+
     }
 
     /**
