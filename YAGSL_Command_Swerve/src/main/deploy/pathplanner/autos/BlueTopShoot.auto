@@ -1,0 +1,43 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "BlueTopInit-BlueTopAim"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "BlueTopAim-BlueTopNeutral"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "BlueTopNeutral-BlueMiddleNeutral"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "BlueMiddleNeutral-BlueTopAim"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "BlueTopAim-BlueTopClimb"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}

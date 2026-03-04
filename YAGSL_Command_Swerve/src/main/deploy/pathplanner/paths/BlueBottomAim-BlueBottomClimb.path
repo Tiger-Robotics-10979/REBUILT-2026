@@ -3,32 +3,37 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.5700909090909088,
-        "y": 0.4997613636363645
+        "x": 3.363954545454545,
+        "y": 1.9736363636363636
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.5529152735752385,
-        "y": 0.8241569412416698
+        "x": 2.5187954545454545,
+        "y": 2.262227272727273
       },
       "isLocked": false,
-      "linkedName": "BottomBlueStart"
+      "linkedName": "BlueBottomAim"
     },
     {
       "anchor": {
-        "x": 3.467022727272727,
-        "y": 0.8811136363636365
+        "x": 1.075840909090909,
+        "y": 2.808488636363636
       },
       "prevControl": {
-        "x": 3.489722363725061,
-        "y": 0.6321463162090992
+        "x": 1.8179318181818183,
+        "y": 2.808488636363636
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "BottomBlueAim"
+      "linkedName": "BlueBottomClimb"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.7877358490566089,
+      "rotationDegrees": 180.0
+    }
+  ],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [],
@@ -42,13 +47,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 69.94126551316094
+    "rotation": 180.0
   },
   "reversed": false,
   "folder": "BottomBlue",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": 58.952477768084954
   },
   "useDefaultConstraints": true
 }

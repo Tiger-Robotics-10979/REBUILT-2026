@@ -1,0 +1,37 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "BlueBottomInit-BlueBottomAim"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ActivateShooter"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "BlueBottomAim-BlueBottomClimb"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "RaiseClimber"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}
