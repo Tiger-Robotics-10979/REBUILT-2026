@@ -16,6 +16,8 @@ import frc.robot.subsystems.SwerveSubsystem;
 import com.pathplanner.lib.path.PathPlannerPath;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -31,21 +33,27 @@ public class RobotContainer {
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   private final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
 
-  //Commands
-  private final Command autoCommand;
+  PathPlannerPath top;
+  PathPlannerPath bottom;
+  private final SendableChooser<Command> autoChooser = new SendableChooser<>();
 
   public RobotContainer() {
     configureBindings();
 
-    // Load autonomous path
-    PathPlannerPath path;
     try {
-      path = PathPlannerPath.fromPathFile("RightCorner");
+      top = PathPlannerPath.fromPathFile("BlueTop");
+      bottom = PathPlannerPath.fromPathFile("BlueBottom");
     } catch (Exception e) {
       throw new RuntimeException("Could not load PathPlanner path", e);
     }
 
-    autoCommand = new FollowPath(swerveSubsystem, path);
+    Command topAuto = new FollowPath(swerveSubsystem, top);
+    Command bottomAuto = new FollowPath(swerveSubsystem, bottom);
+
+    autoChooser.setDefaultOption("Blue Top", topAuto);
+    autoChooser.addOption("Blue Bottom", bottomAuto);
+
+    SmartDashboard.putData("Auto Chooser", autoChooser);
   }
 
   private void configureBindings() {
@@ -67,7 +75,7 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return autoCommand;
+    return autoChooser.getSelected();
   }
 
   public SwerveSubsystem getSwerveSubsystem() {
