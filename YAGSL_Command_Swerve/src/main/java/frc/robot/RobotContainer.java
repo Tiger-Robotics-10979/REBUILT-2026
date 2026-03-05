@@ -33,28 +33,27 @@ public class RobotContainer {
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   private final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
 
-  //Commands
-  private final Command autoCommand;
-
-  private SendableChooser<String> autoChooser = new SendableChooser<>();
+  PathPlannerPath top;
+  PathPlannerPath bottom;
+  private final SendableChooser<Command> autoChooser = new SendableChooser<>();
 
   public RobotContainer() {
     configureBindings();
 
-    // Load autonomous path
-    PathPlannerPath path;
     try {
-      path = PathPlannerPath.fromPathFile("BlueHubTop-NeutralTop");
+      top = PathPlannerPath.fromPathFile("BlueTop");
+      bottom = PathPlannerPath.fromPathFile("BlueBottom");
     } catch (Exception e) {
       throw new RuntimeException("Could not load PathPlanner path", e);
     }
 
-    autoChooser.setDefaultOption("BottomBlue", "BottomBlue");
-    autoChooser.addOption("BlueBottom-BlueHubBottom", "AimAtHub");
+    Command topAuto = new FollowPath(swerveSubsystem, top);
+    Command bottomAuto = new FollowPath(swerveSubsystem, bottom);
 
-    SmartDashboard.putData("Auto Mode", autoChooser);
+    autoChooser.setDefaultOption("Blue Top", topAuto);
+    autoChooser.addOption("Blue Bottom", bottomAuto);
 
-    autoCommand = new FollowPath(swerveSubsystem, path);
+    SmartDashboard.putData("Auto Chooser", autoChooser);
   }
 
   private void configureBindings() {
@@ -76,7 +75,7 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return autoCommand;
+    return autoChooser.getSelected();
   }
 
   public SwerveSubsystem getSwerveSubsystem() {

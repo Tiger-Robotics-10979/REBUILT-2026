@@ -3,50 +3,34 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.467022727272727,
-        "y": 0.8811136363636365
+        "x": 3.363954545454545,
+        "y": 1.9736363636363636
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.9097483172338747,
-        "y": 1.0148743572889196
+        "x": 2.5187954545454545,
+        "y": 2.262227272727273
       },
       "isLocked": false,
-      "linkedName": "BottomBlueAim"
-    },
-    {
-      "anchor": {
-        "x": 2.003454545454545,
-        "y": 2.664193181818182
-      },
-      "prevControl": {
-        "x": 3.068290856750652,
-        "y": 2.5496272044080475
-      },
-      "nextControl": {
-        "x": 0.550794398780327,
-        "y": 2.820485212605439
-      },
-      "isLocked": false,
-      "linkedName": null
+      "linkedName": "BlueBottomAim"
     },
     {
       "anchor": {
         "x": 1.075840909090909,
-        "y": 2.7672613636363645
+        "y": 2.808488636363636
       },
       "prevControl": {
-        "x": 1.325217803945468,
-        "y": 2.749621513503833
+        "x": 1.8179318181818183,
+        "y": 2.808488636363636
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "BottomBlueClimb"
+      "linkedName": "BlueBottomClimb"
     }
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 1.1069182389937122,
+      "waypointRelativePos": 0.7877358490566089,
       "rotationDegrees": 180.0
     }
   ],
@@ -63,13 +47,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 179.74421696926075
+    "rotation": 180.0
   },
   "reversed": false,
   "folder": "BottomBlue",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 69.94126551316094
+    "rotation": 58.952477768084954
   },
   "useDefaultConstraints": true
 }

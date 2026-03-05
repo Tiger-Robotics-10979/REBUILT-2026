@@ -7,19 +7,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "BlueBottom-BlueHubBottom"
+            "pathName": "BlueBottomInit-BlueBottomAim"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "EmptyStorage"
+            "name": "ActivateShooter"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "BlueHubBottom-NeutralBottom"
+            "pathName": "BlueBottomAim-BlueBottomNeutral"
           }
         },
         {
@@ -31,25 +31,37 @@
         {
           "type": "path",
           "data": {
-            "pathName": "NeutralBottom-NeutralMiddle"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "NeutralMiddle-BlueHubBottom"
+            "pathName": "BlueBottomNeutral-BlueMiddleNeutral"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "EmptyStorage"
+            "name": "DeactivateIntake"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "BlueHubBottom-BlueBottomClimb"
+            "pathName": "BlueMiddleNeutral-BlueBottomAim"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ActivateShooter"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "BlueBottomAim-BlueBottomClimb"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "RaiseClimber"
           }
         }
       ]

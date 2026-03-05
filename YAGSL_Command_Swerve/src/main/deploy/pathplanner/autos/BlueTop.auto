@@ -1,0 +1,49 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "BlueTopInit-BlueTopNeutral"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ActivateIntake"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "BlueTopNeutral-BlueMiddleNeutral"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "DeactivateIntake"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "BlueMiddleNeutral-BlueTopClimb"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "RaiseClimber"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}

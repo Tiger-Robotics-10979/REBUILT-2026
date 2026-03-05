@@ -1,0 +1,105 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 3.5700909090909088,
+        "y": 0.4585340909090917
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 4.165406942903486,
+        "y": 0.49764292872742055
+      },
+      "isLocked": false,
+      "linkedName": "BlueBottomInit"
+    },
+    {
+      "anchor": {
+        "x": 4.837829545454545,
+        "y": 0.5719090909090914
+      },
+      "prevControl": {
+        "x": 4.44363026530175,
+        "y": 0.5635592802065699
+      },
+      "nextControl": {
+        "x": 5.308471108446846,
+        "y": 0.5818780790772112
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 6.600295454545455,
+        "y": 0.6955909090909096
+      },
+      "prevControl": {
+        "x": 5.915066431104298,
+        "y": 0.6955909090909097
+      },
+      "nextControl": {
+        "x": 7.280545454545455,
+        "y": 0.6955909090909096
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+<<<<<<< HEAD:YAGSL_Command_Swerve/src/main/deploy/pathplanner/paths/BlueHubBottom-NeutralBottom.path
+        "x": 8.262740066225165,
+        "y": 1.2399254966887405
+      },
+      "prevControl": {
+        "x": 8.027833331294039,
+        "y": 1.0231097904550748
+=======
+        "x": 8.27,
+        "y": 1.221238636363637
+      },
+      "prevControl": {
+        "x": 8.362761363636363,
+        "y": 0.6028295454545458
+>>>>>>> ab933f914865d3ad0a3f3085d1b0f5dd9619eb97:YAGSL_Command_Swerve/src/main/deploy/pathplanner/paths/BlueBottomInit-BlueBottomNeutral.path
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "BlueBottomNeutral"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1.7075471698113227,
+      "rotationDegrees": 0.0
+    }
+  ],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+<<<<<<< HEAD:YAGSL_Command_Swerve/src/main/deploy/pathplanner/paths/BlueHubBottom-NeutralBottom.path
+    "velocity": 0,
+    "rotation": 89.41136544145843
+=======
+    "velocity": 1.0,
+    "rotation": 90.0
+>>>>>>> ab933f914865d3ad0a3f3085d1b0f5dd9619eb97:YAGSL_Command_Swerve/src/main/deploy/pathplanner/paths/BlueBottomInit-BlueBottomNeutral.path
+  },
+  "reversed": false,
+  "folder": "BottomBlue",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 0.0
+  },
+  "useDefaultConstraints": true
+}
