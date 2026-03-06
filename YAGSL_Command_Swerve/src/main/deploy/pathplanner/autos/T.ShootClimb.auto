@@ -1,0 +1,43 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "T.Init-T.Aim"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "T.Aim-T.Neutral"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "T.Neutral-H.Neutral"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "M.Neutral-T.Aim"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "T.Aim-T.Climb"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": "TopAutos",
+  "choreoAuto": false
+}

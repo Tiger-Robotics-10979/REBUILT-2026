@@ -4,15 +4,15 @@
     {
       "anchor": {
         "x": 8.249386363636363,
-        "y": 4.014386363636364
+        "y": 4.090692982456141
       },
       "prevControl": null,
       "nextControl": {
         "x": 8.032943181818181,
-        "y": 4.653409090909091
+        "y": 4.729715709728868
       },
       "isLocked": false,
-      "linkedName": "BlueTop-MiddleNeutral"
+      "linkedName": "M.NeutralT"
     },
     {
       "anchor": {
@@ -73,7 +73,7 @@
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "BlueTopAim"
+      "linkedName": "T.Aim"
     }
   ],
   "rotationTargets": [
@@ -98,7 +98,7 @@
     "rotation": -58.73626830562259
   },
   "reversed": false,
-  "folder": "TopBlue",
+  "folder": "M.Neutral",
   "idealStartingState": {
     "velocity": 0,
     "rotation": -90.0

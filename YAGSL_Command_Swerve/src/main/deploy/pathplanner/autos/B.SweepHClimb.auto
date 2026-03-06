@@ -1,0 +1,49 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "B.Init-B.Neutral"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ActivateIntake"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "B.Neutral-H.Neutral"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "DeactivateIntake"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "H.Neutral-B.Climb"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "RaiseClimber"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": "BottomAutos",
+  "choreoAuto": false
+}

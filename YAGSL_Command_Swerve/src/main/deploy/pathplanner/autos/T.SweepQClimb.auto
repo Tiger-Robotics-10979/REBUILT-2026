@@ -7,19 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "BlueBottomInit-BlueBottomAim"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "ActivateShooter"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "BlueBottomAim-BlueBottomNeutral"
+            "pathName": "T.Init-T.Neutral"
           }
         },
         {
@@ -31,7 +19,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "BlueBottomNeutral-BlueMiddleNeutral"
+            "pathName": "T.Neutral-Q.Neutral"
           }
         },
         {
@@ -43,19 +31,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "BlueMiddleNeutral-BlueBottomAim"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "ActivateShooter"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "BlueBottomAim-BlueBottomClimb"
+            "pathName": "Q.Neutral-T.Climb"
           }
         },
         {
@@ -68,6 +44,6 @@
     }
   },
   "resetOdom": true,
-  "folder": null,
+  "folder": "TopAutos",
   "choreoAuto": false
 }

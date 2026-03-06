@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.403988636363636,
-        "y": 4.024693181818182
+        "x": 8.27,
+        "y": 2.952964912280703
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.878340909090909,
-        "y": 1.2830795454545454
+        "x": 7.744352272727273,
+        "y": 0.2113512759170666
       },
       "isLocked": false,
-      "linkedName": "BlueBottom-MiddleNeutral"
+      "linkedName": "Q.NeutralB"
     },
     {
       "anchor": {
@@ -89,7 +89,7 @@
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "BlueBottomClimb"
+      "linkedName": "B.Climb"
     }
   ],
   "rotationTargets": [
@@ -122,7 +122,7 @@
     "rotation": 180.0
   },
   "reversed": false,
-  "folder": "BottomBlue",
+  "folder": "M.Neutral",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 90.0

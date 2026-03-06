@@ -12,7 +12,7 @@
         "y": 5.127522727272727
       },
       "isLocked": false,
-      "linkedName": "BlueTopAim"
+      "linkedName": "T.Aim"
     },
     {
       "anchor": {
@@ -40,7 +40,7 @@
         "y": 5.039557745856536
       },
       "nextControl": {
-        "x": 0.39523799268351867,
+        "x": 0.3952379926835186,
         "y": 4.570336941741613
       },
       "isLocked": false,
@@ -57,7 +57,7 @@
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "BlueTopClimb"
+      "linkedName": "T.Climb"
     }
   ],
   "rotationTargets": [
@@ -82,7 +82,7 @@
     "rotation": 0.0
   },
   "reversed": false,
-  "folder": "TopBlue",
+  "folder": "Aim",
   "idealStartingState": {
     "velocity": 0,
     "rotation": -58.73626830562259
