@@ -14,7 +14,7 @@ public class ShooterCommand extends Command {
         this.operatorController = operatorController;
         addRequirements(shooter);
     }
-
+   
     @Override
     public void execute() {
         if (operatorController.getLeftBumperPressed()) {

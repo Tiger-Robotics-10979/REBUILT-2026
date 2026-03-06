@@ -19,6 +19,7 @@ public class ShooterSubsystem extends SubsystemBase {
     private final SparkMax shooterMotor;
     private final PIDController shooterPID;
     private double targetRPM;
+    public boolean isShooting = false;
 
     public ShooterSubsystem() {
         shooterMotor = new SparkMax(SHOOTER_MOTOR_ID, SparkMax.MotorType.kBrushless);
@@ -60,7 +61,7 @@ public class ShooterSubsystem extends SubsystemBase {
         shooterMotor.set(speed);
         System.out.println("Shooter RPM: " + getCurrentRPM());
     }
-
+  
     /**
      * Runs shooter in ground intake mode (slower speed for intake assist)
      * @param reverse True to reverse direction, false for normal
@@ -88,4 +89,10 @@ public class ShooterSubsystem extends SubsystemBase {
     public double getCurrentRPM() {
         return shooterMotor.getEncoder().getVelocity();
     }
+    public double getTargetRPM() {
+        return targetRPM;}
+ public void setshooting() {
+        isShooting = true;
+}
+
 }

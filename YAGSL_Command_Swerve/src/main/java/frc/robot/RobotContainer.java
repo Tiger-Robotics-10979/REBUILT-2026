@@ -25,6 +25,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
+
+
 public class RobotContainer {
   //controllers
   private final XboxController driverController = new XboxController(0);
@@ -34,21 +36,25 @@ public class RobotContainer {
   public final CameraSubsystem cameraSubsystem = new CameraSubsystem();
   private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem(cameraSubsystem);
   private final StorageSubsystem storageSubsystem = new StorageSubsystem();
-  private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+  public final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   private final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
-
+  
   PathPlannerPath top;
   PathPlannerPath bottom;
   private final SendableChooser<Command> autoChooser = new SendableChooser<>();
 
-  public RobotContainer() {
-    registerNamedCommands();
 
+    public boolean AShoot = false;
+
+
+  public RobotContainer() {
     configureBindings();
 
+    registerNamedCommands();
+
     try {
-      top = PathPlannerPath.fromPathFile("BlueTop");
-      bottom = PathPlannerPath.fromPathFile("BlueBottom");
+      top = PathPlannerPath.fromPathFile("Test");
+      bottom = PathPlannerPath.fromPathFile("Test");
     } catch (Exception e) {
       throw new RuntimeException("Could not load PathPlanner path", e);
     }
@@ -61,10 +67,10 @@ public class RobotContainer {
 
     SmartDashboard.putData("Auto Chooser", autoChooser);
   }
-
+  
   private void configureBindings() {
     //driver controls
-    swerveSubsystem.setDefaultCommand(new SwerveCommand(swerveSubsystem, driverController)); //Robot movement (Joysticks)
+    swerveSubsystem.setDefaultCommand(new SwerveCommand(swerveSubsystem, driverController, operatorController)); //Robot movement (Joysticks)
 
     //operator controls
     shooterSubsystem.setDefaultCommand(new ShooterCommand(shooterSubsystem, operatorController)); //Shooter (Shooter toggle (Left bumper))
