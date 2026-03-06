@@ -43,10 +43,6 @@ public class RobotContainer {
   PathPlannerPath bottom;
   private final SendableChooser<Command> autoChooser = new SendableChooser<>();
 
-
-    public boolean AShoot = false;
-
-
   public RobotContainer() {
     configureBindings();
 
