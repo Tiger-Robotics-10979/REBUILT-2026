@@ -5,8 +5,8 @@
   "pathFolders": [
     "Aim",
     "Init",
-    "M.Neutral",
-    "Neutral"
+    "FromNeutral",
+    "ToNeutral"
   ],
   "autoFolders": [
     "BottomAutos",
