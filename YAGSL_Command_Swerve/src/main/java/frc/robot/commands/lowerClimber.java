@@ -13,7 +13,7 @@ public class lowerClimber extends Command {
 
     @Override
     public void execute() {
-        climber.raise();
+        climber.lower();
     }
 
     @Override
