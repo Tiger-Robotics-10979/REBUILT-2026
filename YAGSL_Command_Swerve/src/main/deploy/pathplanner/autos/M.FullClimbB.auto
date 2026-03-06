@@ -11,9 +11,15 @@
           }
         },
         {
+          "type": "wait",
+          "data": {
+            "waitTime": 0
+          }
+        },
+        {
           "type": "named",
           "data": {
-            "name": "RaiseClimber"
+            "name": "LowerClimber"
           }
         }
       ]

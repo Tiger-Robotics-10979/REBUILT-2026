@@ -3,6 +3,9 @@ package frc.robot.subsystems;
 import java.io.File;
 import java.io.IOException;
 
+import org.opencv.aruco.EstimateParameters;
+import org.photonvision.EstimatedRobotPose;
+
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -20,7 +23,11 @@ public class SwerveSubsystem extends SubsystemBase {
     public SwerveDrive swerveDrive;
     private boolean shootingMode = false;
 
-    public SwerveSubsystem() {
+    private CameraSubsystem camera;
+
+    public SwerveSubsystem(CameraSubsystem camera) {
+        this.camera = camera;
+
         File swerveJsonDirectory = new File(Filesystem.getDeployDirectory(), "swerve");
         try {
             swerveDrive = new SwerveParser(swerveJsonDirectory).createSwerveDrive(MAX_VELOCITY);
@@ -122,5 +129,13 @@ public class SwerveSubsystem extends SubsystemBase {
         if (swerveDrive != null) {
             swerveDrive.updateOdometry();
         }
+
+        camera.getEstimatedGlobalPose(getPose())
+            .ifPresent(estimatedPose -> {
+                addVisionMeasurement(
+                    estimatedPose.estimatedPose.toPose2d(), 
+                    estimatedPose.timestampSeconds
+                );
+            });
     }
 }

@@ -122,7 +122,7 @@
     "rotation": 180.0
   },
   "reversed": false,
-  "folder": "M.Neutral",
+  "folder": "FromNeutral",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 90.0

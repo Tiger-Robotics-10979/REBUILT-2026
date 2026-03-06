@@ -5,15 +5,22 @@
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "sequential",
           "data": {
-            "pathName": "M.Init-M.Aim"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "ActivateShooter"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "M.Init-M.Aim"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ActivateShooter"
+                }
+              }
+            ]
           }
         },
         {
@@ -25,7 +32,7 @@
         {
           "type": "named",
           "data": {
-            "name": "RaiseClimber"
+            "name": "LowerClimber"
           }
         }
       ]

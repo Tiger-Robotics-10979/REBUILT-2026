@@ -20,7 +20,7 @@
         "y": 2.808488636363636
       },
       "prevControl": {
-        "x": -0.42024025135201826,
+        "x": -0.4202402513520185,
         "y": 2.2412663154278807
       },
       "nextControl": null,
@@ -45,7 +45,14 @@
     }
   ],
   "pointTowardsZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "RaiseClimber",
+      "waypointRelativePos": 0.33922261484099125,
+      "endWaypointRelativePos": null,
+      "command": null
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 3.0,

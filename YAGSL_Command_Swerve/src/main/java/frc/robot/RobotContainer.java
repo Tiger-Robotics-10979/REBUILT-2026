@@ -34,8 +34,8 @@ public class RobotContainer {
   private final XboxController operatorController = new XboxController(1);
 
   //Subsystems
-  private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
   public final CameraSubsystem cameraSubsystem = new CameraSubsystem();
+  private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem(cameraSubsystem);
   private final StorageSubsystem storageSubsystem = new StorageSubsystem();
   public final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   private final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
@@ -94,10 +94,6 @@ public class RobotContainer {
     //driver commands
     new JoystickButton(driverController, XboxController.Button.kRightBumper.value).whileTrue(new GroundIntakeCommand(shooterSubsystem, storageSubsystem));
     new JoystickButton(driverController, XboxController.Button.kLeftBumper.value).whileTrue(new StorageOuttake(storageSubsystem));
-  }
-
-  public void updateVision() {
-    swerveSubsystem.updateVision(cameraSubsystem);
   }
 
   public Command getAutonomousCommand() {
