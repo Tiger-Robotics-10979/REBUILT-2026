@@ -5,6 +5,7 @@ import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkMaxConfig;
+import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -21,6 +22,8 @@ public class ClimberSubsystem extends SubsystemBase {
 
     public ClimberSubsystem() {
         climberMotor = new SparkMax(CLIMBER_MOTOR_ID, SparkMax.MotorType.kBrushless);
+        //climberMotor.configure(IdleMode.kBrake);
+        
         climberEncoder = climberMotor.getEncoder();
 
         SparkMaxConfig climberConfig = new SparkMaxConfig();
@@ -34,19 +37,21 @@ public class ClimberSubsystem extends SubsystemBase {
      * Raises the climber (positive direction)
      */
     public void raise() {
-        if (climberEncoder.getPosition() < 100) { //TODO: Change encoder value to maximum climber encoder value
+        if (climberEncoder.getPosition() < 10000) { //TODO: Change encoder value to maximum climber encoder value
             climberMotor.set(-CLIMB_SPEED);
         }
         else { //greater than encoder upper limit
             climberMotor.set(0);
+            
+            }
         }
-    }
+    
 
     /**
      * Lowers the climber (negative direction)
      */
     public void lower() {
-        if (climberEncoder.getPosition() > 0) {
+        if (climberEncoder.getPosition() > -10000) {
             climberMotor.set(CLIMB_SPEED);
         }
         else {

@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "BlueBottom-BlueHubBottom"
+            "pathName": null
           }
         },
         {
@@ -19,7 +19,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "BlueHubBottom-NeutralBottom"
+            "pathName": null
           }
         },
         {
@@ -31,13 +31,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "NeutralBottom-NeutralMiddle"
+            "pathName": null
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "NeutralMiddle-BlueHubBottom"
+            "pathName": null
           }
         },
         {
@@ -49,7 +49,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "BlueHubBottom-BlueBottomClimb"
+            "pathName": null
           }
         }
       ]

@@ -3,15 +3,6 @@
   "waypoints": [
     {
       "anchor": {
-<<<<<<< HEAD:YAGSL_Command_Swerve/src/main/deploy/pathplanner/paths/NeutralBottom-NeutralMiddle.path
-        "x": 8.262740066225165,
-        "y": 1.2399254966887405
-      },
-      "prevControl": null,
-      "nextControl": {
-        "x": 8.312111595389416,
-        "y": 2.0029729973086754
-=======
         "x": 3.5700909090909088,
         "y": 0.4585340909090917
       },
@@ -19,7 +10,6 @@
       "nextControl": {
         "x": 3.446409090909091,
         "y": 0.6955909090909096
->>>>>>> ab933f914865d3ad0a3f3085d1b0f5dd9619eb97:YAGSL_Command_Swerve/src/main/deploy/pathplanner/paths/BlueBottomInit-BlueBottomAim.path
       },
       "isLocked": false,
       "linkedName": "BlueBottomInit"
@@ -64,7 +54,7 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 3.0,
+    "maxVelocity": 2.0,
     "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
@@ -79,11 +69,7 @@
   "folder": "BottomBlue",
   "idealStartingState": {
     "velocity": 0,
-<<<<<<< HEAD:YAGSL_Command_Swerve/src/main/deploy/pathplanner/paths/NeutralBottom-NeutralMiddle.path
-    "rotation": 89.41136544145843
-=======
     "rotation": 0.0
->>>>>>> ab933f914865d3ad0a3f3085d1b0f5dd9619eb97:YAGSL_Command_Swerve/src/main/deploy/pathplanner/paths/BlueBottomInit-BlueBottomAim.path
   },
   "useDefaultConstraints": true
 }

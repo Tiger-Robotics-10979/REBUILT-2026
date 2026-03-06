@@ -48,21 +48,12 @@
     },
     {
       "anchor": {
-<<<<<<< HEAD:YAGSL_Command_Swerve/src/main/deploy/pathplanner/paths/BlueHubBottom-NeutralBottom.path
-        "x": 8.262740066225165,
-        "y": 1.2399254966887405
-      },
-      "prevControl": {
-        "x": 8.027833331294039,
-        "y": 1.0231097904550748
-=======
         "x": 8.27,
         "y": 1.221238636363637
       },
       "prevControl": {
         "x": 8.362761363636363,
         "y": 0.6028295454545458
->>>>>>> ab933f914865d3ad0a3f3085d1b0f5dd9619eb97:YAGSL_Command_Swerve/src/main/deploy/pathplanner/paths/BlueBottomInit-BlueBottomNeutral.path
       },
       "nextControl": null,
       "isLocked": false,
@@ -79,7 +70,7 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 3.0,
+    "maxVelocity": 2.0,
     "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
@@ -87,13 +78,8 @@
     "unlimited": false
   },
   "goalEndState": {
-<<<<<<< HEAD:YAGSL_Command_Swerve/src/main/deploy/pathplanner/paths/BlueHubBottom-NeutralBottom.path
-    "velocity": 0,
-    "rotation": 89.41136544145843
-=======
     "velocity": 1.0,
     "rotation": 90.0
->>>>>>> ab933f914865d3ad0a3f3085d1b0f5dd9619eb97:YAGSL_Command_Swerve/src/main/deploy/pathplanner/paths/BlueBottomInit-BlueBottomNeutral.path
   },
   "reversed": false,
   "folder": "BottomBlue",

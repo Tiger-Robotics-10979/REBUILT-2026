@@ -48,21 +48,12 @@
     },
     {
       "anchor": {
-<<<<<<< HEAD:YAGSL_Command_Swerve/src/main/deploy/pathplanner/paths/BlueHubTop-NeutralTop.path
-        "x": 8.262740066225165,
-        "y": 1.2399254966887405
-      },
-      "prevControl": {
-        "x": 8.009185980184576,
-        "y": 1.3431716921054573
-=======
         "x": 8.249386363636363,
         "y": 6.807534090909091
       },
       "prevControl": {
         "x": 8.259693181818182,
         "y": 7.322875
->>>>>>> ab933f914865d3ad0a3f3085d1b0f5dd9619eb97:YAGSL_Command_Swerve/src/main/deploy/pathplanner/paths/BlueTopAim-BlueTopNeutral.path
       },
       "nextControl": null,
       "isLocked": false,
@@ -87,13 +78,8 @@
     "unlimited": false
   },
   "goalEndState": {
-<<<<<<< HEAD:YAGSL_Command_Swerve/src/main/deploy/pathplanner/paths/BlueHubTop-NeutralTop.path
     "velocity": 0,
-    "rotation": 89.41136544145843
-=======
-    "velocity": 1.0,
-    "rotation": -90.0
->>>>>>> ab933f914865d3ad0a3f3085d1b0f5dd9619eb97:YAGSL_Command_Swerve/src/main/deploy/pathplanner/paths/BlueTopAim-BlueTopNeutral.path
+    "rotation": -90,
   },
   "reversed": false,
   "folder": "TopBlue",

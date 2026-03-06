@@ -13,13 +13,20 @@ import frc.robot.subsystems.StorageSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 
+import java.util.HashMap;
+
+import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.path.PathPlannerPath;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+
+
 
 public class RobotContainer {
   //controllers
@@ -30,19 +37,27 @@ public class RobotContainer {
   private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
   public final CameraSubsystem cameraSubsystem = new CameraSubsystem();
   private final StorageSubsystem storageSubsystem = new StorageSubsystem();
-  private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+  public final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   private final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
 
+  private final HashMap<String, Command> eventMap = new HashMap<>();
+  
   PathPlannerPath top;
   PathPlannerPath bottom;
   private final SendableChooser<Command> autoChooser = new SendableChooser<>();
 
-  public RobotContainer() {
-    configureBindings();
 
+    boolean AShoot = false; 
+
+
+  public RobotContainer() {
+  NamedCommands.registerCommand("Shoot", new InstantCommand(() -> AShoot = true));
+
+    configureBindings();
+    //configureEventMap();
     try {
-      top = PathPlannerPath.fromPathFile("BlueTop");
-      bottom = PathPlannerPath.fromPathFile("BlueBottom");
+      top = PathPlannerPath.fromPathFile("Test");
+      bottom = PathPlannerPath.fromPathFile("Test");
     } catch (Exception e) {
       throw new RuntimeException("Could not load PathPlanner path", e);
     }
@@ -55,10 +70,20 @@ public class RobotContainer {
 
     SmartDashboard.putData("Auto Chooser", autoChooser);
   }
+ // public void configureEventMap() {
 
+    
+   // eventMap.put("Shoot", new RunCommand(() ->shooterSubsystem.setSpeed(.75)).withTimeout(5));
+   // eventMap.put("Intake", new RunCommand(() ->storageSubsystem.intake()).withTimeout(5));
+   // eventMap.put("Climb", new RunCommand(() ->climberSubsystem.raise()).withTimeout(5));
+    
+    //eventMap.put("Shoot", new InstantCommand(() -> AShoot = true));
+
+    
+  
   private void configureBindings() {
     //driver controls
-    swerveSubsystem.setDefaultCommand(new SwerveCommand(swerveSubsystem, driverController)); //Robot movement (Joysticks)
+    swerveSubsystem.setDefaultCommand(new SwerveCommand(swerveSubsystem, driverController, operatorController)); //Robot movement (Joysticks)
 
     //operator controls
     shooterSubsystem.setDefaultCommand(new ShooterCommand(shooterSubsystem, operatorController)); //Shooter (Shooter toggle (Left bumper))
