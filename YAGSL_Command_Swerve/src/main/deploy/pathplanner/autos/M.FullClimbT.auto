@@ -7,19 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "BlueBottomInit-BlueBottomAim"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "ActivateShooter"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "BlueBottomAim-BlueBottomClimb"
+            "pathName": "M.Init-T.Climb"
           }
         },
         {
@@ -32,6 +20,6 @@
     }
   },
   "resetOdom": true,
-  "folder": null,
+  "folder": "MiddleAutos",
   "choreoAuto": false
 }

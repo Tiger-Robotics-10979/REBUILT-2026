@@ -1,0 +1,37 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "M.Init-M.Aim"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ActivateShooter"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "M.Aim-B.Climb"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "RaiseClimber"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": "MiddleAutos",
+  "choreoAuto": false
+}

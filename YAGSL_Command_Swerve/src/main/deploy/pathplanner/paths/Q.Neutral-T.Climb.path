@@ -4,15 +4,15 @@
     {
       "anchor": {
         "x": 8.249386363636363,
-        "y": 4.014386363636364
+        "y": 5.236377192982457
       },
       "prevControl": null,
       "nextControl": {
         "x": 8.492403891146418,
-        "y": 3.9557137011528893
+        "y": 5.177704530498982
       },
       "isLocked": false,
-      "linkedName": "BlueTop-MiddleNeutral"
+      "linkedName": "Q.NeutralT"
     },
     {
       "anchor": {
@@ -105,7 +105,7 @@
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "BlueTopClimb"
+      "linkedName": "T.Climb"
     }
   ],
   "rotationTargets": [
@@ -118,7 +118,7 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 2.0,
+    "maxVelocity": 3.0,
     "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
@@ -130,7 +130,7 @@
     "rotation": 0.0
   },
   "reversed": false,
-  "folder": "TopBlue",
+  "folder": "M.Neutral",
   "idealStartingState": {
     "velocity": 0,
     "rotation": -90.0

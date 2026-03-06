@@ -1,0 +1,139 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 8.249386363636363,
+        "y": 4.090692982456141
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 8.492403891146418,
+        "y": 4.032020319972666
+      },
+      "isLocked": false,
+      "linkedName": "M.NeutralT"
+    },
+    {
+      "anchor": {
+        "x": 5.796363636363636,
+        "y": 7.374409090909092
+      },
+      "prevControl": {
+        "x": 6.716203391464216,
+        "y": 7.00647318886886
+      },
+      "nextControl": {
+        "x": 5.229488636363636,
+        "y": 7.601159090909092
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 4.085431818181818,
+        "y": 7.374409090909092
+      },
+      "prevControl": {
+        "x": 4.606596158530987,
+        "y": 7.4488611395287325
+      },
+      "nextControl": {
+        "x": 3.4361022727264783,
+        "y": 7.281647727274694
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 2.7764659090909087,
+        "y": 6.529249999999999
+      },
+      "prevControl": {
+        "x": 3.106284090909091,
+        "y": 7.250727272727273
+      },
+      "nextControl": {
+        "x": 2.5927554045199757,
+        "y": 6.127383271251083
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 1.9003863636363634,
+        "y": 5.065681818181818
+      },
+      "prevControl": {
+        "x": 2.780593532275645,
+        "y": 5.459038546951345
+      },
+      "nextControl": {
+        "x": 1.3111994452069102,
+        "y": 4.802379442190619
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 0.48835227272727255,
+        "y": 4.756477272727272
+      },
+      "prevControl": {
+        "x": 0.48835227272727255,
+        "y": 5.117215909090908
+      },
+      "nextControl": {
+        "x": 0.48835227272727255,
+        "y": 4.457579545454545
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 1.075840909090909,
+        "y": 4.601875
+      },
+      "prevControl": {
+        "x": 0.7975568181818182,
+        "y": 4.581261363636363
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "T.Climb"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.9119496855345911,
+      "rotationDegrees": 0.0
+    }
+  ],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0.0
+  },
+  "reversed": false,
+  "folder": "M.Neutral",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": -90.0
+  },
+  "useDefaultConstraints": true
+}

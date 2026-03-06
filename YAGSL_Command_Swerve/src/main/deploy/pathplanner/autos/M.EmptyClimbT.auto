@@ -7,37 +7,31 @@
         {
           "type": "path",
           "data": {
-            "pathName": "BlueTopInit-BlueTopAim"
+            "pathName": "M.Init-M.Aim"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ActivateShooter"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": null
+            "pathName": "M.Aim-T.Climb"
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "BlueTopNeutral-BlueMiddleNeutral"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "BlueMiddleNeutral-BlueTopAim"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "BlueTopAim-BlueTopClimb"
+            "name": "RaiseClimber"
           }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": null,
+  "folder": "MiddleAutos",
   "choreoAuto": false
 }

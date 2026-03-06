@@ -7,31 +7,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "BlueTopInit-BlueTopNeutral"
+            "pathName": "B.Init-B.Aim"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "ActivateIntake"
+            "name": "ActivateShooter"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "BlueTopNeutral-BlueMiddleNeutral"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "DeactivateIntake"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "BlueMiddleNeutral-BlueTopClimb"
+            "pathName": "B.Aim-B.Climb"
           }
         },
         {
@@ -44,6 +32,6 @@
     }
   },
   "resetOdom": true,
-  "folder": null,
+  "folder": "BottomAutos",
   "choreoAuto": false
 }

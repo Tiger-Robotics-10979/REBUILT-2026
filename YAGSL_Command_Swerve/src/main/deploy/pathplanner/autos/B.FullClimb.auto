@@ -7,19 +7,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "BlueTopInit-BlueTopAim"
+            "pathName": "B.Init-B.Climb"
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "BlueTopAim-BlueTopClimb"
+            "name": "RaiseClimber"
           }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": null,
+  "folder": "BottomAutos",
   "choreoAuto": false
 }

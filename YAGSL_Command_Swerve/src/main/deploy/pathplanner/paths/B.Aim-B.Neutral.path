@@ -12,7 +12,7 @@
         "y": 1.6128977272727276
       },
       "isLocked": false,
-      "linkedName": "BlueBottomAim"
+      "linkedName": "B.Aim"
     },
     {
       "anchor": {
@@ -73,7 +73,7 @@
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "BlueBottomNeutral"
+      "linkedName": "B.Neutral"
     }
   ],
   "rotationTargets": [
@@ -98,7 +98,7 @@
     "rotation": 90.0
   },
   "reversed": false,
-  "folder": "BottomBlue",
+  "folder": "Aim",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 58.952477768084954
