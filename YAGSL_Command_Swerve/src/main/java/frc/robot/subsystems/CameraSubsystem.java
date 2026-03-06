@@ -36,8 +36,15 @@ public class CameraSubsystem extends SubsystemBase {
             return Optional.empty();
         }
 
-        // Reject high ambiguity targets
-        if (result.getBestTarget().getPoseAmbiguity() > 0.2) {
+        var target = result.getBestTarget();
+
+        //rejects high ambiguity targets
+        if (target.getPoseAmbiguity() > 0.2) {
+            return Optional.empty();
+        }
+
+        //rejects targets that are too far away
+        if (target.getBestCameraToTarget().getTranslation().getNorm() > 4.0) {
             return Optional.empty();
         }
 

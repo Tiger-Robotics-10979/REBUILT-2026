@@ -30,6 +30,8 @@ public class FollowPath extends Command {
         this.swerve = swerve;
         this.path = path;
         addRequirements(swerve);
+
+        pidRotation.enableContinuousInput(-Math.PI, Math.PI);
     }
 
     @Override
@@ -57,8 +59,11 @@ public class FollowPath extends Command {
 
         double xError = pidX.calculate(swerve.getPose().getX(), goalState.pose.getX());
         double yError = pidY.calculate(swerve.getPose().getY(), goalState.pose.getY());
-        double rotationError = pidRotation.calculate(swerve.getPose().getRotation().minus(goalState.pose.getRotation()).getRadians(), 0);
-
+        double rotationError =
+            pidRotation.calculate(
+                swerve.getPose().getRotation().getRadians(),
+                goalState.pose.getRotation().getRadians()
+            );
         Translation2d correction = new Translation2d(xError, yError);
         Translation2d finalVelocity = trajectoryVelocity.plus(correction);
 
