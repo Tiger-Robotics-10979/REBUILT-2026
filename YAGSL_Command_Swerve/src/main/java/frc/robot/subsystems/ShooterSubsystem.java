@@ -47,7 +47,7 @@ public class ShooterSubsystem extends SubsystemBase {
     public void shootAtDistance(double distanceMeters) {
         targetRPM = calculateTargetRPM(distanceMeters);
         double output = shooterPID.calculate(getCurrentRPM(), 1250);  //TODO: Use this function to test different RPMs to make regression model (change targetRPM)
-        shooterMotor.set(output + 0.5);
+        shooterMotor.set(output + 0.25);
         System.out.println("Shooter RPM: " + getCurrentRPM());
 
     }

@@ -7,12 +7,16 @@ import frc.robot.commands.StorageCommand;
 import frc.robot.commands.StorageOuttake;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.SwerveCommand;
+import frc.robot.commands.activateShooter;
+import frc.robot.commands.lowerClimber;
+import frc.robot.commands.raiseClimber;
 import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.StorageSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 
+import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.path.PathPlannerPath;
 
 import edu.wpi.first.wpilibj.XboxController;
@@ -38,6 +42,8 @@ public class RobotContainer {
   private final SendableChooser<Command> autoChooser = new SendableChooser<>();
 
   public RobotContainer() {
+    registerNamedCommands();
+
     configureBindings();
 
     try {
@@ -68,6 +74,22 @@ public class RobotContainer {
     //driver commands
     new JoystickButton(driverController, XboxController.Button.kRightBumper.value).whileTrue(new GroundIntakeCommand(shooterSubsystem, storageSubsystem));
     new JoystickButton(driverController, XboxController.Button.kLeftBumper.value).whileTrue(new StorageOuttake(storageSubsystem));
+  }
+
+  private void registerNamedCommands() {
+    NamedCommands.registerCommand(
+        "RaiseClimber",
+        new raiseClimber(climberSubsystem)
+    );
+    NamedCommands.registerCommand(
+        "LowerClimber",
+        new lowerClimber(climberSubsystem)
+    );
+    NamedCommands.registerCommand(
+        "ActivateShooter",
+        new activateShooter(shooterSubsystem)
+    );
+
   }
 
   public Command getAutonomousCommand() {
