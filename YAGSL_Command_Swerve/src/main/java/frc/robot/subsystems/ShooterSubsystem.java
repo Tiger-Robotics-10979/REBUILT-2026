@@ -89,10 +89,12 @@ public class ShooterSubsystem extends SubsystemBase {
     public double getCurrentRPM() {
         return shooterMotor.getEncoder().getVelocity();
     }
+    
     public double getTargetRPM() {
-        return targetRPM;}
- public void setshooting() {
-        isShooting = true;
-}
+        return targetRPM;
+    }
 
+    public void setshooting() {
+        isShooting = true;
+    }
 }
