@@ -47,12 +47,13 @@ public class RobotContainer {
   private final SendableChooser<Command> autoChooser = new SendableChooser<>();
 
 
-    boolean AShoot = false; 
+    public boolean AShoot = false;
 
 
   public RobotContainer() {
-  NamedCommands.registerCommand("Shoot", new InstantCommand(() -> AShoot = true));
-
+     
+   
+    NamedCommands.registerCommand("Shoot",new InstantCommand(() -> shooterSubsystem.setshooting()));
     configureBindings();
     //configureEventMap();
     try {
