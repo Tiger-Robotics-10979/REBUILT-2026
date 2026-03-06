@@ -34,7 +34,7 @@ public class ClimberSubsystem extends SubsystemBase {
      * Raises the climber (positive direction)
      */
     public void raise() {
-        if (climberEncoder.getPosition() < 100) { //TODO: Change encoder value to maximum climber encoder value
+        if (climberEncoder.getPosition() < 50) { //TODO: Change encoder value to maximum climber encoder value
             climberMotor.set(-CLIMB_SPEED);
         }
         else { //greater than encoder upper limit
@@ -46,7 +46,7 @@ public class ClimberSubsystem extends SubsystemBase {
      * Lowers the climber (negative direction)
      */
     public void lower() {
-        if (climberEncoder.getPosition() > 0) {
+        if (climberEncoder.getPosition() > 3) {
             climberMotor.set(CLIMB_SPEED);
         }
         else {
