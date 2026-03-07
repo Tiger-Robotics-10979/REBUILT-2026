@@ -35,15 +35,9 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "DeactivateIntake"
-          }
-        },
-        {
           "type": "path",
           "data": {
-            "pathName": "Q.Neutral-B.Aim"
+            "pathName": "H.Neutral-B.Aim"
           }
         },
         {

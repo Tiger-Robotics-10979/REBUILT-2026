@@ -6,6 +6,7 @@ import frc.robot.commands.StorageCommand;
 import frc.robot.commands.StorageOuttake;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.SwerveCommand;
+import frc.robot.commands.autos.activateIntake;
 import frc.robot.commands.autos.activateShooter;
 import frc.robot.commands.autos.lowerClimber;
 import frc.robot.commands.autos.raiseClimber;
@@ -78,8 +79,11 @@ public class RobotContainer {
     );
     NamedCommands.registerCommand(
         "ActivateShooter",
-        new activateShooter(shooterSubsystem, storageSubsystem)
+        new activateShooter(shooterSubsystem, storageSubsystem).withTimeout(6)
     );
+    NamedCommands.registerCommand(
+        "ActivateIntake", 
+        new activateIntake(storageSubsystem, shooterSubsystem));
   }
 
   public Command getAutonomousCommand() {
