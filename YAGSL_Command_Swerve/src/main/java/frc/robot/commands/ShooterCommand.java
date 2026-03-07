@@ -17,12 +17,12 @@ public class ShooterCommand extends Command {
    
     @Override
     public void execute() {
-        if (operatorController.getLeftBumperPressed()) {
+        if (operatorController.getAButtonPressed()) {
             shooterEnabled = !shooterEnabled;
         }
 
         if (shooterEnabled) {
-            shooter.setSpeed(0.75);; //replace distance with camera calculations for distance
+            shooter.setSpeed(0.75); //replace distance with camera calculations for distance
         } 
         else {
             shooter.stop();

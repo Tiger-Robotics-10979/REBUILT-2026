@@ -18,12 +18,10 @@ public class SwerveCommand extends Command {
 
     @Override
     public void execute() {
-
         //Negative due to coordinate plane
         double xSpeed = -controller.getLeftX();  //Forward/backward (inverted)
         double ySpeed = -controller.getLeftY();  //Left/right (inverted)
         double rotation = r; //Rotation (inverted)
-
         
         if  (controller.getRightX() != 0) {
             r = -controller.getRightX();

@@ -1,35 +1,35 @@
 package frc.robot;
 
 import frc.robot.commands.ClimberCommand;
-import frc.robot.commands.FollowPath;
 import frc.robot.commands.GroundIntakeCommand;
 import frc.robot.commands.StorageCommand;
 import frc.robot.commands.StorageOuttake;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.SwerveCommand;
-import frc.robot.commands.activateShooter;
-import frc.robot.commands.lowerClimber;
-import frc.robot.commands.raiseClimber;
+import frc.robot.commands.autos.activateShooter;
+import frc.robot.commands.autos.lowerClimber;
+import frc.robot.commands.autos.raiseClimber;
 import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.StorageSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 
+import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
-import com.pathplanner.lib.path.PathPlannerPath;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 
 
 public class RobotContainer {
   //controllers
-  private final XboxController driverController = new XboxController(0);
+  public final XboxController driverController = new XboxController(0);
   private final XboxController operatorController = new XboxController(1);
 
   //Subsystems
@@ -39,27 +39,14 @@ public class RobotContainer {
   public final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   private final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
   
-  PathPlannerPath top;
-  PathPlannerPath bottom;
-  private final SendableChooser<Command> autoChooser = new SendableChooser<>();
+  private SendableChooser<Command> autoChooser;
 
   public RobotContainer() {
     configureBindings();
 
     registerNamedCommands();
 
-    try {
-      top = PathPlannerPath.fromPathFile("Test");
-      bottom = PathPlannerPath.fromPathFile("Test");
-    } catch (Exception e) {
-      throw new RuntimeException("Could not load PathPlanner path", e);
-    }
-
-    Command topAuto = new FollowPath(swerveSubsystem, top);
-    Command bottomAuto = new FollowPath(swerveSubsystem, bottom);
-
-    autoChooser.setDefaultOption("Blue Top", topAuto);
-    autoChooser.addOption("Blue Bottom", bottomAuto);
+    autoChooser = AutoBuilder.buildAutoChooser();
 
     SmartDashboard.putData("Auto Chooser", autoChooser);
   }
@@ -76,6 +63,8 @@ public class RobotContainer {
     //driver commands
     new JoystickButton(driverController, XboxController.Button.kRightBumper.value).whileTrue(new GroundIntakeCommand(shooterSubsystem, storageSubsystem));
     new JoystickButton(driverController, XboxController.Button.kLeftBumper.value).whileTrue(new StorageOuttake(storageSubsystem));
+    new JoystickButton(driverController, XboxController.Button.kA.value)
+      .onTrue(new InstantCommand(() -> swerveSubsystem.toggleShootingMode()));
   }
 
   private void registerNamedCommands() {
@@ -89,9 +78,8 @@ public class RobotContainer {
     );
     NamedCommands.registerCommand(
         "ActivateShooter",
-        new activateShooter(shooterSubsystem)
+        new activateShooter(shooterSubsystem, storageSubsystem)
     );
-
   }
 
   public Command getAutonomousCommand() {

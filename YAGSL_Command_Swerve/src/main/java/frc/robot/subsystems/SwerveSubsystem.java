@@ -1,21 +1,30 @@
 package frc.robot.subsystems;
 
+import static frc.robot.Constants.swerveDriveConstants.MAX_ANGULAR_VELOCITY;
+import static frc.robot.Constants.swerveDriveConstants.MAX_VELOCITY;
+
 import java.io.File;
 import java.io.IOException;
+
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.commands.PathfindingCommand;
+import com.pathplanner.lib.config.PIDConstants;
+import com.pathplanner.lib.config.RobotConfig;
+import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
 import swervelib.SwerveDrive;
 import swervelib.parser.SwerveParser;
-import static frc.robot.Constants.swerveDriveConstants.MAX_VELOCITY;
-import static frc.robot.Constants.swerveDriveConstants.MAX_ANGULAR_VELOCITY;
 
 public class SwerveSubsystem extends SubsystemBase {
-    private static final double DEADBAND = 0.04;
+    private static final double DEADBAND = 0.05;
 
     public SwerveDrive swerveDrive;
     private boolean shootingMode = false;
@@ -42,6 +51,8 @@ public class SwerveSubsystem extends SubsystemBase {
         }
 
         swerveDrive.zeroGyro();
+
+        setupPathPlanner();
     }
 
     /**
@@ -91,6 +102,70 @@ public class SwerveSubsystem extends SubsystemBase {
         swerveDrive.drive(new Translation2d(0, 0), 0, false, false);
     }
 
+    public void setupPathPlanner() {
+        RobotConfig config;
+        try {
+            config = RobotConfig.fromGUISettings();
+
+            final boolean enableFeedforward = true;
+            // Configure AutoBuilder last
+            AutoBuilder.configure(
+                this::getPose,
+                // Robot pose supplier
+                this::resetOdometry,
+                // Method to reset odometry (will be called if your auto has a starting pose)
+                this::getRobotVelocity,
+                // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
+                (speedsRobotRelative, moduleFeedForwards) -> {
+                    if (enableFeedforward)
+                    {
+                    swerveDrive.drive(
+                        speedsRobotRelative,
+                        swerveDrive.kinematics.toSwerveModuleStates(speedsRobotRelative),
+                        moduleFeedForwards.linearForces()
+                                    );
+                    } else
+                    {
+                    swerveDrive.setChassisSpeeds(speedsRobotRelative);
+                    }
+                },
+                // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds. Also optionally outputs individual module feedforwards
+                new PPHolonomicDriveController(
+                    // PPHolonomicController is the built in path following controller for holonomic drive trains
+                    new PIDConstants(10.0, 0.25, 0.0),
+                    // Translation PID constants
+                    new PIDConstants(5.0, 0.0, 0.0)
+                    // Rotation PID constants
+                ),
+                config,
+                // The robot configuration
+                () -> {
+                    // Boolean supplier that controls when the path will be mirrored for the red alliance
+                    // This will flip the path being followed to the red side of the field.
+                    // THE ORIGIN WILL REMAIN ON THE BLUE SIDE
+
+                    var alliance = DriverStation.getAlliance();
+                    if (alliance.isPresent())
+                    {
+                    return alliance.get() == DriverStation.Alliance.Red;
+                    }
+                    return false;
+                },
+                this
+                // Reference to this subsystem to set requirements
+            );
+
+            } catch (Exception e)
+            {
+            // Handle exception as needed
+            e.printStackTrace();
+            }
+
+            //Preload PathPlanner Path finding
+            // IF USING CUSTOM PATHFINDER ADD BEFORE THIS LINE
+        PathfindingCommand.warmupCommand().schedule();
+    }
+
     /**
      * Gets the current robot pose
      * @return Current pose on the field
@@ -134,5 +209,13 @@ public class SwerveSubsystem extends SubsystemBase {
                     estimatedPose.timestampSeconds
                 );
             });
+    }
+
+    public ChassisSpeeds getRobotVelocity() {
+        return swerveDrive.getRobotVelocity();
+    }
+
+    public void toggleShootingMode() {
+        shootingMode = !shootingMode;
     }
 }
