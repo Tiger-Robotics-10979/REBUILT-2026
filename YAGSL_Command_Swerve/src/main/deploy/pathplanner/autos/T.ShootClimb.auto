@@ -11,9 +11,21 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "ActivateShooter"
+          }
+        },
+        {
           "type": "path",
           "data": {
-            "pathName": null
+            "pathName": "T.Aim-T.Neutral"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ActivateIntake"
           }
         },
         {
@@ -29,9 +41,21 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "ActivateShooter"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "T.Aim-T.Climb"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "LowerClimber"
           }
         }
       ]
