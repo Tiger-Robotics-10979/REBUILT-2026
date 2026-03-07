@@ -1,6 +1,7 @@
 package frc.robot;
 
 import frc.robot.commands.ClimberCommand;
+import frc.robot.commands.FollowPath;
 import frc.robot.commands.GroundIntakeCommand;
 import frc.robot.commands.StorageCommand;
 import frc.robot.commands.StorageOuttake;
@@ -18,6 +19,7 @@ import frc.robot.subsystems.SwerveSubsystem;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.commands.PathPlannerAuto;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -46,10 +48,16 @@ public class RobotContainer {
     configureBindings();
 
     registerNamedCommands();
+  
+    
 
     autoChooser = AutoBuilder.buildAutoChooser();
 
+    
+
     SmartDashboard.putData("Auto Chooser", autoChooser);
+
+  
   }
   
   private void configureBindings() {
@@ -87,7 +95,11 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
+
     return autoChooser.getSelected();
+    
+    //return new com.pathplanner.lib.commands.PathPlannerAuto("M.Shoot");
+    //return autoChooser.getSelected();
   }
 
   public SwerveSubsystem getSwerveSubsystem() {
@@ -101,4 +113,4 @@ public class RobotContainer {
   public StorageSubsystem getStorageSubsystem() {
     return storageSubsystem;
   }
-}
+  }
