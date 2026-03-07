@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.7857456140350876,
-        "y": 5.30798245614035
+        "x": 2.2472017543859657,
+        "y": 5.363675438596491
       },
       "isLocked": false,
       "linkedName": "M.Init"
@@ -20,8 +20,8 @@
         "y": 4.601875
       },
       "prevControl": {
-        "x": 0.6241491228070175,
-        "y": 5.10907894736842
+        "x": -0.47379824561403483,
+        "y": 4.878350877192983
       },
       "nextControl": null,
       "isLocked": false,
@@ -48,7 +48,7 @@
   "eventMarkers": [
     {
       "name": "RaiseClimber",
-      "waypointRelativePos": 0.26431095406360433,
+      "waypointRelativePos": 0.2643109540636012,
       "endWaypointRelativePos": null,
       "command": null
     }

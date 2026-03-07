@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class CameraSubsystem extends SubsystemBase {
     private PhotonCamera camera;
     private PhotonPoseEstimator photonPoseEstimator;
+    private SwerveSubsystem swerve;
 
     public CameraSubsystem() {
         camera = new PhotonCamera("camera1");
@@ -82,6 +83,12 @@ public class CameraSubsystem extends SubsystemBase {
                 "Distance To Tag",
                 camToTarget.getTranslation().getNorm()
             );
+
+            getEstimatedGlobalPose(swerve.getPose()).ifPresent(pose -> {
+                SmartDashboard.putNumber("Robot X", pose.estimatedPose.getX());
+                SmartDashboard.putNumber("Robot Y", pose.estimatedPose.getY());
+                SmartDashboard.putNumber("Robot Rotation", pose.estimatedPose.getRotation().toRotation2d().getDegrees());
+            });
         } else {
             SmartDashboard.putString("Tag Status", "No Targets");
         }
