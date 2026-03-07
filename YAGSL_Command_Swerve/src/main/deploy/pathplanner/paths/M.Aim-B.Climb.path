@@ -69,7 +69,7 @@
   "folder": "Aim",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": 178.9190758133393
   },
   "useDefaultConstraints": true
 }
