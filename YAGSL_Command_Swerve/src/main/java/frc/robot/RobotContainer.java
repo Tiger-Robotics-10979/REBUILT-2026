@@ -62,6 +62,8 @@ public class RobotContainer {
     autoChooser.addOption("Blue Bottom", bottomAuto);
 
     SmartDashboard.putData("Auto Chooser", autoChooser);
+
+  
   }
   
   private void configureBindings() {
@@ -95,7 +97,9 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return autoChooser.getSelected();
+    
+    return new com.pathplanner.lib.commands.PathPlannerAuto("M.Shoot");
+    //return autoChooser.getSelected();
   }
 
   public SwerveSubsystem getSwerveSubsystem() {
