@@ -1,7 +1,6 @@
 package frc.robot;
 
 import frc.robot.commands.ClimberCommand;
-import frc.robot.commands.FollowPath;
 import frc.robot.commands.GroundIntakeCommand;
 import frc.robot.commands.StorageCommand;
 import frc.robot.commands.StorageOuttake;
@@ -19,7 +18,6 @@ import frc.robot.subsystems.SwerveSubsystem;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
-import com.pathplanner.lib.commands.PathPlannerAuto;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
