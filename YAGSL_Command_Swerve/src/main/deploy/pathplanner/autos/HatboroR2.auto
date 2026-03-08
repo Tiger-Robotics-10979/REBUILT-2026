@@ -46,6 +46,12 @@
           "data": {
             "pathName": "HatboroR7"
           }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ActivateShooter"
+          }
         }
       ]
     }

@@ -27,15 +27,15 @@
           "data": {
             "commands": [
               {
-                "type": "path",
-                "data": {
-                  "pathName": "T.Neutral-F.Neutral"
-                }
-              },
-              {
                 "type": "named",
                 "data": {
                   "name": "ActivateIntake"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "T.Neutral-F.Neutral"
                 }
               }
             ]
@@ -45,6 +45,12 @@
           "type": "path",
           "data": {
             "pathName": "Hatboro2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ActivateShooter"
           }
         }
       ]
