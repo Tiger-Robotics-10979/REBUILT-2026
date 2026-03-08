@@ -34,12 +34,8 @@ public class ClimberSubsystem extends SubsystemBase {
      * Raises the climber (positive direction)
      */
     public void raise() {
-        if (climberEncoder.getPosition() < 50) {
+       
             climberMotor.set(-CLIMB_SPEED);
-        }
-        else { //greater than encoder upper limit
-            climberMotor.set(0);
-        }
     }
     
 
@@ -47,14 +43,13 @@ public class ClimberSubsystem extends SubsystemBase {
      * Lowers the climber (negative direction)
      */
     public void lower() {
-        if (climberEncoder.getPosition() > 3) {
+     
             climberMotor.set(CLIMB_SPEED);
         }
-        else {
-            climberMotor.set(0);
-        }
         
-    }
+        
+        
+    
 
     /**
      * Runs climber at a custom speed

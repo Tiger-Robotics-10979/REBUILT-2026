@@ -7,37 +7,38 @@
         {
           "type": "path",
           "data": {
-            "pathName": "T.Init-T.Aim"
+            "pathName": "Hatboro3b"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ActivateShooter"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": null
+            "pathName": "Hatboro4b"
           }
         },
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "T.Neutral-H.Neutral"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "H.Neutral-T.Aim"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "T.Aim-T.Climb"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "ActivateIntake"
+                }
+              }
+            ]
           }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": "TopAutos",
+  "folder": "MiddleAutos",
   "choreoAuto": false
 }

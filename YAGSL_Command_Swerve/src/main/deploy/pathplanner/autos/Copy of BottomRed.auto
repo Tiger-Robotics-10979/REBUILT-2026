@@ -7,7 +7,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "T.Init-T.Neutral"
+            "pathName": null
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "EmptyStorage"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": null
           }
         },
         {
@@ -19,31 +31,31 @@
         {
           "type": "path",
           "data": {
-            "pathName": "T.Neutral-Q.Neutral"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "DeactivateIntake"
+            "pathName": null
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Q.Neutral-T.Climb"
+            "pathName": null
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "RaiseClimber"
+            "name": "EmptyStorage"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": null
           }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": "TopAutos",
+  "folder": null,
   "choreoAuto": false
 }

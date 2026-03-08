@@ -23,6 +23,12 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "DeactivateIntake"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "H.Neutral-T.Climb"

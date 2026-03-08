@@ -3,35 +3,42 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.249386363636363,
-        "y": 6.807534090909091
+        "x": 8.248,
+        "y": 1.298
       },
       "prevControl": null,
       "nextControl": {
-        "x": 8.424602272727272,
-        "y": 5.6325568181818175
+        "x": 8.253407015478135,
+        "y": 1.5700350311975146
       },
       "isLocked": false,
-      "linkedName": "T.Neutral"
+      "linkedName": null
     },
     {
       "anchor": {
-        "x": 8.249386363636363,
-        "y": 4.090692982456141
+        "x": 8.248,
+        "y": 6.880894039735099
       },
       "prevControl": {
-        "x": 8.424602272727272,
-        "y": 5.080147527910686
+        "x": 8.252470034473273,
+        "y": 6.478991307986169
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "M.NeutralT"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "ActivateIntake",
+      "waypointRelativePos": 0,
+      "endWaypointRelativePos": null,
+      "command": null
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 3.0,
@@ -42,13 +49,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -90.0
+    "rotation": -100.0
   },
   "reversed": false,
-  "folder": "ToNeutral",
+  "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 80.0
+    "rotation": -100.0
   },
   "useDefaultConstraints": true
 }

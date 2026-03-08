@@ -79,19 +79,19 @@ public class RobotContainer {
   private void registerNamedCommands() {
     NamedCommands.registerCommand(
         "RaiseClimber",
-        new raiseClimber(climberSubsystem)
+        new raiseClimber(climberSubsystem).withTimeout(6)
     );
     NamedCommands.registerCommand(
         "LowerClimber",
-        new lowerClimber(climberSubsystem)
+        new lowerClimber(climberSubsystem).withTimeout(6)
     );
     NamedCommands.registerCommand(
         "ActivateShooter",
-        new activateShooter(shooterSubsystem, storageSubsystem).withTimeout(6)
+        new activateShooter(shooterSubsystem, storageSubsystem).withTimeout(7)
     );
     NamedCommands.registerCommand(
         "ActivateIntake", 
-        new activateIntake(storageSubsystem, shooterSubsystem));
+        new activateIntake(storageSubsystem, shooterSubsystem)) ;
   }
 
   public Command getAutonomousCommand() {

@@ -16,10 +16,10 @@ public class ClimberCommand extends Command {
 
     @Override
     public void execute() {
-        if (controller.getYButton()) {
+        if (controller.getXButton()) {
             climber.raise();
         } 
-        else if (controller.getAButton()) {
+        else if (controller.getBButton()) {
             climber.lower();
         } 
         else {
