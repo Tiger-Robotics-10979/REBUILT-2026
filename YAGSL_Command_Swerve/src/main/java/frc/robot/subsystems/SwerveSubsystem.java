@@ -24,7 +24,7 @@ import swervelib.SwerveDrive;
 import swervelib.parser.SwerveParser;
 
 public class SwerveSubsystem extends SubsystemBase {
-    private static final double DEADBAND = 0.05;
+    private static final double DEADBAND = 0.09;
 
     public SwerveDrive swerveDrive;
     private boolean shootingMode = false;

@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Hatboro3b"
+            "pathName": "HatboroR"
           }
         },
         {
@@ -19,7 +19,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Hatboro4b"
+            "pathName": "HatboroR1"
           }
         },
         {
@@ -35,7 +35,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Hatboro6"
+                  "pathName": "HatboroR2"
                 }
               }
             ]
@@ -44,7 +44,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "hatboro7"
+            "pathName": "Hatboro13"
           }
         }
       ]

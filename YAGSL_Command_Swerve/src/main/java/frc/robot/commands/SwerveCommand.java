@@ -27,8 +27,9 @@ public class SwerveCommand extends Command {
             r = -controller.getRightX();
 
         }
-        else {
-            r = -operatorController.getRightX();
+        if (operatorController.getRightX() != 0) {
+            
+             r = -operatorController.getRightX();
         }
         
         //Drive with field-relative control

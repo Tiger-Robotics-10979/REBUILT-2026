@@ -1,6 +1,7 @@
 package frc.robot;
 
 import frc.robot.commands.ClimberCommand;
+
 import frc.robot.commands.GroundIntakeCommand;
 import frc.robot.commands.StorageCommand;
 import frc.robot.commands.StorageOuttake;
@@ -18,6 +19,7 @@ import frc.robot.subsystems.SwerveSubsystem;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.commands.PathPlannerAuto;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -68,10 +70,10 @@ public class RobotContainer {
     storageSubsystem.setDefaultCommand(new StorageCommand(storageSubsystem, operatorController)); //Inside storage intake (Out (POV 0), in (POV 180))
 
     //driver commands
-    new JoystickButton(driverController, XboxController.Button.kRightBumper.value).whileTrue(new GroundIntakeCommand(shooterSubsystem, storageSubsystem));
-    new JoystickButton(driverController, XboxController.Button.kLeftBumper.value).whileTrue(new StorageOuttake(storageSubsystem));
-    new JoystickButton(driverController, XboxController.Button.kA.value)
-      .onTrue(new InstantCommand(() -> swerveSubsystem.toggleShootingMode()));
+    new JoystickButton(operatorController, XboxController.Button.kRightBumper.value).whileTrue(new GroundIntakeCommand(shooterSubsystem, storageSubsystem));
+    new JoystickButton(operatorController, XboxController.Button.kLeftBumper.value).whileTrue(new StorageOuttake(storageSubsystem));
+    //new JoystickButton(operatorController, XboxController.Button.kA.value)
+      //.onTrue(new InstantCommand(() -> swerveSubsystem.toggleShootingMode()));
   }
 
   private void registerNamedCommands() {

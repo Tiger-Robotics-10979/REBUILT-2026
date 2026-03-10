@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Hatboro3b"
+            "pathName": "hatboro8"
           }
         },
         {
@@ -19,7 +19,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Hatboro4b"
+            "pathName": "hatboro9"
           }
         },
         {
@@ -27,15 +27,15 @@
           "data": {
             "commands": [
               {
-                "type": "named",
+                "type": "path",
                 "data": {
-                  "name": "ActivateIntake"
+                  "pathName": "hatboro10"
                 }
               },
               {
-                "type": "path",
+                "type": "named",
                 "data": {
-                  "pathName": "Hatboro6"
+                  "name": "ActivateIntake"
                 }
               }
             ]
@@ -44,7 +44,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "hatboro7"
+            "pathName": "hatboro11"
           }
         }
       ]

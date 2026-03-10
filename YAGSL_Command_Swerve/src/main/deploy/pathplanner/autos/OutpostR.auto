@@ -1,0 +1,31 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "HatboroR"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ActivateShooter"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "hatboro14"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": "MiddleAutos",
+  "choreoAuto": false
+}

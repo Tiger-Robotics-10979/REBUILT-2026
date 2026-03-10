@@ -8,8 +8,7 @@ public class ShooterCommand extends Command {
     private final ShooterSubsystem shooter;
     private final XboxController operatorController;
     private boolean shooterEnabled = false;
-    private boolean iShootEnabled = false;
-
+  
     public ShooterCommand(ShooterSubsystem shooter, XboxController operatorController) {
         this.shooter = shooter;
         this.operatorController = operatorController;
@@ -30,14 +29,8 @@ public class ShooterCommand extends Command {
             shooter.stop();
         }
 
-        if (operatorController.getYButtonPressed()) {
-            iShootEnabled = !iShootEnabled; 
-        }
-        if (iShootEnabled) {
-            shooter.setSpeed(-1);
-        }
-        else {
-            shooter.stop();
+        if (operatorController.getYButton()) {
+          shooter.setSpeed(1);
         }
     }    
 
