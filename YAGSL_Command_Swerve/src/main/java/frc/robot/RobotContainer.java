@@ -48,16 +48,10 @@ public class RobotContainer {
     configureBindings();
 
     registerNamedCommands();
-  
-    
 
     autoChooser = AutoBuilder.buildAutoChooser();
 
-    
-
     SmartDashboard.putData("Auto Chooser", autoChooser);
-
-  
   }
   
   private void configureBindings() {
@@ -95,11 +89,7 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-
     return autoChooser.getSelected();
-    
-    //return new com.pathplanner.lib.commands.PathPlannerAuto("M.Shoot");
-    //return autoChooser.getSelected();
   }
 
   public SwerveSubsystem getSwerveSubsystem() {

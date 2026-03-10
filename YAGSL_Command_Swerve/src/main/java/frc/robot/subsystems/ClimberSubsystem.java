@@ -34,22 +34,15 @@ public class ClimberSubsystem extends SubsystemBase {
      * Raises the climber (positive direction)
      */
     public void raise() {
-       
-            climberMotor.set(-CLIMB_SPEED);
+        climberMotor.set(-CLIMB_SPEED);
     }
-    
 
     /**
      * Lowers the climber (negative direction)
      */
     public void lower() {
-     
-            climberMotor.set(CLIMB_SPEED);
-        }
-        
-        
-        
-    
+        climberMotor.set(CLIMB_SPEED);
+    }
 
     /**
      * Runs climber at a custom speed
