@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Hatboro3b"
+            "pathName": "RT-shoot"
           }
         },
         {
@@ -19,7 +19,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Hatboro4b"
+            "pathName": "RT(s)-NT"
           }
         },
         {
@@ -35,10 +35,16 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Hatboro5b"
+                  "pathName": "NT-NB(f-a)"
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "NB-RT(s)"
           }
         },
         {

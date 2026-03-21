@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Hatboro3b"
+            "pathName": "BT-Shoot"
           }
         },
         {
@@ -19,7 +19,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Hatboro4b"
+            "pathName": "BT(s)-NT"
           }
         },
         {
@@ -35,16 +35,10 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Hatboro6"
+                  "pathName": "NT-.25Intake"
                 }
               }
             ]
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "hatboro7"
           }
         }
       ]

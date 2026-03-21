@@ -100,7 +100,7 @@
     "rotation": 45.0
   },
   "reversed": false,
-  "folder": null,
+  "folder": "Good Path",
   "idealStartingState": {
     "velocity": 0.0,
     "rotation": -90.0

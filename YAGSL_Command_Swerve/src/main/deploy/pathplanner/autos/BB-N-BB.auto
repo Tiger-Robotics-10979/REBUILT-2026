@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "M.Init-M.Aim"
+            "pathName": "BB-Shoot"
           }
         },
         {
@@ -19,7 +19,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Hatboro1"
+            "pathName": "BB(s)-NB"
           }
         },
         {
@@ -35,16 +35,10 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "T.Neutral-F.Neutral"
+                  "pathName": "NB-NT-BB(s)"
                 }
               }
             ]
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Hatboro2"
           }
         },
         {

@@ -4,8 +4,9 @@
   "holonomicMode": true,
   "pathFolders": [
     "Aim",
-    "Init",
     "FromNeutral",
+    "Init",
+    "Good Path",
     "ToNeutral"
   ],
   "autoFolders": [

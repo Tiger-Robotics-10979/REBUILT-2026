@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "HatboroR4"
+            "pathName": "M.Init-M.Aim"
           }
         },
         {
@@ -19,7 +19,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "HatboroR5"
+            "pathName": "BT-NT"
           }
         },
         {
@@ -35,7 +35,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "HatboroR6"
+                  "pathName": "T.Neutral-F.Neutral"
                 }
               }
             ]
@@ -44,7 +44,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Hatboro12"
+            "pathName": "Hatboro2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ActivateShooter"
           }
         }
       ]

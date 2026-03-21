@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "hatboro8"
+            "pathName": "BB-Shoot"
           }
         },
         {
@@ -19,7 +19,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "hatboro9"
+            "pathName": "BB(s)-NB"
           }
         },
         {
@@ -27,15 +27,15 @@
           "data": {
             "commands": [
               {
-                "type": "path",
-                "data": {
-                  "pathName": "hatboro10"
-                }
-              },
-              {
                 "type": "named",
                 "data": {
                   "name": "ActivateIntake"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "NB-NT"
                 }
               }
             ]
@@ -44,7 +44,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "hatboro11"
+            "pathName": "NT-BT(s)"
           }
         }
       ]
