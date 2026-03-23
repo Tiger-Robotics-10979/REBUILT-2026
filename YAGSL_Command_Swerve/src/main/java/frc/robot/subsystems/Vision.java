@@ -69,7 +69,7 @@ public class Vision
   /**
    * Current pose from the pose estimator using wheel odometry.
    */
-  private             Supplier<Pose2d>    currentPose;
+  public             Supplier<Pose2d>    currentPose;
   /**
    * Field from {@link swervelib.SwerveDrive#field}
    */
@@ -240,11 +240,19 @@ public class Vision
    * @param id AprilTag ID
    * @return Distance
    */
-  public double getDistanceFromAprilTag(int id)
-  {
+public double getDistanceFromAprilTag(int id)
+{
     Optional<Pose3d> tag = fieldLayout.getTagPose(id);
-    return tag.map(pose3d -> PhotonUtils.getDistanceToPose(currentPose.get(), pose3d.toPose2d())).orElse(-1.0);
-  }
+
+    Pose2d pose = currentPose.get();
+
+    if (pose == null || tag.isEmpty())
+    {
+        return 1.0;
+    }
+
+    return PhotonUtils.getDistanceToPose(pose, tag.get().toPose2d());
+}
 
   /**
    * Get tracked target from a camera of AprilTagID

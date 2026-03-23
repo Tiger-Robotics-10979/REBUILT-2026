@@ -17,6 +17,7 @@ import frc.robot.subsystems.StorageSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 import frc.robot.subsystems.Vision;
+import swervelib.SwerveDrive;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
@@ -33,19 +34,17 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 
 public class RobotContainer {
-  private final Field2d field = new Field2d();
-
   //controllers
   public final XboxController driverController = new XboxController(0);
   private final XboxController operatorController = new XboxController(1);
 
   //Subsystems
   public final CameraSubsystem cameraSubsystem = new CameraSubsystem();
-  private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
+  public final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
   // private final StorageSubsystem storageSubsystem = new StorageSubsystem();
   // public final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   // private final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
-  public final Vision vision = new Vision(swerveSubsystem::getPose, field);
+  public final Vision vision = new Vision(swerveSubsystem::getPose, swerveSubsystem.swerveDrive.field);
   
   private SendableChooser<Command> autoChooser;
 

@@ -27,9 +27,11 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
+    m_robotContainer.vision.updatePoseEstimation(m_robotContainer.swerveSubsystem.swerveDrive);
+    
     SmartDashboard.putNumber("Vision value", m_robotContainer.vision.getDistanceFromAprilTag(2));
 
-    
+
 
     CommandScheduler.getInstance().run();
   }
