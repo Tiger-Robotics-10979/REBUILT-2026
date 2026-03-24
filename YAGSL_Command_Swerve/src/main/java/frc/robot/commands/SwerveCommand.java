@@ -20,8 +20,8 @@ public class SwerveCommand extends Command {
     @Override
     public void execute() {
         //Negative due to coordinate plane
-        double xSpeed = -controller.getLeftX();  //Forward/backward (inverted)
-        double ySpeed = -controller.getLeftY();  //Left/right (inverted)
+        double xSpeed = controller.getLeftX();  //Forward/backward (inverted)
+        double ySpeed = controller.getLeftY();  //Left/right (inverted)
         double rotation = r; //Rotation (inverted)
         
         if  (controller.getRightX() != 0) {
@@ -33,7 +33,7 @@ public class SwerveCommand extends Command {
              r = -operatorController.getRightX();
         }
 
-        Translation2d translation = new Translation2d(xSpeed, ySpeed);
+        Translation2d translation = new Translation2d(-ySpeed, -xSpeed);
         
         //Drive with field-relative control
         swerve.drive(translation, rotation, true);
