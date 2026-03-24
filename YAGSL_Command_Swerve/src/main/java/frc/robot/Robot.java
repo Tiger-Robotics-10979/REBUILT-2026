@@ -11,25 +11,22 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
-  private final RobotContainer m_robotContainer;
+  private RobotContainer m_robotContainer;
 
-  public Robot() {
-    m_robotContainer = new RobotContainer();
-  }
+  public Robot() {}
 
   @Override
   public void robotInit() {
+    m_robotContainer = new RobotContainer();
     CameraServer.startAutomaticCapture();
-
     DataLogManager.start();
     DriverStation.startDataLog(DataLogManager.getLog());
+    DriverStation.silenceJoystickConnectionWarning(true);
   }
 
   @Override
   public void robotPeriodic() {
-    SmartDashboard.putNumber("Vision value", m_robotContainer.vision.getDistanceFromAprilTag(2));
-
-    
+    SmartDashboard.putNumber("Vision value", m_robotContainer.getVision().getDistanceFromAprilTag(2));
 
     CommandScheduler.getInstance().run();
   }
