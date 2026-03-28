@@ -8,7 +8,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.ClimberCommand;
+import frc.robot.commands.FaceAprilTagCommand;
 import frc.robot.commands.GroundIntakeCommand;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.StorageCommand;
@@ -25,8 +27,6 @@ import frc.robot.subsystems.StorageSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 import frc.robot.subsystems.Vision;
 
-
-
 public class RobotContainer {
   //controllers
   public final XboxController driverController = new XboxController(0);
@@ -38,6 +38,8 @@ public class RobotContainer {
   private final StorageSubsystem storageSubsystem = new StorageSubsystem();
   public final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   private final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
+
+  private final SwerveCommand swerveCommand = new SwerveCommand(swerveSubsystem, driverController, operatorController);
   
   private SendableChooser<Command> autoChooser;
 
@@ -53,7 +55,7 @@ public class RobotContainer {
   
   private void configureBindings() {
     //driver controls
-    swerveSubsystem.setDefaultCommand(new SwerveCommand(swerveSubsystem, driverController, operatorController)); //Robot movement (Joysticks)
+    swerveSubsystem.setDefaultCommand(swerveCommand); //Robot movement (Joysticks)
 
     //operator controls
     shooterSubsystem.setDefaultCommand(new ShooterCommand(shooterSubsystem, operatorController)); //Shooter (Shooter toggle (Left bumper))
@@ -65,6 +67,9 @@ public class RobotContainer {
     new JoystickButton(operatorController, XboxController.Button.kLeftBumper.value).whileTrue(new StorageOuttake(storageSubsystem));
     // new JoystickButton(operatorController, XboxController.Button.kA.value)
     //   .onTrue(new InstantCommand(() -> swerveSubsystem.toggleShootingMode()));
+
+    new Trigger(() -> operatorController.getRightTriggerAxis() > 0.5)
+      .whileTrue(new FaceAprilTagCommand(swerveCommand, swerveSubsystem.getVision()));
   }
 
   private void registerNamedCommands() {
