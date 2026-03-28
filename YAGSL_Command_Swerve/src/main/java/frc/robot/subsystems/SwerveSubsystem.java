@@ -139,7 +139,6 @@ public class SwerveSubsystem extends SubsystemBase {
   public void periodic() {
     // always update odometry
     swerveDrive.updateOdometry();
-
     // When vision is enabled we must manually update odometry in SwerveDrive
     if (visionDriveTest && vision != null) {
       vision.updatePoseEstimation(swerveDrive);
@@ -698,6 +697,7 @@ public class SwerveSubsystem extends SubsystemBase {
     return swerveDrive.getPitch();
   }
 
+
   /**
    * Add a fake vision reading for testing purposes.
    */
@@ -722,4 +722,6 @@ public class SwerveSubsystem extends SubsystemBase {
   public Vision getVision() {
     return vision;
   }
+
+  // public void faceTag() {}
 }
