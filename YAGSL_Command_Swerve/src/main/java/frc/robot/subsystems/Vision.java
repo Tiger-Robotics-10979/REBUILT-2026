@@ -4,6 +4,9 @@ import static edu.wpi.first.units.Units.Microseconds;
 import static edu.wpi.first.units.Units.Seconds;
 
 import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -56,19 +59,9 @@ public class Vision {
   public static final AprilTagFieldLayout fieldLayout = AprilTagFieldLayout.loadField(
       AprilTagFields.k2026RebuiltAndymark);
   /**
-   * Ambiguity defined as a value between (0,1). Used in
-   * {@link Vision#filterPose}.
-   */
-  private final double maximumAmbiguity = 0.25;
-  /**
    * Photon Vision Simulation
    */
   public VisionSystemSim visionSim;
-  /**
-   * Count of times that the odom thinks we're more than 10meters away from the
-   * april tag.
-   */
-  private double longDistangePoseEstimationCount = 0;
   /**
    * Current pose from the pose estimator using wheel odometry.
    */
@@ -135,14 +128,11 @@ public class Vision {
   public void updatePoseEstimation(SwerveDrive swerveDrive) {
     if (SwerveDriveTelemetry.isSimulation && swerveDrive.getSimulationDriveTrainPose().isPresent()) {
       /*
-       * In the maple-sim, odometry is simulated using encoder values, accounting for
-       * factors like skidding and drifting.
+       * In the maple-sim, odometry is simulated using encoder values, accounting for factors like skidding and drifting.
        * As a result, the odometry may not always be 100% accurate.
-       * However, the vision system should be able to provide a reasonably accurate
-       * pose estimation, even when odometry is incorrect.
+       * However, the vision system should be able to provide a reasonably accurate pose estimation, even when odometry is incorrect. 
        * (This is why teams implement vision system to correct odometry.)
-       * Therefore, we must ensure that the actual robot pose is provided in the
-       * simulator when updating the vision simulation during the simulation.
+       * Therefore, we must ensure that the actual robot pose is provided in the simulator when updating the vision simulation during the simulation.
        */
       visionSim.update(swerveDrive.getSimulationDriveTrainPose().get());
     }
@@ -185,46 +175,6 @@ public class Vision {
   }
 
   /**
-   * Filter pose via the ambiguity and find best estimate between all of the
-   * camera's throwing out distances more than
-   * 10m for a short amount of time.
-   *
-   * @param pose Estimated robot pose.
-   * @return Could be empty if there isn't a good reading.
-   */
-  @Deprecated(since = "2024", forRemoval = true)
-  private Optional<EstimatedRobotPose> filterPose(Optional<EstimatedRobotPose> pose) {
-    if (pose.isPresent()) {
-      double bestTargetAmbiguity = 1; // 1 is max ambiguity
-      for (PhotonTrackedTarget target : pose.get().targetsUsed) {
-        double ambiguity = target.getPoseAmbiguity();
-        if (ambiguity != -1 && ambiguity < bestTargetAmbiguity) {
-          bestTargetAmbiguity = ambiguity;
-        }
-      }
-      // ambiguity to high dont use estimate
-      if (bestTargetAmbiguity > maximumAmbiguity) {
-        return Optional.empty();
-      }
-
-      // est pose is very far from recorded robot pose
-      if (PhotonUtils.getDistanceToPose(currentPose.get(), pose.get().estimatedPose.toPose2d()) > 1) {
-        longDistangePoseEstimationCount++;
-
-        // if it calculates that were 10 meter away for more than 10 times in a row its
-        // probably right
-        if (longDistangePoseEstimationCount < 10) {
-          return Optional.empty();
-        }
-      } else {
-        longDistangePoseEstimationCount = 0;
-      }
-      return pose;
-    }
-    return Optional.empty();
-  }
-
-  /**
    * Get distance of the robot from the AprilTag pose.
    *
    * @param id AprilTag ID
@@ -254,7 +204,6 @@ public class Vision {
       }
     }
     return target;
-
   }
 
   /**
@@ -272,23 +221,19 @@ public class Vision {
    */
   private void openSimCameraViews() {
     if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-      // try
-      // {
-      // Desktop.getDesktop().browse(new URI("http://localhost:1182/"));
-      // Desktop.getDesktop().browse(new URI("http://localhost:1184/"));
-      // Desktop.getDesktop().browse(new URI("http://localhost:1186/"));
-      // } catch (IOException | URISyntaxException e)
-      // {
-      // e.printStackTrace();
-      // }
+      try {
+      Desktop.getDesktop().browse(new URI("http://localhost:1182/"));
+      } 
+      catch (IOException | URISyntaxException e) {
+        e.printStackTrace();
+      }
     }
   }
 
   /**
-   * Update the {@link Field2d} to include tracked targets/
+   * Update the {@link Field2d} to include tracked targets
    */
   public void updateVisionField() {
-
     List<PhotonTrackedTarget> targets = new ArrayList<PhotonTrackedTarget>();
     for (Cameras c : Cameras.values()) {
       if (!c.resultsList.isEmpty()) {
@@ -318,11 +263,10 @@ public class Vision {
      * Camera1
      */
     CENTER_CAM("camera1",
-        new Rotation3d(0, Units.degreesToRadians(18), 0),
-        new Translation3d(Units.inchesToMeters(-4.628),
-            Units.inchesToMeters(-10.687),
-            Units.inchesToMeters(16.129)),
-        VecBuilder.fill(4, 4, 8), VecBuilder.fill(0.5, 0.5, 1));
+        new Rotation3d(0, 0, 0), //Units.degreesToRadians(0)
+        new Translation3d(0, 0, 0), //Units.inchesToMeters()
+        VecBuilder.fill(4, 4, 8), 
+        VecBuilder.fill(0.5, 0.5, 1));
 
     /**
      * Latency alert to use when high latency is detected.
@@ -389,39 +333,39 @@ public class Vision {
      */
     Cameras(String name, Rotation3d robotToCamRotation, Translation3d robotToCamTranslation,
         Matrix<N3, N1> singleTagStdDevs, Matrix<N3, N1> multiTagStdDevsMatrix) {
-      latencyAlert = new Alert("'" + name + "' Camera is experiencing high latency.", AlertType.kWarning);
+          latencyAlert = new Alert("'" + name + "' Camera is experiencing high latency.", AlertType.kWarning);
 
-      camera = new PhotonCamera(name);
+          camera = new PhotonCamera(name);
 
-      // https://docs.wpilib.org/en/stable/docs/software/basic-programming/coordinate-system.html
-      robotToCamTransform = new Transform3d(robotToCamTranslation, robotToCamRotation);
+          // https://docs.wpilib.org/en/stable/docs/software/basic-programming/coordinate-system.html
+          robotToCamTransform = new Transform3d(robotToCamTranslation, robotToCamRotation);
 
-      poseEstimator = new PhotonPoseEstimator(Vision.fieldLayout,
-          PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR,
-          robotToCamTransform);
-      poseEstimator.setMultiTagFallbackStrategy(PoseStrategy.LOWEST_AMBIGUITY);
+          poseEstimator = new PhotonPoseEstimator(Vision.fieldLayout,
+              PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR,
+              robotToCamTransform);
+          poseEstimator.setMultiTagFallbackStrategy(PoseStrategy.LOWEST_AMBIGUITY);
 
-      this.singleTagStdDevs = singleTagStdDevs;
-      this.multiTagStdDevs = multiTagStdDevsMatrix;
+          this.singleTagStdDevs = singleTagStdDevs;
+          this.multiTagStdDevs = multiTagStdDevsMatrix;
 
-      if (Robot.isSimulation()) {
-        SimCameraProperties cameraProp = new SimCameraProperties();
-        // A 640 x 480 camera with a 100 degree diagonal FOV.
-        cameraProp.setCalibration(960, 720, Rotation2d.fromDegrees(100));
-        // Approximate detection noise with average and standard deviation error in
-        // pixels.
-        cameraProp.setCalibError(0.25, 0.08);
-        // Set the camera image capture framerate (Note: this is limited by robot loop
-        // rate).
-        cameraProp.setFPS(30);
-        // The average and standard deviation in milliseconds of image data latency.
-        cameraProp.setAvgLatencyMs(35);
-        cameraProp.setLatencyStdDevMs(5);
+          if (Robot.isSimulation()) {
+            SimCameraProperties cameraProp = new SimCameraProperties();
+            // A 640 x 480 camera with a 100 degree diagonal FOV.
+            cameraProp.setCalibration(960, 720, Rotation2d.fromDegrees(100));
+            // Approximate detection noise with average and standard deviation error in
+            // pixels.
+            cameraProp.setCalibError(0.25, 0.08);
+            // Set the camera image capture framerate (Note: this is limited by robot loop
+            // rate).
+            cameraProp.setFPS(30);
+            // The average and standard deviation in milliseconds of image data latency.
+            cameraProp.setAvgLatencyMs(35);
+            cameraProp.setLatencyStdDevMs(5);
 
-        cameraSim = new PhotonCameraSim(camera, cameraProp);
-        cameraSim.enableDrawWireframe(true);
-      }
-    }
+            cameraSim = new PhotonCameraSim(camera, cameraProp);
+            cameraSim.enableDrawWireframe(true);
+          }
+        }
 
     /**
      * Add camera to {@link VisionSystemSim} for simulated photon vision.
@@ -436,8 +380,7 @@ public class Vision {
 
     /**
      * Get the result with the least ambiguity from the best tracked target within
-     * the Cache. This may not be the most
-     * recent result!
+     * the Cache. This may not be the most recent result!
      *
      * @return The result in the cache with the least ambiguous best tracked target.
      *         This is not the most recent result!
@@ -472,8 +415,7 @@ public class Vision {
 
     /**
      * Get the estimated robot pose. Updates the current robot pose estimation,
-     * standard deviations, and flushes the
-     * cache of results.
+     * standard deviations, and flushes the cache of results.
      *
      * @return Estimated pose.
      */
