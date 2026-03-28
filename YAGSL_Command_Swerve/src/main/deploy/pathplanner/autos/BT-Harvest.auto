@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "M.Init-M.Aim"
+            "pathName": "BT-Shoot"
           }
         },
         {
@@ -19,7 +19,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "BT-NT"
+            "pathName": "BT(s)-NT"
           }
         },
         {
@@ -35,7 +35,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "T.Neutral-F.Neutral"
+                  "pathName": "NT-.5Intake(f-b)"
                 }
               }
             ]
@@ -44,7 +44,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "BT-BN"
+            "pathName": "RotateToB"
           }
         },
         {
@@ -52,11 +52,42 @@
           "data": {
             "name": "ActivateShooter"
           }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "UnRotateToB"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "ActivateIntake"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": ".5-NB(f-b)"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "NB-BB(s)"
+          }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": "MiddleAutos",
+  "folder": null,
   "choreoAuto": false
 }
