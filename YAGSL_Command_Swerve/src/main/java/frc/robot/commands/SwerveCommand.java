@@ -11,6 +11,9 @@ public class SwerveCommand extends Command {
     private final XboxController controller;
     private final XboxController operatorController;
     private double rotation = 0;
+    private double autoAimRotation = 0;
+    private boolean autoAimActive = false;
+
     public SwerveCommand(SwerveSubsystem swerve, XboxController controller, XboxController operatorController) {
         this.swerve = swerve;
         this.controller = controller;
@@ -18,28 +21,44 @@ public class SwerveCommand extends Command {
         addRequirements(swerve);
     }
 
+    public void setAutoAimRotation(double rotation) {
+        this.autoAimRotation = rotation;
+        this.autoAimActive = true;
+    }
+
+    public void clearAutoAim() {
+        this.autoAimActive = false;
+        this.autoAimRotation = 0;
+    }
+
     @Override
     public void execute() {
-        double maxSpeed = swerve.getSwerveDrive().getMaximumChassisVelocity();
         double maxRotationSpeed = swerve.getSwerveDrive().getMaximumChassisAngularVelocity();
 
-
         rotation = -applyDeadBand(controller, 4) * maxRotationSpeed;
-        if  (applyDeadBand(operatorController, 4) != 0) {
+        if (Math.abs(applyDeadBand(operatorController, 4)) > 0) {
             rotation = -applyDeadBand(operatorController, 4) * maxRotationSpeed;
         }
 
-        double xSpeed = applyDeadBand(controller, 0);  //Forward/backward (inverted)
-        double ySpeed = applyDeadBand(controller, 1);  //Left/right (inverted)
+        double xSpeed = applyDeadBand(controller, 0);
+        double ySpeed = applyDeadBand(controller, 1);
 
-        boolean isRedAlliance = DriverStation.getAlliance().isPresent() && 
+        boolean isRedAlliance = DriverStation.getAlliance().isPresent() &&
                                 DriverStation.getAlliance().get() == DriverStation.Alliance.Red;
-        
-        double adjustedX = (isRedAlliance ? ySpeed : -ySpeed) * maxSpeed;
-        double adjustedY = (isRedAlliance ? xSpeed : -xSpeed) * maxSpeed;
 
-        Translation2d translation = new Translation2d(adjustedX, adjustedY);
-        swerve.drive(translation, rotation, true);
+        double adjustedX = isRedAlliance ? ySpeed : -ySpeed;
+        double adjustedY = isRedAlliance ? xSpeed : -xSpeed;
+
+        double maxSpeed = swerve.getSwerveDrive().getMaximumChassisVelocity();
+
+        //Use auto aim rotation if active, otherwise use joystick
+        double finalRotation = autoAimActive ? autoAimRotation : rotation;
+
+        swerve.drive(
+            new Translation2d(adjustedX * maxSpeed, adjustedY * maxSpeed),
+            finalRotation,
+            true
+        );
     }
 
     public double applyDeadBand(XboxController controller, Integer axis) {
