@@ -78,7 +78,7 @@ public class RobotContainer {
     );
     NamedCommands.registerCommand(
         "ActivateShooter",
-        new activateShooter(shooterSubsystem, storageSubsystem).withTimeout(7)
+        new activateShooter(shooterSubsystem, storageSubsystem).withTimeout(4)
     );
     NamedCommands.registerCommand(
         "ActivateIntake", 
@@ -105,3 +105,5 @@ public class RobotContainer {
     return swerveSubsystem.getVision(); 
   }
 }
+
+
