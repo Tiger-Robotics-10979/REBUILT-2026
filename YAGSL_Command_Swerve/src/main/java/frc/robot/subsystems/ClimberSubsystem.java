@@ -2,7 +2,6 @@ package frc.robot.subsystems;
 
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
-import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
@@ -17,11 +16,9 @@ public class ClimberSubsystem extends SubsystemBase {
     private static final double CLIMB_SPEED = 0.5;
 
     private final SparkMax climberMotor;
-    private final RelativeEncoder climberEncoder;
 
     public ClimberSubsystem() {
         climberMotor = new SparkMax(CLIMBER_MOTOR_ID, SparkMax.MotorType.kBrushless);
-        climberEncoder = climberMotor.getEncoder();
 
         SparkMaxConfig climberConfig = new SparkMaxConfig();
         climberConfig.voltageCompensation(VOLTAGE_COMPENSATION);
