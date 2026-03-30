@@ -97,6 +97,6 @@ public class FaceAprilTagCommand extends Command {
 
     @Override
     public boolean isFinished() {
-        return isAligned();
+        return false;
     }
 }
