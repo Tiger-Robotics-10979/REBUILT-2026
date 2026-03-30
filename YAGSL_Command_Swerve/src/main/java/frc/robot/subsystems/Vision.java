@@ -521,9 +521,4 @@ public class Vision {
       }
     }
   }
-
-  public PhotonTrackedTarget getTargetFromId(int id, CameraSubsystem camera) {
-    throw new UnsupportedOperationException("Unimplemented method 'getTargetFromId'");
-  }
-  
 }

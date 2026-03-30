@@ -3,12 +3,14 @@ package frc.robot;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 
+import edu.wpi.first.apriltag.AprilTag;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.commands.AimAndShoot;
 import frc.robot.commands.ClimberCommand;
 import frc.robot.commands.FaceAprilTagCommand;
 import frc.robot.commands.GroundIntakeCommand;
@@ -40,6 +42,7 @@ public class RobotContainer {
   private final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
 
   private final SwerveCommand swerveCommand = new SwerveCommand(swerveSubsystem, driverController, operatorController);
+  private final FaceAprilTagCommand faceAprilTagCommand = new FaceAprilTagCommand(swerveCommand, getVision());
   
   private SendableChooser<Command> autoChooser;
 
@@ -58,9 +61,9 @@ public class RobotContainer {
     swerveSubsystem.setDefaultCommand(swerveCommand); //Robot movement (Joysticks)
 
     //operator controls
-    shooterSubsystem.setDefaultCommand(new ShooterCommand(shooterSubsystem, operatorController)); //Shooter (Shooter toggle (Left bumper))
-    climberSubsystem.setDefaultCommand(new ClimberCommand(climberSubsystem, operatorController)); //Climber (Up (Button Y), Down (Button A))
-    storageSubsystem.setDefaultCommand(new StorageCommand(storageSubsystem, operatorController)); //Inside storage intake (Out (POV 0), in (POV 180))
+    shooterSubsystem.setDefaultCommand(new ShooterCommand(shooterSubsystem, operatorController)); //A (toggle)
+    climberSubsystem.setDefaultCommand(new ClimberCommand(climberSubsystem, operatorController)); //X (raise) and B (lower)
+    storageSubsystem.setDefaultCommand(new StorageCommand(storageSubsystem, operatorController)); //D-Pad Up (out) and D-Pad Down (in)
 
     //driver commands
     new JoystickButton(operatorController, XboxController.Button.kRightBumper.value).whileTrue(new GroundIntakeCommand(shooterSubsystem, storageSubsystem));
@@ -69,7 +72,10 @@ public class RobotContainer {
     //   .onTrue(new InstantCommand(() -> swerveSubsystem.toggleShootingMode()));
 
     new Trigger(() -> operatorController.getRightTriggerAxis() > 0.5)
-      .whileTrue(new FaceAprilTagCommand(swerveCommand, swerveSubsystem.getVision()));
+      .whileTrue(faceAprilTagCommand);
+
+    // new Trigger(() -> operatorController.getRightTriggerAxis() > 0.25) //aims at hub and shoots
+    //   .whileTrue(new AimAndShoot(faceAprilTagCommand, shooterSubsystem, storageSubsystem));
   }
 
   private void registerNamedCommands() {

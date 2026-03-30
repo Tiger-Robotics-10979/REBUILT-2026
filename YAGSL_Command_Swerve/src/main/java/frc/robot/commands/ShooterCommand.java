@@ -6,19 +6,18 @@ import frc.robot.subsystems.ShooterSubsystem;
 
 public class ShooterCommand extends Command {
     private final ShooterSubsystem shooter;
-    private final XboxController operatorController;
+    private final XboxController controller;
     private boolean shooterEnabled = false;
   
-    public ShooterCommand(ShooterSubsystem shooter, XboxController operatorController) {
+    public ShooterCommand(ShooterSubsystem shooter, XboxController controller) {
         this.shooter = shooter;
-        this.operatorController = operatorController;
+        this.controller = controller;
         addRequirements(shooter);
     }
    
     @Override
     public void execute() {
-
-        if (operatorController.getAButtonPressed()) {
+        if (controller.getAButtonPressed()) {
             shooterEnabled = !shooterEnabled;
         }
 
@@ -27,10 +26,6 @@ public class ShooterCommand extends Command {
         } 
         else {
             shooter.stop();
-        }
-
-        if (operatorController.getYButton()) {
-          shooter.setSpeed(1);
         }
     }    
 

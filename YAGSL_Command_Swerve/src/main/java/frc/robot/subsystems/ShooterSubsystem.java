@@ -9,7 +9,8 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ShooterSubsystem extends SubsystemBase {
-    private static final int SHOOTER_MOTOR_ID = 12;
+    private static final int LEFT_SHOOTER_MOTOR_ID = 12;
+    private static final int RIGHT_SHOOTER_MOTOR_ID = 25; //TODO: Update with actual ID of right shooter motor
     private static final int CURRENT_LIMIT = 40;
     private static final double VOLTAGE_COMPENSATION = 12.0;
 
@@ -21,7 +22,7 @@ public class ShooterSubsystem extends SubsystemBase {
     private double targetRPM;
 
     public ShooterSubsystem() {
-        shooterMotor = new SparkMax(SHOOTER_MOTOR_ID, SparkMax.MotorType.kBrushless);
+        shooterMotor = new SparkMax(LEFT_SHOOTER_MOTOR_ID, SparkMax.MotorType.kBrushless);
         shooterPID = new PIDController(0.0003, 0.00001, 0.0);
 
         SparkMaxConfig shooterConfig = new SparkMaxConfig();
