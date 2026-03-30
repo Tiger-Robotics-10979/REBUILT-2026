@@ -14,22 +14,26 @@ public class ShooterSubsystem extends SubsystemBase {
     private static final int CURRENT_LIMIT = 40;
     private static final double VOLTAGE_COMPENSATION = 12.0;
 
-    //Speed constants
     private static final double GROUND_INTAKE_SPEED = 0.6;
 
-    private final SparkMax shooterMotor;
+    private final SparkMax leftShooterMotor;
+    private final SparkMax rightShooterMotor;
     private final PIDController shooterPID;
     private double targetRPM;
 
     public ShooterSubsystem() {
-        shooterMotor = new SparkMax(LEFT_SHOOTER_MOTOR_ID, SparkMax.MotorType.kBrushless);
+        leftShooterMotor = new SparkMax(LEFT_SHOOTER_MOTOR_ID, SparkMax.MotorType.kBrushless);
+        rightShooterMotor = new SparkMax(RIGHT_SHOOTER_MOTOR_ID, SparkMax.MotorType.kBrushless);
         shooterPID = new PIDController(0.0003, 0.00001, 0.0);
 
         SparkMaxConfig shooterConfig = new SparkMaxConfig();
         shooterConfig.voltageCompensation(VOLTAGE_COMPENSATION);
         shooterConfig.smartCurrentLimit(CURRENT_LIMIT);
 
-        shooterMotor.configure(shooterConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        leftShooterMotor.configure(shooterConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        rightShooterMotor.configure(shooterConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+
+        leftShooterMotor.setInverted(true);
     }
 
     /**
@@ -48,7 +52,8 @@ public class ShooterSubsystem extends SubsystemBase {
     public void shootAtDistance(double distanceMeters) {
         targetRPM = calculateTargetRPM(distanceMeters);
         double output = shooterPID.calculate(getCurrentRPM(), 1250);  //TODO: Use this function to test different RPMs to make regression model (change targetRPM)
-        shooterMotor.set(output + 0.25);
+        leftShooterMotor.set(output + 0.1); //+0.25 feedforward value
+        rightShooterMotor.set(output + 0.1);
         System.out.println("Shooter RPM: " + getCurrentRPM());
 
     }
@@ -58,7 +63,8 @@ public class ShooterSubsystem extends SubsystemBase {
      * @param speed Speed from -1.0 to 1.0
      */
     public void setSpeed(double speed) {
-        shooterMotor.set(speed);
+        leftShooterMotor.set(speed);
+        rightShooterMotor.set(speed);
         System.out.println("Shooter RPM: " + getCurrentRPM());
     }
   
@@ -68,9 +74,11 @@ public class ShooterSubsystem extends SubsystemBase {
      */
     public void runGroundIntake(boolean invert) {
         if (invert) {
-            shooterMotor.set(-GROUND_INTAKE_SPEED);
+            leftShooterMotor.set(-GROUND_INTAKE_SPEED);
+            rightShooterMotor.set(-GROUND_INTAKE_SPEED);
         } else {
-            shooterMotor.set(GROUND_INTAKE_SPEED);
+            leftShooterMotor.set(GROUND_INTAKE_SPEED);
+            rightShooterMotor.set(GROUND_INTAKE_SPEED);
         }
     }
 
@@ -78,7 +86,8 @@ public class ShooterSubsystem extends SubsystemBase {
      * Stops the shooter motor
      */
     public void stop() {
-        shooterMotor.set(0);
+        leftShooterMotor.set(0);
+        rightShooterMotor.set(0);
         targetRPM = 0;
     }
 
@@ -87,7 +96,7 @@ public class ShooterSubsystem extends SubsystemBase {
      * @return Current RPM
      */
     public double getCurrentRPM() {
-        return shooterMotor.getEncoder().getVelocity();
+        return (leftShooterMotor.getEncoder().getVelocity() + rightShooterMotor.getEncoder().getVelocity()) / 2.0;
     }
     
     public double getTargetRPM() {

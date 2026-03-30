@@ -13,8 +13,8 @@ import frc.robot.subsystems.Vision;
 public class FaceAprilTagCommand extends Command {
     private final SwerveCommand swerveCommand;
     private final Vision vision;
-    private final double kP = 0.1; //the gain (controls how aggresive? the robot rotates)
-    private final double TOLERANCE = 1.0; //1 degree of error from the exact goal ("within a degree, stop rotating")
+    private final double kP = 0.10; //the gain (controls how aggresive? the robot rotates)
+    private final double TOLERANCE = 0.5; //1 degree of error from the exact goal ("within a degree, stop rotating")
     private List<PhotonTrackedTarget> lastKnownTargets = new ArrayList<>();
 
     //lists of hub tags for both alliance (makes sure that shooter doesn't activate on enemy alliance side)

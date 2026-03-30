@@ -83,7 +83,7 @@ public class SwerveSubsystem extends SubsystemBase {
         Rotation2d.fromDegrees(0))
         : new Pose2d(new Translation2d(Meter.of(16),
             Meter.of(4)),
-            Rotation2d.fromDegrees(180));
+            Rotation2d.fromDegrees(540));
     // Configure the Telemetry before creating the SwerveDrive to avoid unnecessary objects being created.
     SwerveDriveTelemetry.verbosity = TelemetryVerbosity.HIGH;
     try {
@@ -150,8 +150,7 @@ public class SwerveSubsystem extends SubsystemBase {
    * Setup AutoBuilder for PathPlanner.
    */
   public void setupPathPlanner() {
-    // Load the RobotConfig from the GUI settings. You should probably
-    // store this in your Constants file
+    // Load the RobotConfig from the GUI settings. You should probably store this in your Constants file
     RobotConfig config;
     try {
       config = RobotConfig.fromGUISettings();
@@ -178,12 +177,9 @@ public class SwerveSubsystem extends SubsystemBase {
           // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds. Also
           // optionally outputs individual module feedforwards
           new PPHolonomicDriveController(
-              // PPHolonomicController is the built in path following controller for holonomic
-              // drive trains
-              new PIDConstants(10.0, 0.25, 0.0),
-              // Translation PID constants
-              new PIDConstants(5.0, 0.0, 0.0)
-          // Rotation PID constants
+              // PPHolonomicController is the built in path following controller for holonomic drive trains
+              new PIDConstants(10.0, 0.25, 0.0), // Translation PID constants
+              new PIDConstants(10.0, 0.0, 0.0) // Rotation PID constants
           ),
           config,
           // The robot configuration
@@ -241,8 +237,7 @@ public class SwerveSubsystem extends SubsystemBase {
    * @return {@link AutoBuilder#followPath(PathPlannerPath)} path command.
    */
   public Command getAutonomousCommand(String pathName) {
-    // Create a path following command using AutoBuilder. This will also trigger
-    // event markers.
+    // Create a path following command using AutoBuilder. This will also trigger event markers.
     return new PathPlannerAuto(pathName);
   }
 
