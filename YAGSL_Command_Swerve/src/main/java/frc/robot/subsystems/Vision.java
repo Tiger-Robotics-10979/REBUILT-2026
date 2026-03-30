@@ -220,6 +220,8 @@ public class Vision {
     if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
       try {
       Desktop.getDesktop().browse(new URI("http://localhost:1182/"));
+      //Desktop.getDesktop().browse(new URI("http://localhost:1184/"));
+
       } 
       catch (IOException | URISyntaxException e) {
         e.printStackTrace();
@@ -260,10 +262,17 @@ public class Vision {
      * Camera1
      */
     CENTER_CAM("camera1",
-        new Rotation3d(0, Units.degreesToRadians(-15), 0), //Units.degreesToRadians(0)
+        new Rotation3d(0, Units.degreesToRadians(-15), Units.degreesToRadians(0)), //Units.degreesToRadians(0)
         new Translation3d(0, 0, 0), //Units.inchesToMeters()
         VecBuilder.fill(4, 4, 8), 
         VecBuilder.fill(0.5, 0.5, 1));
+
+    //** LEFT_CAM("camera2",
+       // new Rotation3d(0, Units.degreesToRadians(-15), Units.degreesToRadians(45)), //Units.degreesToRadians(0)
+      //  new Translation3d(0, 1, 0), //Units.inchesToMeters()
+     //   VecBuilder.fill(4, 4, 8), 
+    //VecBuilder.fill(0.5, 0.5, 1));
+      
 
     /**
      * Latency alert to use when high latency is detected.
