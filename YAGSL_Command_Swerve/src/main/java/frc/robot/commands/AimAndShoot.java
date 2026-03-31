@@ -7,10 +7,10 @@ import frc.robot.subsystems.StorageSubsystem;
 
 public class AimAndShoot extends SequentialCommandGroup {
 
-    public AimAndShoot(FaceAprilTagCommand faceAprilTagCommand, ShooterSubsystem shooterSubsystem, StorageSubsystem storageSubsystem) {
+    public AimAndShoot(AimAtHub aimAtHub, ShooterSubsystem shooterSubsystem, StorageSubsystem storageSubsystem) {
         addCommands(
-            faceAprilTagCommand.withTimeout(3), //3 second limit on facing hub
-            new activateShooter(shooterSubsystem, storageSubsystem)
+            aimAtHub.withTimeout(3), //3 second limit on facing hub
+            new activateShooter(shooterSubsystem, storageSubsystem).withTimeout(2)
         );
     }
 }
