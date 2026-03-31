@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.AimAndShoot;
+import frc.robot.commands.AimAtHub;
 import frc.robot.commands.ClimberCommand;
 import frc.robot.commands.FaceAprilTagCommand;
 import frc.robot.commands.GroundIntakeCommand;
@@ -43,6 +44,7 @@ public class RobotContainer {
 
   private final SwerveCommand swerveCommand = new SwerveCommand(swerveSubsystem, driverController, operatorController);
   private final FaceAprilTagCommand faceAprilTagCommand = new FaceAprilTagCommand(swerveCommand, getVision());
+  private final AimAtHub aimAtHub = new AimAtHub(swerveCommand, swerveSubsystem);
   
   private SendableChooser<Command> autoChooser;
 
@@ -71,11 +73,8 @@ public class RobotContainer {
     // new JoystickButton(operatorController, XboxController.Button.kA.value)
     //   .onTrue(new InstantCommand(() -> swerveSubsystem.toggleShootingMode()));
 
-    new Trigger(() -> operatorController.getRightTriggerAxis() > 0.5)
-      .whileTrue(faceAprilTagCommand);
-
-    // new Trigger(() -> operatorController.getRightTriggerAxis() > 0.25) //aims at hub and shoots
-    //   .whileTrue(new AimAndShoot(faceAprilTagCommand, shooterSubsystem, storageSubsystem));
+    new Trigger(() -> operatorController.getRightTriggerAxis() > 0.25)
+      .whileTrue(aimAtHub);
   }
 
   private void registerNamedCommands() {
