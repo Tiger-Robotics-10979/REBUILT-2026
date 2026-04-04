@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.commands.AimAndShoot;
 import frc.robot.commands.AimAtHub;
 import frc.robot.commands.ClimberCommand;
 import frc.robot.commands.FaceAprilTagCommand;
@@ -21,6 +20,7 @@ import frc.robot.commands.StorageOuttake;
 import frc.robot.commands.SwerveCommand;
 import frc.robot.commands.autos.activateIntake;
 import frc.robot.commands.autos.activateShooter;
+import frc.robot.commands.autos.indexOut;
 import frc.robot.commands.autos.lowerClimber;
 import frc.robot.commands.autos.raiseClimber;
 import frc.robot.subsystems.CameraSubsystem;
@@ -39,11 +39,10 @@ public class RobotContainer {
   public final CameraSubsystem cameraSubsystem = new CameraSubsystem();
   private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
   private final StorageSubsystem storageSubsystem = new StorageSubsystem();
-  public final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+  public final ShooterSubsystem shooterSubsystem = new ShooterSubsystem(swerveSubsystem);
   private final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
 
   private final SwerveCommand swerveCommand = new SwerveCommand(swerveSubsystem, driverController, operatorController);
-  private final FaceAprilTagCommand faceAprilTagCommand = new FaceAprilTagCommand(swerveCommand, getVision());
   private final AimAtHub aimAtHub = new AimAtHub(swerveCommand, swerveSubsystem);
   
   private SendableChooser<Command> autoChooser;
@@ -69,7 +68,7 @@ public class RobotContainer {
 
     //driver commands
     new JoystickButton(operatorController, XboxController.Button.kRightBumper.value).whileTrue(new GroundIntakeCommand(shooterSubsystem, storageSubsystem));
-    new JoystickButton(operatorController, XboxController.Button.kLeftBumper.value).whileTrue(new StorageOuttake(storageSubsystem));
+    // new JoystickButton(operatorController, XboxController.Button.kLeftBumper.value).whileTrue(new StorageOuttake(storageSubsystem));
     // new JoystickButton(operatorController, XboxController.Button.kA.value)
     //   .onTrue(new InstantCommand(() -> swerveSubsystem.toggleShootingMode()));
 
@@ -88,11 +87,17 @@ public class RobotContainer {
     );
     NamedCommands.registerCommand(
         "ActivateShooter",
-        new activateShooter(shooterSubsystem, storageSubsystem).withTimeout(4)
+        new activateShooter(shooterSubsystem, storageSubsystem).withTimeout(4.5)
     );
     NamedCommands.registerCommand(
         "ActivateIntake", 
-        new activateIntake(storageSubsystem, shooterSubsystem)) ;
+        new activateIntake(storageSubsystem, shooterSubsystem).withTimeout(5)
+    );
+
+  NamedCommands.registerCommand(
+        ".5ActivateIntake", 
+        new activateIntake(storageSubsystem, shooterSubsystem).withTimeout(3)
+    );
   }
 
   public Command getAutonomousCommand() {
@@ -109,6 +114,10 @@ public class RobotContainer {
 
   public StorageSubsystem getStorageSubsystem() {
     return storageSubsystem;
+  }
+  
+  public ShooterSubsystem getShooterSubsystem() {
+    return shooterSubsystem;
   }
 
   public Vision getVision() { 

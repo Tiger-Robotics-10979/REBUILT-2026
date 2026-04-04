@@ -8,11 +8,11 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class StorageSubsystem extends SubsystemBase {
-    private static final int STORAGE_MOTOR_ID = 16;
+    private static final int STORAGE_MOTOR_ID = 9;
     private static final int CURRENT_LIMIT = 40;
     private static final double VOLTAGE_COMPENSATION = 12.0;
 
-    private static final double STORAGE_SPEED = 1;
+    private static final double STORAGE_SPEED = 1.0;
 
     private final SparkMax storageMotor;
 
@@ -22,6 +22,7 @@ public class StorageSubsystem extends SubsystemBase {
         SparkMaxConfig intakeConfig = new SparkMaxConfig();
         intakeConfig.voltageCompensation(VOLTAGE_COMPENSATION);
         intakeConfig.smartCurrentLimit(CURRENT_LIMIT);
+        intakeConfig.inverted(true);
 
         storageMotor.configure(intakeConfig, ResetMode.kNoResetSafeParameters , PersistMode.kPersistParameters);
     }

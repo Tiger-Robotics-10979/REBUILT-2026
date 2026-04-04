@@ -2,15 +2,24 @@ package frc.robot.subsystems;
 
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
+
+import org.photonvision.PhotonUtils;
+
+import com.ctre.phoenix6.swerve.utility.WheelForceCalculator.Feedforwards;
 import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.config.FeedForwardConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ShooterSubsystem extends SubsystemBase {
-    private static final int LEFT_SHOOTER_MOTOR_ID = 12;
-    private static final int RIGHT_SHOOTER_MOTOR_ID = 25; //TODO: Update with actual ID of right shooter motor
+    private static final int LEFT_SHOOTER_MOTOR_ID = 11;
+    private static final int RIGHT_SHOOTER_MOTOR_ID = 16; //TODO: Update with actual ID of right shooter motor
     private static final int CURRENT_LIMIT = 40;
     private static final double VOLTAGE_COMPENSATION = 12.0;
 
@@ -20,20 +29,29 @@ public class ShooterSubsystem extends SubsystemBase {
     private final SparkMax rightShooterMotor;
     private final PIDController shooterPID;
     private double targetRPM;
+    private double FEED_FORWARD = 0.73;
 
-    public ShooterSubsystem() {
+    private final SwerveSubsystem swerveSubsystem;
+
+    private static final Translation2d RED_HUB = new Translation2d(11.925, 4.0);
+    private static final Translation2d BLUE_HUB = new Translation2d(4.625, 4.0);
+
+    public ShooterSubsystem(SwerveSubsystem swerveSubsystem) {
+        this.swerveSubsystem = swerveSubsystem;
+
         leftShooterMotor = new SparkMax(LEFT_SHOOTER_MOTOR_ID, SparkMax.MotorType.kBrushless);
         rightShooterMotor = new SparkMax(RIGHT_SHOOTER_MOTOR_ID, SparkMax.MotorType.kBrushless);
-        shooterPID = new PIDController(0.0003, 0.00001, 0.0);
+        shooterPID = new PIDController(0.0001, 0.0, 0.0); //3 - 4.5
 
         SparkMaxConfig shooterConfig = new SparkMaxConfig();
         shooterConfig.voltageCompensation(VOLTAGE_COMPENSATION);
         shooterConfig.smartCurrentLimit(CURRENT_LIMIT);
 
-        leftShooterMotor.configure(shooterConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
         rightShooterMotor.configure(shooterConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
-        leftShooterMotor.setInverted(true);
+        shooterConfig.inverted(true);
+
+        leftShooterMotor.configure(shooterConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     }
 
     /**
@@ -42,7 +60,7 @@ public class ShooterSubsystem extends SubsystemBase {
      * @return Target RPM for shooter
      */
     public double calculateTargetRPM(double distanceMeters) {
-        return ((14.18581 * (distanceMeters * distanceMeters)) + (417.28272 * distanceMeters) + 1796.55345);
+        return (((236.80603 * (distanceMeters * distanceMeters)) - (134.51444 * distanceMeters) + 2793.2) * 0.666);
     }
 
     /**
@@ -51,11 +69,16 @@ public class ShooterSubsystem extends SubsystemBase {
      */
     public void shootAtDistance(double distanceMeters) {
         targetRPM = calculateTargetRPM(distanceMeters);
-        double output = shooterPID.calculate(getCurrentRPM(), 1250);  //TODO: Use this function to test different RPMs to make regression model (change targetRPM)
-        leftShooterMotor.set(output + 0.1); //+0.25 feedforward value
-        rightShooterMotor.set(output + 0.1);
+        double output = shooterPID.calculate(getCurrentRPM(), targetRPM);  //TODO: Use this function to test different RPMs to make regression model (change targetRPM)
+        leftShooterMotor.set(output + FEED_FORWARD);
+        rightShooterMotor.set(output + FEED_FORWARD);
         System.out.println("Shooter RPM: " + getCurrentRPM());
+    }
 
+    public void shootWithPID() {
+        double output = shooterPID.calculate(getCurrentRPM(), 2000);
+        leftShooterMotor.set(output);
+        rightShooterMotor.set(output);
     }
 
     /**
@@ -81,6 +104,27 @@ public class ShooterSubsystem extends SubsystemBase {
             rightShooterMotor.set(GROUND_INTAKE_SPEED);
         }
     }
+ 
+    /**
+     * Calculates distance from the robot to the nearest hub
+     * @return Distance in meters
+     */
+    public double distanceFromHub() {
+        boolean isRed = DriverStation.getAlliance().isPresent()
+                && (DriverStation.getAlliance().get() == DriverStation.Alliance.Red);
+
+        Translation2d hubCenter = isRed ? RED_HUB : BLUE_HUB;
+
+        Pose2d robotPose = swerveSubsystem.getPose();
+        
+        double distance =
+            Math.sqrt(
+                Math.pow(
+                        (robotPose.getX() - hubCenter.getX()), 2) +
+                        Math.pow((robotPose.getY() - hubCenter.getY()), 2));
+
+        return distance;
+    }
 
     /**
      * Stops the shooter motor
@@ -88,7 +132,6 @@ public class ShooterSubsystem extends SubsystemBase {
     public void stop() {
         leftShooterMotor.set(0);
         rightShooterMotor.set(0);
-        targetRPM = 0;
     }
 
     /**
@@ -96,7 +139,7 @@ public class ShooterSubsystem extends SubsystemBase {
      * @return Current RPM
      */
     public double getCurrentRPM() {
-        return (leftShooterMotor.getEncoder().getVelocity() + rightShooterMotor.getEncoder().getVelocity()) / 2.0;
+        return ((leftShooterMotor.getEncoder().getVelocity()  * 0.666)) ;
     }
     
     public double getTargetRPM() {

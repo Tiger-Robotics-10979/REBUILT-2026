@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "RT-shoot"
+            "pathName": "BB-Shoot"
           }
         },
         {
@@ -19,7 +19,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "RT(s)-NT"
+            "pathName": "BB(s)-NB"
           }
         },
         {
@@ -27,15 +27,15 @@
           "data": {
             "commands": [
               {
-                "type": "named",
+                "type": "path",
                 "data": {
-                  "name": "ActivateIntake"
+                  "pathName": "NB-.5intake"
                 }
               },
               {
-                "type": "path",
+                "type": "named",
                 "data": {
-                  "pathName": "NT-NB(f-a)"
+                  "name": ".5ActivateIntake"
                 }
               }
             ]
@@ -44,7 +44,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "NB-RT(s)"
+            "pathName": "NB.5-BB(s)"
           }
         },
         {

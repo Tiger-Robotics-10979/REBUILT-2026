@@ -8,12 +8,12 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ClimberSubsystem extends SubsystemBase {
-    private static final int CLIMBER_MOTOR_ID = 11;
+    private static final int CLIMBER_MOTOR_ID = 12;
     private static final int CURRENT_LIMIT = 40;
     private static final double VOLTAGE_COMPENSATION = 12.0;
 
     //Speed constants
-    private static final double CLIMB_SPEED = 0.5;
+    private static final double CLIMB_SPEED = 0.3;
 
     private final SparkMax climberMotor;
 

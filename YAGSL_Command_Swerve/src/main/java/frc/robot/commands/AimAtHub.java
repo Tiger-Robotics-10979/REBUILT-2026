@@ -20,6 +20,7 @@ public class AimAtHub extends Command {
     public AimAtHub(SwerveCommand swerveCommand, SwerveSubsystem swerveSubsystem) {
         this.swerveCommand = swerveCommand;
         this.swerveSubsystem = swerveSubsystem;
+        addRequirements(swerveSubsystem);
     }
 
     @Override

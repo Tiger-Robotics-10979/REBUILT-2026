@@ -21,9 +21,20 @@ public class ShooterCommand extends Command {
             shooterEnabled = !shooterEnabled;
         }
 
-        if (shooterEnabled) {
-            shooter.setSpeed(0.75); //replace distance with camera calculations for distance
-        } 
+        if (controller.getYButton()) { //Emergy set speed of feedforward for close up
+            shooter.setSpeed(0.735);
+        }
+        else if (controller.getLeftBumperButton()) { //Emergency reverse for clearing jams
+            shooter.setSpeed(-1.0);
+
+        }
+        else if (controller.getLeftTriggerAxis() > 0.4) {
+            shooter.setSpeed(1);
+        }
+        else if (shooterEnabled) {
+            shooter.setSpeed(0.78);
+            // shooter.shootAtDistance(shooter.distanceFromHub()); //Simple FF = 0.725
+        }
         else {
             shooter.stop();
         }

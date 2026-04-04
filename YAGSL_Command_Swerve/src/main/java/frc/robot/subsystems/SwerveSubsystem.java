@@ -83,7 +83,7 @@ public class SwerveSubsystem extends SubsystemBase {
         Rotation2d.fromDegrees(0))
         : new Pose2d(new Translation2d(Meter.of(16),
             Meter.of(4)),
-            Rotation2d.fromDegrees(540));
+            Rotation2d.fromDegrees(360));
     // Configure the Telemetry before creating the SwerveDrive to avoid unnecessary objects being created.
     SwerveDriveTelemetry.verbosity = TelemetryVerbosity.HIGH;
     try {
@@ -117,7 +117,7 @@ public class SwerveSubsystem extends SubsystemBase {
   public SwerveSubsystem(SwerveDriveConfiguration driveCfg, SwerveControllerConfiguration controllerCfg) {
     swerveDrive = new SwerveDrive(driveCfg,
         controllerCfg,
-        4.5,
+        4,
         new Pose2d(new Translation2d(Meter.of(2), Meter.of(0)),
             Rotation2d.fromDegrees(0)));
   }

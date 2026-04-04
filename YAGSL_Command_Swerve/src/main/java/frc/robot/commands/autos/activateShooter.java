@@ -24,7 +24,7 @@ public class activateShooter extends Command {
 
     @Override
     public void execute() {
-        shooter.setSpeed(0.75);
+        shooter.setSpeed(1);
 
         if (timer.get() > 0.8) {
             storage.outtake();

@@ -34,6 +34,7 @@ import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.units.Unit;
 import edu.wpi.first.wpilibj.Alert;
 import edu.wpi.first.wpilibj.Alert.AlertType;
 import edu.wpi.first.wpilibj.Timer;
@@ -263,8 +264,8 @@ public class Vision {
      */
     CENTER_CAM("camera1",
         new Rotation3d(0, Units.degreesToRadians(-15), Units.degreesToRadians(0)), //Units.degreesToRadians(0)
-        new Translation3d(0, 0, 0), //Units.inchesToMeters()
-        VecBuilder.fill(4, 4, 8), 
+        new Translation3d(Units.inchesToMeters(0), Units.inchesToMeters(-13), Units.inchesToMeters(10.5)), //Units.inchesToMeters()
+        VecBuilder.fill(4, 4, 8),
         VecBuilder.fill(0.5, 0.5, 1));
 
     //** LEFT_CAM("camera2",

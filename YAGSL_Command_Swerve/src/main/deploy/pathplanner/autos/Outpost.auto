@@ -5,19 +5,31 @@
     "data": {
       "commands": [
         {
-          "type": "sequential",
+          "type": "path",
+          "data": {
+            "pathName": "BT-Shoot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ActivateShooter"
+          }
+        },
+        {
+          "type": "parallel",
           "data": {
             "commands": [
               {
                 "type": "path",
                 "data": {
-                  "pathName": "M.Init-M.Aim"
+                  "pathName": "BT(s)-Loop"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "ActivateShooter"
+                  "name": "ActivateIntake"
                 }
               }
             ]
@@ -26,19 +38,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "M.Aim-T.Climb"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0
+            "pathName": "Outpost-Shoot"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "LowerClimber"
+            "name": "ActivateShooter"
           }
         }
       ]

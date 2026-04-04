@@ -10,9 +10,13 @@ public class SwerveCommand extends Command {
     private final SwerveSubsystem swerve;
     private final XboxController controller;
     private final XboxController operatorController;
+    private double inverted = 1;
     private double rotation = 0;
     private double autoAimRotation = 0;
     private boolean autoAimActive = false;
+
+    private double xSpeed;
+    private double ySpeed;
 
     public SwerveCommand(SwerveSubsystem swerve, XboxController controller, XboxController operatorController) {
         this.swerve = swerve;
@@ -33,6 +37,17 @@ public class SwerveCommand extends Command {
 
     @Override
     public void execute() {
+        
+        if (controller.getAButtonPressed()) {
+            if (inverted < 0) {
+                inverted = 1;
+            }
+            else {
+                inverted = -1;
+            }
+            
+        }
+
         double maxRotationSpeed = swerve.getSwerveDrive().getMaximumChassisAngularVelocity();
 
         rotation = -applyDeadBand(controller, 4) * maxRotationSpeed;
@@ -40,14 +55,16 @@ public class SwerveCommand extends Command {
             rotation = -applyDeadBand(operatorController, 4) * maxRotationSpeed;
         }
 
-        double xSpeed = applyDeadBand(controller, 0);
-        double ySpeed = applyDeadBand(controller, 1);
+        
+        xSpeed = -applyDeadBand(controller, 0) * inverted;
+        ySpeed = -applyDeadBand(controller, 1) * inverted;
+        
 
         boolean isRedAlliance = DriverStation.getAlliance().isPresent() &&
                                 DriverStation.getAlliance().get() == DriverStation.Alliance.Red;
 
-        double adjustedX = isRedAlliance ? ySpeed : -ySpeed;
-        double adjustedY = isRedAlliance ? xSpeed : -xSpeed;
+        double adjustedX = isRedAlliance ? -ySpeed : ySpeed;
+        double adjustedY = isRedAlliance ? -xSpeed : xSpeed;
 
         double maxSpeed = swerve.getSwerveDrive().getMaximumChassisVelocity();
 
