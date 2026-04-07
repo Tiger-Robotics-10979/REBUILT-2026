@@ -3,57 +3,41 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.288,
-        "y": 6.063
+        "x": 8.281,
+        "y": 1.351
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.4602562277580082,
-        "y": 7.343545670225385
+        "x": 8.33130121838408,
+        "y": 1.1061127046393033
       },
-      "isLocked": false,
+      "isLocked": true,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 3.482158956109135,
-        "y": 7.472562277580071
+        "x": 4.908650662251655,
+        "y": 0.5211920529801319
       },
       "prevControl": {
-        "x": 3.0947333022977666,
-        "y": 7.515609572448002
+        "x": 6.894253510021578,
+        "y": 0.5660157288270333
       },
       "nextControl": {
-        "x": 3.7306298897775396,
-        "y": 7.444954396061358
+        "x": 2.9230478144817322,
+        "y": 0.47636837713323044
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 6.83902728351127,
-        "y": 7.300415183867142
+        "x": 0.4437913907284766,
+        "y": 0.6591307947019869
       },
       "prevControl": {
-        "x": 5.943686124690999,
-        "y": 7.442855822770369
-      },
-      "nextControl": {
-        "x": 7.312431791221829,
-        "y": 7.225100830367734
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 8.263,
-        "y": 6.757
-      },
-      "prevControl": {
-        "x": 8.001020166073548,
-        "y": 7.149786476868328
+        "x": 0.9737665562913909,
+        "y": 0.6446109271523186
       },
       "nextControl": null,
       "isLocked": false,
@@ -63,7 +47,14 @@
   "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "ActivateShooter",
+      "waypointRelativePos": 0.31046119235095404,
+      "endWaypointRelativePos": 1.6692913385826773,
+      "command": null
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 3.0,
@@ -73,14 +64,14 @@
     "unlimited": true
   },
   "goalEndState": {
-    "velocity": 1.0,
+    "velocity": 0,
     "rotation": 90.0
   },
   "reversed": false,
   "folder": "Good Path",
   "idealStartingState": {
-    "velocity": 0,
-    "rotation": -45.0
+    "velocity": 5.0,
+    "rotation": 90.0
   },
   "useDefaultConstraints": false
 }

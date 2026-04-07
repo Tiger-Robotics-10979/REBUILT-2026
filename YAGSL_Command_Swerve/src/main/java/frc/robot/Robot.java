@@ -15,8 +15,6 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
 
-  private final Field2d m_field = new Field2d();
-
   public Robot() {}
 
   @Override
@@ -31,7 +29,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     SmartDashboard.putNumber("Vision value", 
-        m_robotContainer.getVision().getDistanceFromAprilTag(2));
+        m_robotContainer.getVision().getDistanceFromAprilTag(9));
     
     SmartDashboard.putNumberArray("OdometryPose", new double[]{
         m_robotContainer.getSwerveSubsystem().getPose().getX(),
@@ -39,14 +37,13 @@ public class Robot extends TimedRobot {
         m_robotContainer.getSwerveSubsystem().getPose().getRotation().getDegrees()
     });
 
-    SmartDashboard.putData("field", m_field);
-    m_field.setRobotPose(m_robotContainer.getSwerveSubsystem().getPose());
-
     SmartDashboard.putNumber("currentShooterRPM", m_robotContainer.getShooterSubsystem().getCurrentRPM());
     SmartDashboard.putNumber("targetShooterRPM", m_robotContainer.getShooterSubsystem().getTargetRPM());
 
     SmartDashboard.putNumber("distanceFromHub", m_robotContainer.getShooterSubsystem().distanceFromHub());
     SmartDashboard.putNumber("distanceFromTag", m_robotContainer.getVision().getDistanceFromAprilTag(9));
+
+    SmartDashboard.putData("swerveField", m_robotContainer.getSwerveSubsystem().getSwerveDrive().field);
 
     CommandScheduler.getInstance().run();
   }

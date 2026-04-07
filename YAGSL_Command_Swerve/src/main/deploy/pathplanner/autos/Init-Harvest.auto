@@ -7,19 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "BT-Shoot"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "ActivateShooter"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "BT(s)-NT"
+            "pathName": "Init-NT"
           }
         },
         {
@@ -27,15 +15,15 @@
           "data": {
             "commands": [
               {
-                "type": "named",
-                "data": {
-                  "name": "ActivateIntake"
-                }
-              },
-              {
                 "type": "path",
                 "data": {
                   "pathName": "NT-.5Intake(f-b)"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": ".5ActivateIntake"
                 }
               }
             ]
@@ -64,18 +52,42 @@
           "data": {
             "commands": [
               {
-                "type": "named",
+                "type": "path",
                 "data": {
-                  "name": "ActivateIntake"
+                  "pathName": "NT.5-NB"
                 }
               },
               {
-                "type": "path",
+                "type": "named",
                 "data": {
-                  "pathName": ".5intake-BTShoot"
+                  "name": ".5ActivateIntake"
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "RotateBB"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ActivateShooter"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "UnRotateBB"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "NB-OUTPOST"
           }
         }
       ]

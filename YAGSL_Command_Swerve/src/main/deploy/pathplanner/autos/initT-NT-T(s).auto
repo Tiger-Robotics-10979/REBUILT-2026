@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Init-NB"
+            "pathName": "Init-NT"
           }
         },
         {
@@ -15,15 +15,15 @@
           "data": {
             "commands": [
               {
-                "type": "path",
-                "data": {
-                  "pathName": "NB-.5intake"
-                }
-              },
-              {
                 "type": "named",
                 "data": {
                   "name": ".5ActivateIntake"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "NT-.5Intake(f-b)"
                 }
               }
             ]
@@ -32,13 +32,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": ".5-NB(f-b)"
+            "pathName": ".5Intake-NT"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "NB-BB(s)"
+            "pathName": "NT-BT(s)"
           }
         },
         {

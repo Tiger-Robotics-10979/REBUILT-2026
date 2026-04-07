@@ -7,7 +7,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Init-NB"
+            "pathName": "HShoot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "HubShoot"
           }
         },
         {
@@ -17,13 +23,13 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "NB-.5intake"
+                  "pathName": "HShoot-NT"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": ".5ActivateIntake"
+                  "name": "ActivateIntake"
                 }
               }
             ]
@@ -32,13 +38,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": ".5-NB(f-b)"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "NB-BB(s)"
+            "pathName": "NT-BT(s)"
           }
         },
         {

@@ -75,6 +75,10 @@ public class ShooterSubsystem extends SubsystemBase {
         System.out.println("Shooter RPM: " + getCurrentRPM());
     }
 
+    /**
+     * Runs shooter with PID control based on setpoint.
+     * ONLY for testing
+     */
     public void shootWithPID() {
         double output = shooterPID.calculate(getCurrentRPM(), 2000);
         leftShooterMotor.set(output);
@@ -120,8 +124,8 @@ public class ShooterSubsystem extends SubsystemBase {
         double distance =
             Math.sqrt(
                 Math.pow(
-                        (robotPose.getX() - hubCenter.getX()), 2) +
-                        Math.pow((robotPose.getY() - hubCenter.getY()), 2));
+                        (robotPose.getY() - hubCenter.getX()), 2) +
+                        Math.pow((robotPose.getX() - hubCenter.getY()), 2));
 
         return distance;
     }

@@ -17,11 +17,11 @@
     {
       "anchor": {
         "x": 8.281,
-        "y": 4.0
+        "y": 4.5
       },
       "prevControl": {
         "x": 8.28075919335706,
-        "y": 4.761245551601423
+        "y": 5.261245551601423
       },
       "nextControl": null,
       "isLocked": false,
@@ -38,17 +38,17 @@
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
-    "unlimited": false
+    "unlimited": true
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 80.0
+    "rotation": 90.0
   },
   "reversed": false,
   "folder": "Good Path",
   "idealStartingState": {
-    "velocity": 0,
-    "rotation": 80.0
+    "velocity": 5.0,
+    "rotation": 90.0
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }

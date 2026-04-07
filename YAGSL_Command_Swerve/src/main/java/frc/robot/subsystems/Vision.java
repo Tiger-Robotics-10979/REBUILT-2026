@@ -268,13 +268,6 @@ public class Vision {
         VecBuilder.fill(4, 4, 8),
         VecBuilder.fill(0.5, 0.5, 1));
 
-    //** LEFT_CAM("camera2",
-       // new Rotation3d(0, Units.degreesToRadians(-15), Units.degreesToRadians(45)), //Units.degreesToRadians(0)
-      //  new Translation3d(0, 1, 0), //Units.inchesToMeters()
-     //   VecBuilder.fill(4, 4, 8), 
-    //VecBuilder.fill(0.5, 0.5, 1));
-      
-
     /**
      * Latency alert to use when high latency is detected.
      */

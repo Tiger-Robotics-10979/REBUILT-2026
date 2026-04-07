@@ -2,6 +2,9 @@ package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.commands.PathPlannerAuto;
+import com.pathplanner.lib.events.EventTrigger;
+import com.pathplanner.lib.path.EventMarker;
 
 import edu.wpi.first.apriltag.AprilTag;
 import edu.wpi.first.wpilibj.XboxController;
@@ -20,10 +23,11 @@ import frc.robot.commands.StorageOuttake;
 import frc.robot.commands.SwerveCommand;
 import frc.robot.commands.autos.activateIntake;
 import frc.robot.commands.autos.activateShooter;
+import frc.robot.commands.autos.hubShoot;
 import frc.robot.commands.autos.indexOut;
 import frc.robot.commands.autos.lowerClimber;
 import frc.robot.commands.autos.raiseClimber;
-import frc.robot.subsystems.CameraSubsystem;
+// import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.StorageSubsystem;
@@ -36,7 +40,7 @@ public class RobotContainer {
   private final XboxController operatorController = new XboxController(1);
 
   //Subsystems
-  public final CameraSubsystem cameraSubsystem = new CameraSubsystem();
+  // public final CameraSubsystem cameraSubsystem = new CameraSubsystem();
   private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
   private final StorageSubsystem storageSubsystem = new StorageSubsystem();
   public final ShooterSubsystem shooterSubsystem = new ShooterSubsystem(swerveSubsystem);
@@ -44,17 +48,48 @@ public class RobotContainer {
 
   private final SwerveCommand swerveCommand = new SwerveCommand(swerveSubsystem, driverController, operatorController);
   private final AimAtHub aimAtHub = new AimAtHub(swerveCommand, swerveSubsystem);
-  
+
   private SendableChooser<Command> autoChooser;
 
-  public RobotContainer() {
-    configureBindings();
+  // private void registerNamedCommands() {
+  //   NamedCommands.registerCommand(
+  //       "LowerClimber",
+  //       new lowerClimber(climberSubsystem).withTimeout(6)
+  //   );
+  //   NamedCommands.registerCommand(
+  //       "ActivateShooter",
+  //       new activateShooter(shooterSubsystem, storageSubsystem).withTimeout(4.5)
+  //   );
+  //   NamedCommands.registerCommand(
+  //       "ActivateIntake", 
+  //       new activateIntake(storageSubsystem, shooterSubsystem).withTimeout(5)
+  //   );
+  //   NamedCommands.registerCommand(
+  //         ".5ActivateIntake", 
+  //         new activateIntake(storageSubsystem, shooterSubsystem).withTimeout(1.7)
+  //     );
+  //   NamedCommands.registerCommand(
+  //     "HubShoot", 
+  //     new hubShoot(shooterSubsystem, storageSubsystem).withTimeout(4.5)
+  //     ); 
+  // }
 
-    registerNamedCommands();
+  public RobotContainer() {
+    // NamedCommands.registerCommand("Test", new lowerClimber(climberSubsystem).onlyWhile(null));
+    NamedCommands.registerCommand("LowerClimber", new lowerClimber(climberSubsystem).withTimeout(6));
+    NamedCommands.registerCommand("ActivateShooter", new activateShooter(shooterSubsystem, storageSubsystem).withTimeout(4.5));
+    NamedCommands.registerCommand("ActivateIntake", new activateIntake(storageSubsystem, shooterSubsystem).withTimeout(5));
+    NamedCommands.registerCommand(".5ActivateIntake", new activateIntake(storageSubsystem, shooterSubsystem).withTimeout(1.7));
+    NamedCommands.registerCommand("HubShoot", new hubShoot(shooterSubsystem, storageSubsystem).withTimeout(4.5)); 
+    new EventTrigger("ActivateShooter").onTrue(new activateShooter(shooterSubsystem, storageSubsystem));
+    new EventTrigger("ActivateIntake").onTrue(new activateIntake(storageSubsystem, shooterSubsystem));
+    new EventTrigger("HubShoot").onTrue(new hubShoot(shooterSubsystem, storageSubsystem));
+    configureBindings();
+    // registerNamedCommands();
 
     autoChooser = AutoBuilder.buildAutoChooser();
 
-    SmartDashboard.putData("Auto Chooser", autoChooser);
+    SmartDashboard.putData("Auto Chooser", autoChooser); 
   }
   
   private void configureBindings() {
@@ -76,29 +111,13 @@ public class RobotContainer {
       .whileTrue(aimAtHub);
   }
 
-  private void registerNamedCommands() {
-    NamedCommands.registerCommand(
-        "RaiseClimber",
-        new raiseClimber(climberSubsystem).withTimeout(6)
-    );
-    NamedCommands.registerCommand(
-        "LowerClimber",
-        new lowerClimber(climberSubsystem).withTimeout(6)
-    );
-    NamedCommands.registerCommand(
-        "ActivateShooter",
-        new activateShooter(shooterSubsystem, storageSubsystem).withTimeout(4.5)
-    );
-    NamedCommands.registerCommand(
-        "ActivateIntake", 
-        new activateIntake(storageSubsystem, shooterSubsystem).withTimeout(5)
-    );
+  
+   
 
-  NamedCommands.registerCommand(
-        ".5ActivateIntake", 
-        new activateIntake(storageSubsystem, shooterSubsystem).withTimeout(3)
-    );
-  }
+
+      
+
+  
 
   public Command getAutonomousCommand() {
     return autoChooser.getSelected();
@@ -108,9 +127,9 @@ public class RobotContainer {
     return swerveSubsystem;
   }
 
-  public CameraSubsystem getCameraSubsystem() {
-    return cameraSubsystem;
-  }
+  // public CameraSubsystem getCameraSubsystem() {
+  //   return cameraSubsystem;
+  // }
 
   public StorageSubsystem getStorageSubsystem() {
     return storageSubsystem;
