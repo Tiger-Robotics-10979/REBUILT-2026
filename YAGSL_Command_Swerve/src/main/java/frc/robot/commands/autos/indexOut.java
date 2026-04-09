@@ -25,4 +25,5 @@ public class indexOut extends Command {
     @Override
     public boolean isFinished() {
         return false;
-    }}
+    }
+}
