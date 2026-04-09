@@ -3,16 +3,16 @@
   "robotLength": 0.857,
   "holonomicMode": true,
   "pathFolders": [
-    "Aim",
-    "FromNeutral",
-    "Init",
     "Good Path",
+    "Init",
+    "New Good Path",
     "ToNeutral"
   ],
   "autoFolders": [
     "BottomAutos",
-    "MiddleAutos",
     "Good Auto",
+    "MiddleAutos",
+    "New Good Auto",
     "TopAutos"
   ],
   "defaultMaxVel": 3.0,
