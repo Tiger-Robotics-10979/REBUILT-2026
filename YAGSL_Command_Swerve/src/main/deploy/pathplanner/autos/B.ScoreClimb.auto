@@ -19,7 +19,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "B.Aim-B.Neutral"
+            "pathName": null
           }
         },
         {
@@ -43,7 +43,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Q.Neutral-B.Aim"
+            "pathName": null
           }
         },
         {
@@ -55,7 +55,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "B.Aim-B.Climb"
+            "pathName": null
           }
         },
         {

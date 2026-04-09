@@ -25,13 +25,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "H.Neutral-T.Aim"
+            "pathName": null
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "T.Aim-T.Climb"
+            "pathName": null
           }
         }
       ]

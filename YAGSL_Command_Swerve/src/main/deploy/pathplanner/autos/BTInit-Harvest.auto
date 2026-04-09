@@ -7,19 +7,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "T.Init-T.Aim"
+            "pathName": "Init-Harvest"
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": null
+            "name": "ActivateShooter"
           }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": "TopAutos",
+  "folder": "New Good Auto",
   "choreoAuto": false
 }
