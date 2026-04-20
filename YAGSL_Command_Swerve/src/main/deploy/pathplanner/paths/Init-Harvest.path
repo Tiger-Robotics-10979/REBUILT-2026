@@ -36,40 +36,40 @@
         "y": 1.971283880171185
       },
       "prevControl": {
-        "x": 8.473402989820354,
-        "y": 2.918181401224089
+        "x": 8.413895348961386,
+        "y": 2.9449777659737193
       },
       "nextControl": {
-        "x": 7.480741797432238,
-        "y": 0.8844365192582018
+        "x": 7.52761565836299,
+        "y": 0.8018623962040325
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 6.419771754636234,
-        "y": 4.351997146932953
+        "x": 7.032692763938317,
+        "y": 4.341637010676156
       },
       "prevControl": {
-        "x": 6.495703630319356,
-        "y": 2.787800507860663
+        "x": 7.149889661515844,
+        "y": 2.7799899114158904
       },
       "nextControl": {
-        "x": 6.355078459343795,
-        "y": 5.684679029957205
+        "x": 6.946266205031621,
+        "y": 5.493269756981638
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.288,
-        "y": 6.063
+        "x": 7.172562277580072,
+        "y": 6.687141162514828
       },
       "prevControl": {
-        "x": 2.9263338088445074,
-        "y": 5.723495007132667
+        "x": 6.83902728351127,
+        "y": 6.192218268090154
       },
       "nextControl": null,
       "isLocked": false,
@@ -92,6 +92,10 @@
     {
       "waypointRelativePos": 2.8059701492536897,
       "rotationDegrees": -70.0
+    },
+    {
+      "waypointRelativePos": 3.99,
+      "rotationDegrees": -116.00000000000001
     }
   ],
   "constraintZones": [
@@ -136,7 +140,7 @@
     {
       "fieldPosition": {
         "x": 3.0,
-        "y": 7.0
+        "y": 2.0
       },
       "rotationOffset": 0.0,
       "minWaypointRelativePos": 2.45,
@@ -172,7 +176,7 @@
     {
       "name": "ActivateIntake",
       "waypointRelativePos": 2.6684672518568626,
-      "endWaypointRelativePos": 3.4463200540175363,
+      "endWaypointRelativePos": 3.9415073115860975,
       "command": null
     }
   ],
@@ -186,7 +190,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -40.0
+    "rotation": 180.0
   },
   "reversed": false,
   "folder": "New Good Path",
