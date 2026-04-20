@@ -20,7 +20,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_robotContainer = new RobotContainer();
-    // CameraServer.startAutomaticCapture();
+    CameraServer.startAutomaticCapture();
+    // CameraServer.getVideo();
     DataLogManager.start();
     DriverStation.startDataLog(DataLogManager.getLog());
     DriverStation.silenceJoystickConnectionWarning(true);
@@ -28,22 +29,28 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-    SmartDashboard.putNumber("Vision value", 
-        m_robotContainer.getVision().getDistanceFromAprilTag(9));
+    // SmartDashboard.putData("SwerveInputStream", m_robotContainer.getSwerveSubsystem().driveFieldOriented(m_robotContainer.getSwerveInputStream()));
+
+    // SmartDashboard.putNumber("Vision value", 
+    //     m_robotContainer.getVision().getDistanceFromAprilTag(9));
     
-    SmartDashboard.putNumberArray("OdometryPose", new double[]{
-        m_robotContainer.getSwerveSubsystem().getPose().getX(),
-        m_robotContainer.getSwerveSubsystem().getPose().getY(),
-        m_robotContainer.getSwerveSubsystem().getPose().getRotation().getDegrees()
-    });
+    // SmartDashboard.putNumberArray("OdometryPose", new double[]{
+    //     m_robotContainer.getSwerveSubsystem().getPose().getX(),
+    //     m_robotContainer.getSwerveSubsystem().getPose().getY(),
+    //     m_robotContainer.getSwerveSubsystem().getPose().getRotation().getDegrees()
+    // });
 
-    SmartDashboard.putNumber("currentShooterRPM", m_robotContainer.getShooterSubsystem().getCurrentRPM());
-    SmartDashboard.putNumber("targetShooterRPM", m_robotContainer.getShooterSubsystem().getTargetRPM());
+    // SmartDashboard.putNumber("currentShooterRPM", m_robotContainer.getShooterSubsystem().getCurrentRPM());
+    // SmartDashboard.putNumber("targetShooterRPM", m_robotContainer.getShooterSubsystem().getTargetRPM());
 
-    SmartDashboard.putNumber("distanceFromHub", m_robotContainer.getShooterSubsystem().distanceFromHub());
-    SmartDashboard.putNumber("distanceFromTag", m_robotContainer.getVision().getDistanceFromAprilTag(9));
+    // SmartDashboard.putNumber("distanceFromHub", m_robotContainer.getShooterSubsystem().distanceFromHub());
+    // SmartDashboard.putNumber("distanceFromTag", m_robotContainer.getVision().getDistanceFromAprilTag(9));
 
-    SmartDashboard.putData("swerveField", m_robotContainer.getSwerveSubsystem().getSwerveDrive().field);
+    // SmartDashboard.putData("swerveField", m_robotContainer.getSwerveSubsystem().getSwerveDrive().field);
+
+    // SmartDashboard.putNumber("targetRotation", m_robotContainer.getAimAtHub().getTargetRotation());
+    // SmartDashboard.putNumber("currentRotation", m_robotContainer.getAimAtHub().getCurrentRotation());
+    
 
     CommandScheduler.getInstance().run();
   }
@@ -76,7 +83,9 @@ public void autonomousInit() {
   }
 
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    m_robotContainer.selectRotationController();
+  }
 
   @Override
   public void testInit() {

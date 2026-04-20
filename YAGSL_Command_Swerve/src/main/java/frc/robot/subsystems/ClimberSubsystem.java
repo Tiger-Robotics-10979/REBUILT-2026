@@ -13,7 +13,7 @@ public class ClimberSubsystem extends SubsystemBase {
     private static final double VOLTAGE_COMPENSATION = 12.0;
 
     //Speed constants
-    private static final double CLIMB_SPEED = 0.3;
+    private static final double CLIMB_SPEED = 1;
 
     private final SparkMax climberMotor;
 

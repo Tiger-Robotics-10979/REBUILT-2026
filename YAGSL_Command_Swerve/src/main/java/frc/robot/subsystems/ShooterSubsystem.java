@@ -29,12 +29,14 @@ public class ShooterSubsystem extends SubsystemBase {
     private final SparkMax rightShooterMotor;
     private final PIDController shooterPID;
     private double targetRPM;
-    private double FEED_FORWARD = 0.73;
+    private double FEED_FORWARD = 0.8;
+    
 
     private final SwerveSubsystem swerveSubsystem;
 
-    private static final Translation2d RED_HUB = new Translation2d(11.925, 4.0);
+    // private static final Translation2d BLUE_HUB = new Translation2d(11.925, 4.0);
     private static final Translation2d BLUE_HUB = new Translation2d(4.625, 4.0);
+    private static final Translation2d RED_HUB = new Translation2d(11.925, 4.0);
 
     public ShooterSubsystem(SwerveSubsystem swerveSubsystem) {
         this.swerveSubsystem = swerveSubsystem;
@@ -47,24 +49,27 @@ public class ShooterSubsystem extends SubsystemBase {
         shooterConfig.voltageCompensation(VOLTAGE_COMPENSATION);
         shooterConfig.smartCurrentLimit(CURRENT_LIMIT);
 
-        rightShooterMotor.configure(shooterConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        rightShooterMotor.configure(shooterConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters); //why undeclared?
 
         shooterConfig.inverted(true);
 
-        leftShooterMotor.configure(shooterConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        leftShooterMotor.configure(shooterConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters); //why undeclared?
     }
-
+ 
     /**
      * Calculates target RPM based on distance to target
      * @param distanceMeters Distance to target in meters
      * @return Target RPM for shooter
      */
-    public double calculateTargetRPM(double distanceMeters) {
-        return (((236.80603 * (distanceMeters * distanceMeters)) - (134.51444 * distanceMeters) + 2793.2) * 0.666);
+    public double calculateTargetRPM(double distanceMeters) { 
+        // double inchesConverted = distanceMeters * 39.3701;
+
+        // return ((0.148362 * (inchesConverted * inchesConverted)) + (12.18062 * inchesConverted) + 2610.44836);
+        return (((236.80603 * (distanceMeters * distanceMeters)) + (134.51444 * distanceMeters) + 2793.2) * 0.666);
     }
 
     /**
-     * Runs shooter with PID control based on distance
+     * Runs shooter with PID control based on distance 
      * @param distanceMeters Distance to target in meters
      */
     public void shootAtDistance(double distanceMeters) {
@@ -73,6 +78,7 @@ public class ShooterSubsystem extends SubsystemBase {
         leftShooterMotor.set(output + FEED_FORWARD);
         rightShooterMotor.set(output + FEED_FORWARD);
         System.out.println("Shooter RPM: " + getCurrentRPM());
+        System.out.println("Target RPM: " + targetRPM);
     }
 
     /**
@@ -121,11 +127,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
         Pose2d robotPose = swerveSubsystem.getPose();
         
-        double distance =
-            Math.sqrt(
-                Math.pow(
-                        (robotPose.getY() - hubCenter.getX()), 2) +
-                        Math.pow((robotPose.getX() - hubCenter.getY()), 2));
+        double distance = robotPose.getTranslation().getDistance(hubCenter);
 
         return distance;
     }
@@ -136,7 +138,7 @@ public class ShooterSubsystem extends SubsystemBase {
     public void stop() {
         leftShooterMotor.set(0);
         rightShooterMotor.set(0);
-    }
+    }  
 
     /**
      * Gets current shooter RPM
@@ -149,4 +151,5 @@ public class ShooterSubsystem extends SubsystemBase {
     public double getTargetRPM() {
         return targetRPM;
     }
+
 }

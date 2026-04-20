@@ -47,7 +47,7 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "RaiseClimber",
+      "name": "",
       "waypointRelativePos": 0.3095406360424028,
       "endWaypointRelativePos": null,
       "command": null

@@ -1,0 +1,56 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Init-NT"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "NT-.5Intake(f-b)"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": ".5ActivateIntake"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": ".5Intake-NT"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "NT-BT(s)"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ActivateShooter"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": "Good Auto",
+  "choreoAuto": false
+}

@@ -24,9 +24,9 @@ public class hubShoot extends Command {
 
     @Override
     public void execute() {
-        shooter.setSpeed(0.84);
+        shooter.setSpeed(0.87);
 
-        if (timer.get() > 0.8) {
+        if (timer.get() > 2) {
             storage.outtake();
         }
     }

@@ -15,18 +15,6 @@
           "data": {
             "name": "ActivateShooter"
           }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": null
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "RaiseClimber"
-          }
         }
       ]
     }

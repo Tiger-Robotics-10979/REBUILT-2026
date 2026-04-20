@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.KickerSubsystem;
 
-public class KickerCommand extends Command{
+public class KickerCommand extends Command {
     private final KickerSubsystem kicker;
     private final XboxController controller;
 
@@ -17,6 +17,9 @@ public class KickerCommand extends Command{
     @Override
     public void execute() {
         if (controller.getPOV() == 0) {
+            kicker.setSpeed(1);
+        }
+        else if (controller.getPOV() == 180) {
             kicker.setSpeed(-0.4);
         }
         else {

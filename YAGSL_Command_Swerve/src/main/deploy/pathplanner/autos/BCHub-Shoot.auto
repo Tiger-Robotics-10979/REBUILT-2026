@@ -7,7 +7,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "NB-OUTPOST"
+            "pathName": "BCHub-Shoot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "HubShoot"
           }
         }
       ]

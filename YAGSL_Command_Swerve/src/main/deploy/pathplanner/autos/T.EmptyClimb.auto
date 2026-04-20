@@ -9,12 +9,6 @@
           "data": {
             "pathName": "T.Init-T.Aim"
           }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": null
-          }
         }
       ]
     }

@@ -9,12 +9,6 @@
           "data": {
             "pathName": "T.Init-T.Climb"
           }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "RaiseClimber"
-          }
         }
       ]
     }

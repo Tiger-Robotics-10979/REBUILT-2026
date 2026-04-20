@@ -37,6 +37,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -87,7 +88,7 @@ public class SwerveSubsystem extends SubsystemBase {
     // Configure the Telemetry before creating the SwerveDrive to avoid unnecessary objects being created.
     SwerveDriveTelemetry.verbosity = TelemetryVerbosity.HIGH;
     try {
-      swerveDrive = new SwerveParser(swerveJsonDirectory).createSwerveDrive(4.5, startingPose);
+      swerveDrive = new SwerveParser(swerveJsonDirectory).createSwerveDrive(6.5, startingPose);
       // Alternative method if you don't want to supply the conversion factor via JSON files.
       // swerveDrive = new SwerveParser(swerveJsonDirectory).createSwerveDrive(maximumSpeed, angleConversionFactor, driveConversionFactor);
     } catch (Exception e) {
@@ -117,7 +118,7 @@ public class SwerveSubsystem extends SubsystemBase {
   public SwerveSubsystem(SwerveDriveConfiguration driveCfg, SwerveControllerConfiguration controllerCfg) {
     swerveDrive = new SwerveDrive(driveCfg,
         controllerCfg,
-        4,
+        6.5,
         new Pose2d(new Translation2d(Meter.of(2), Meter.of(0)),
             Rotation2d.fromDegrees(0)));
   }
@@ -131,19 +132,24 @@ public class SwerveSubsystem extends SubsystemBase {
     return vision;
   }
 
-  @Override
-  public void periodic() {
-    // always update odometry
+@Override
+public void periodic() {
     swerveDrive.updateOdometry();
-    // When vision is enabled we must manually update odometry in SwerveDrive
     if (visionDriveTest && vision != null) {
-      vision.updatePoseEstimation(swerveDrive);
-      vision.updateVisionField();
+        vision.updatePoseEstimation(swerveDrive);
+        vision.updateVisionField();
     }
-  }
+    // Add this line:
+    swerveDrive.field.setRobotPose(swerveDrive.getPose());
+
+    SmartDashboard.putNumber("Robot X", swerveDrive.getPose().getX());
+    SmartDashboard.putNumber("Robot Y", swerveDrive.getPose().getY());
+    SmartDashboard.putNumber("Robot Angle", swerveDrive.getPose().getRotation().getDegrees());
+}
 
   @Override
   public void simulationPeriodic() {
+    
   }
 
   /**
@@ -250,7 +256,7 @@ public class SwerveSubsystem extends SubsystemBase {
   public Command driveToPose(Pose2d pose) {
     // Create the constraints to use while pathfinding
     PathConstraints constraints = new PathConstraints(
-        swerveDrive.getMaximumChassisVelocity(), 4.0,
+        swerveDrive.getMaximumChassisVelocity(), 6.5,
         swerveDrive.getMaximumChassisAngularVelocity(), Units.degreesToRadians(720));
 
     // Since AutoBuilder is configured, we can use it to build pathfinding commands
@@ -713,6 +719,4 @@ public class SwerveSubsystem extends SubsystemBase {
   public Vision getVision() {
     return vision;
   }
-
-  // public void faceTag() {}
 }

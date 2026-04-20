@@ -21,18 +21,6 @@
           "data": {
             "pathName": "T.Neutral-H.Neutral"
           }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": null
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": null
-          }
         }
       ]
     }

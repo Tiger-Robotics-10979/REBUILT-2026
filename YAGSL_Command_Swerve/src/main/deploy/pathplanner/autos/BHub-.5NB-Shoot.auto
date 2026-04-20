@@ -1,0 +1,81 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "BHub-Shoot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "QHubShoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "BHub-.5NB"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": ".5NB-BB"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ActivateIntake"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ActivateShooter"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "BB-NB-BB"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ActivateIntake"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ActivateShooter"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": "Good Auto",
+  "choreoAuto": false
+}

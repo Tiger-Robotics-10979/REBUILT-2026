@@ -8,6 +8,7 @@ public class ShooterCommand extends Command {
     private final ShooterSubsystem shooter;
     private final XboxController controller;
     private boolean shooterEnabled = false;
+    private boolean shooterStart = false;
   
     public ShooterCommand(ShooterSubsystem shooter, XboxController controller) {
         this.shooter = shooter;
@@ -22,7 +23,7 @@ public class ShooterCommand extends Command {
         }
 
         if (controller.getYButton()) { //Emergency set speed of feedforward for close up
-            shooter.setSpeed(0.735);
+            shooter.setSpeed(0.8);
         }
         else if (controller.getLeftBumperButton()) { //Emergency reverse for clearing jams
             shooter.setSpeed(-1.0);
@@ -32,12 +33,19 @@ public class ShooterCommand extends Command {
             shooter.setSpeed(1);
         }
         else if (shooterEnabled) {
-            //shooter.setSpeed(0.78);
-            shooter.shootAtDistance(shooter.distanceFromHub()); //Simple FF = 0.725
+            shooter.setSpeed(0.87);
+            // shooter.shootAtDistance(shooter.distanceFromHub()); //Simple FF = 0.725
+        }
+        else if (controller.getStartButtonPressed()) {
+            shooterStart = !shooterStart;
+        }
+        else if (shooterStart) {
+            shooter.shootAtDistance(shooter.distanceFromHub());
         }
         else {
             shooter.stop();
         }
+
     }    
 
 

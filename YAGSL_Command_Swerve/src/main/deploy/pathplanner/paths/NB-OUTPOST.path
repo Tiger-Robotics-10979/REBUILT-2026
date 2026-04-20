@@ -25,7 +25,7 @@
       },
       "nextControl": {
         "x": 2.9230478144817322,
-        "y": 0.47636837713323044
+        "y": 0.4763683771332304
       },
       "isLocked": false,
       "linkedName": null
@@ -61,7 +61,7 @@
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
-    "unlimited": true
+    "unlimited": false
   },
   "goalEndState": {
     "velocity": 0,
@@ -73,5 +73,5 @@
     "velocity": 5.0,
     "rotation": 90.0
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }

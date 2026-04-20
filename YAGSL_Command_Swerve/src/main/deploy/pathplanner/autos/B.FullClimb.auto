@@ -9,12 +9,6 @@
           "data": {
             "pathName": "B.Init-B.Climb"
           }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "RaiseClimber"
-          }
         }
       ]
     }

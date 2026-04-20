@@ -46,6 +46,12 @@
           "data": {
             "name": "ActivateShooter"
           }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ActivateShooter"
+          }
         }
       ]
     }

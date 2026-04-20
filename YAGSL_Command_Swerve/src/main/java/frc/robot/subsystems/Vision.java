@@ -264,8 +264,10 @@ public class Vision {
      */
     CENTER_CAM("camera1",
         new Rotation3d(0, Units.degreesToRadians(-15), Units.degreesToRadians(0)), //Units.degreesToRadians(0)
-        new Translation3d(Units.inchesToMeters(0), Units.inchesToMeters(-13), Units.inchesToMeters(10.5)), //Units.inchesToMeters()
-        VecBuilder.fill(4, 4, 8),
+        new Translation3d(Units.inchesToMeters(-13), Units.inchesToMeters(0), Units.inchesToMeters(15.5)), 
+        //  new Translation3d(Units.inchesToMeters(0), Units.inchesToMeters(-13), Units.inchesToMeters(10.5)), 
+
+        VecBuilder.fill(2, 2, 4),
         VecBuilder.fill(0.5, 0.5, 1));
 
     /**
@@ -429,7 +431,7 @@ public class Vision {
           ? camera.getAllUnreadResults()
           : cameraSim.getCamera().getAllUnreadResults();
 
-      resultsList.sort((a, b) -> a.getTimestampSeconds() >= b.getTimestampSeconds() ? 1 : -1); //newest first
+      resultsList.sort((a, b) -> a.getTimestampSeconds() >= b.getTimestampSeconds() ? -1 : 1); //newest first
 
       if (!resultsList.isEmpty()) {
         updateEstimatedGlobalPose();

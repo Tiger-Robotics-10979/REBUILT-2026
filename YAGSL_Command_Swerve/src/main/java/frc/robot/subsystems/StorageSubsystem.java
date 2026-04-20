@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
+import com.revrobotics.spark.SparkFlex;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
@@ -14,10 +15,10 @@ public class StorageSubsystem extends SubsystemBase {
 
     private static final double STORAGE_SPEED = 1.0;
 
-    private final SparkMax storageMotor;
+    private final SparkFlex storageMotor;
 
     public StorageSubsystem() {
-        storageMotor = new SparkMax(STORAGE_MOTOR_ID, SparkMax.MotorType.kBrushless);
+        storageMotor = new SparkFlex(STORAGE_MOTOR_ID, SparkMax.MotorType.kBrushless);
 
         SparkMaxConfig intakeConfig = new SparkMaxConfig();
         intakeConfig.voltageCompensation(VOLTAGE_COMPENSATION);

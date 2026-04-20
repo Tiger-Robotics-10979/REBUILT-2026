@@ -15,12 +15,14 @@ public class AimAtHub extends Command {
     private static final Translation2d BLUE_HUB = new Translation2d(4.625, 4.0);
 
     private final double TOLERANCE = 1;
-    private final double kP = 10.0;
+    private final double kP = 10.0; //10
+
+    public double targetAngleRadians;
+    public double currentAngleRadians;
 
     public AimAtHub(SwerveCommand swerveCommand, SwerveSubsystem swerveSubsystem) {
         this.swerveCommand = swerveCommand;
         this.swerveSubsystem = swerveSubsystem;
-        addRequirements(swerveSubsystem);
     }
 
     @Override
@@ -37,10 +39,10 @@ public class AimAtHub extends Command {
         double dx = hubCenter.getX() - robotPose.getX();
         double dy = hubCenter.getY() - robotPose.getY();
         
-        double targetAngleRadians = Math.atan2(dy, dx);
+        double targetAngleRadians = Math.atan2(dy, dx) + Math.PI;
 
         double currentAngleRadians = robotPose.getRotation().getRadians();
-        double errorRadians = targetAngleRadians - currentAngleRadians;
+        double errorRadians = (targetAngleRadians - currentAngleRadians); // Adjust for field orientation
 
 
         while (errorRadians > Math.PI) errorRadians -= 2 * Math.PI;
@@ -51,7 +53,7 @@ public class AimAtHub extends Command {
             return;
         }
 
-        double rotationSpeed = Math.max(-4, Math.min(4, errorRadians * kP));
+        double rotationSpeed = Math.max(-4, Math.min(4, errorRadians * kP)) * -1; //no -1
         swerveCommand.setAutoAimRotation(rotationSpeed);
     }
 
@@ -63,5 +65,13 @@ public class AimAtHub extends Command {
     @Override
     public boolean isFinished() {
         return false;
+    }
+
+    public double getTargetRotation() {
+        return targetAngleRadians;
+    }
+    
+    public double getCurrentRotation() {
+        return currentAngleRadians;
     }
 }

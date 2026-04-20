@@ -1,0 +1,62 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "CHub-Shoot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "HubShoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "CHub-Depot"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Depot-Intake"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": ".5ActivateIntake"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Depot-Shoot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ActivateShooter"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": "Good Auto",
+  "choreoAuto": false
+}

@@ -13,7 +13,7 @@
         {
           "type": "named",
           "data": {
-            "name": "HubShoot"
+            "name": "QHubShoot"
           }
         },
         {
@@ -39,6 +39,31 @@
           "type": "path",
           "data": {
             "pathName": "NT-BT(s)"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ActivateShooter"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "BT-.25BNT-BT"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": ".5ActivateIntake"
+                }
+              }
+            ]
           }
         },
         {
