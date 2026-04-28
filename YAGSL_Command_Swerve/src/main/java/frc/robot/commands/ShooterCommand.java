@@ -22,20 +22,32 @@ public class ShooterCommand extends Command {
             shooterEnabled = !shooterEnabled;
         }
 
+        //shoot with close range set speed
         if (controller.getYButton()) { //Emergency set speed of feedforward for close up
+            shooter.setShootingDirection(true);
             shooter.setSpeed(0.8);
         }
-        else if (controller.getLeftBumperButton()) { //Emergency reverse for clearing jams
-            shooter.setSpeed(-1.0);
 
+        //unstuck button
+        else if (controller.getLeftBumperButton()) { //Emergency reverse for clearing jams
+            shooter.setShootingDirection(false);
+            shooter.setSpeed(-1.0);
         }
+
+        //shoot with maximum speed
         else if (controller.getLeftTriggerAxis() > 0.4) {
+            shooter.setShootingDirection(true);
             shooter.setSpeed(1);
         }
+
+        //shoot with mid range set speed
         else if (shooterEnabled) {
+            shooter.setShootingDirection(true);
             shooter.setSpeed(0.87);
             // shooter.shootAtDistance(shooter.distanceFromHub()); //Simple FF = 0.725
         }
+
+        //shoot with camera
         else if (controller.getStartButtonPressed()) {
             shooterStart = !shooterStart;
         }
@@ -45,7 +57,6 @@ public class ShooterCommand extends Command {
         else {
             shooter.stop();
         }
-
     }    
 
 

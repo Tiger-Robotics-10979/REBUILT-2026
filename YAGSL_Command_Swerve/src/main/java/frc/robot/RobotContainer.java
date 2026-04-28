@@ -28,7 +28,6 @@ import frc.robot.commands.autos.hubShoot;
 import frc.robot.commands.autos.indexOut;
 import frc.robot.commands.autos.lowerClimber;
 import frc.robot.commands.autos.raiseClimber;
-// import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.KickerSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -43,7 +42,6 @@ public class RobotContainer {
   private final XboxController operatorController = new XboxController(1);
 
   //Subsystems
-  // public final CameraSubsystem cameraSubsystem = new CameraSubsystem();
   private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
   private final StorageSubsystem storageSubsystem = new StorageSubsystem();
   public final ShooterSubsystem shooterSubsystem = new ShooterSubsystem(swerveSubsystem);
@@ -116,7 +114,7 @@ public class RobotContainer {
       }
       else {
           inverted = -1;
-      } 
+      }
     }
     return inverted;
   }
